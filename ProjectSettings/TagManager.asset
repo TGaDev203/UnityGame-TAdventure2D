@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Ground
+  - Ladder
+  - Coin
+  - Enemy
+  - Water
+  - Platform
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Platform
+  - Ladder
+  - Player
+  - BackGround
+  - Mushroom
+  - TopLadder
+  - TopBouncing
+  - Items
+  - Enemy
+  - Trap
+  - EndPoint
+  - Button
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3067105133
+    locked: 0
+  - name: Climbing
+    uniqueID: 1447064525
+    locked: 0
+  - name: Water
+    uniqueID: 2020695687
+    locked: 0
+  - name: Mushroom
+    uniqueID: 2499403847
+    locked: 0
+  - name: Platforms
+    uniqueID: 1930094207
+    locked: 0
+  - name: Enemy
+    uniqueID: 718242843
+    locked: 0
+  - name: Player
+    uniqueID: 2871956615
+    locked: 0
+  - name: Coin
+    uniqueID: 312845549
+    locked: 0
+  - name: Item
+    uniqueID: 936747235
+    locked: 0
+  - name: UI
+    uniqueID: 3739781423
+    locked: 0
+  - name: Effect
+    uniqueID: 3416636767
+    locked: 0
