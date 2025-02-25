@@ -26,9 +26,6 @@
 # Visual Studio cache directory
 .vs/
 
-# Ignore VSCode settings
-.vscode/
-
 # Gradle cache directory
 .gradle/
 
@@ -62,10 +59,6 @@ sysinfo.txt
 *.apk
 *.aab
 *.unitypackage
-<<<<<<< HEAD
-=======
-*.unitypackage.meta
->>>>>>> a90d547280a798dfe89543e5dbda21766bf48e12
 *.app
 
 # Crashlytics generated file
