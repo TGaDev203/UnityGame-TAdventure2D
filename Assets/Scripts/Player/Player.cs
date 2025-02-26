@@ -59,7 +59,7 @@ public class Player : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Die();
+            OnDeath();
         }
     }
 
@@ -68,9 +68,13 @@ public class Player : MonoBehaviour
         return playerCollider.IsTouchingLayers(_layerTakenDamage);
     }
 
-    private void Die()
+    private void OnDeath()
     {
+        // PlayerAnimation playerAnimation = GetComponent<PlayerAnimation>();
+        // playerAnimation.PlayerDyingAnimation();
         // UnityEditor.EditorApplication.isPlaying = false;
+        PlayerMovement playerMovement = GetComponent<PlayerMovement>();
+        playerMovement.Die();
     }
 
     private void StartGame()

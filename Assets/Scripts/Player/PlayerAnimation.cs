@@ -38,7 +38,6 @@ public class PlayerAnimation : MonoBehaviour
         FlipSprite();
         PlayerRunAnimation();
         PlayerClimbAnination();
-        PlayerDyingAnimation();
     }
 
     //! Flip Sprite
@@ -85,7 +84,7 @@ public class PlayerAnimation : MonoBehaviour
     }
 
     //! Dying Animation
-    private void PlayerDyingAnimation ()
+    public void PlayerDeathAnimation ()
     {
         if (playerCollider.IsTouchingLayers(_layerPlayerDieAnimation))
         {

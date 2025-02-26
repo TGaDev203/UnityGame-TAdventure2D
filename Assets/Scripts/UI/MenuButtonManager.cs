@@ -25,55 +25,45 @@ public class MenuButtonManager : MonoBehaviour
         AddButtonListeners();
     }
 
-    private void AddButtonListeners()
+    private void AddButtonListeners ()
     {
         for (int i = 0; i < buttons.Count; i++)
         {
             int index = i;
 
-            // Lấy GameObject từ Button để thêm EventTrigger
-            GameObject buttonGameObject = buttons[i].gameObject;
+            // Get the button component
+            Button button = buttons[i];
 
-            EventTrigger trigger = buttonGameObject.AddComponent<EventTrigger>();
+            // Add event listeners using Unity's UI system
+            EventTriggerListener.Get(button.gameObject).onEnter += (eventData) => OnPointerEnter(index);
+            EventTriggerListener.Get(button.gameObject).onExit += (eventData) => OnPointerEnter(index);
 
-            // Thêm sự kiện cho khi chuột di chuyển vào Button
-            EventTrigger.Entry entryEnter = new EventTrigger.Entry();
-            entryEnter.eventID = EventTriggerType.PointerEnter;
-            entryEnter.callback.AddListener((eventData) => { OnPointerEnter(index); });
-            trigger.triggers.Add(entryEnter);
-
-            // Thêm sự kiện cho khi chuột rời khỏi Button
-            EventTrigger.Entry entryExit = new EventTrigger.Entry();
-            entryExit.eventID = EventTriggerType.PointerExit;
-            entryExit.callback.AddListener((eventData) => { OnPointerExit(index); });
-            trigger.triggers.Add(entryExit);
-
-            buttons[i].onClick.AddListener(() => OnButtonClicked(index));
+            button.onClick.AddListener(() => OnButtonClicked(index)); 
         }
     }
 
     private void OnPointerEnter(int index)
     {
-        ChangeButtonColor(buttons[index], hoverColor);
+        // ChangeButtonColor(buttons[index], hoverColor);
         PlayProgressSound();
         currentButtonIndex = index;
         UpdateButton();
     }
 
-    private void OnPointerExit(int index)
-    {
-        if (EventSystem.current.currentSelectedGameObject == buttons[currentButtonIndex].gameObject)
-        {
-            buttons[currentButtonIndex].OnDeselect(null);
-        }
-        ChangeButtonColor(buttons[index], normalColor);
-    }
+    // private void OnPointerExit(int index)
+    // {
+    //     if (EventSystem.current.currentSelectedGameObject == buttons[currentButtonIndex].gameObject)
+    //     {
+    //         buttons[currentButtonIndex].OnDeselect(null);
+    //     }
+    //     ChangeButtonColor(buttons[index], normalColor);
+    // }
 
-    private void ChangeButtonColor(Button button, Color newColor)
-    {
-        Image buttonImage = button.GetComponent<Image>();
-        buttonImage.color = newColor;
-    }
+    // private void ChangeButtonColor(Button button, Color newColor)
+    // {
+    //     Image buttonImage = button.GetComponent<Image>();
+    //     buttonImage.color = newColor;
+    // }
 
     private void OnButtonClicked(int index)
     {

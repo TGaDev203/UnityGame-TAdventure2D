@@ -28,32 +28,50 @@ public class PauseButtonManager : MonoBehaviour
 
             else
             {
+                SoundManager.Instance.StopAllSound();
                 Pause();
             }
         }
     }
+
+    // private void AddButtonListeners ()
+    // {
+    //     for (int i = 0; i < buttons.Count; i++)
+    //     {
+    //         int index = i;
+            
+    //         GameObject buttonGameObject = buttons[i].gameObject;
+
+    //         EventTrigger trigger = buttonGameObject.AddComponent<EventTrigger>();
+
+    //         EventTrigger.Entry entryEnter = new EventTrigger.Entry();
+    //         entryEnter.eventID = EventTriggerType.PointerEnter;
+    //         entryEnter.callback.AddListener((eventData) => { OnPointerEnter(index); });
+    //         trigger.triggers.Add(entryEnter);
+
+    //         EventTrigger.Entry entryExit = new EventTrigger.Entry();
+    //         entryExit.eventID = EventTriggerType.PointerExit;
+    //         entryExit.callback.AddListener((eventData) => { OnPointerExit(index); });
+    //         trigger.triggers.Add(entryExit);
+
+    //         buttons[i].onClick.AddListener(() => OnButtonClicked(index));
+    //     }
+    // }
 
     private void AddButtonListeners ()
     {
         for (int i = 0; i < buttons.Count; i++)
         {
             int index = i;
-            
-            GameObject buttonGameObject = buttons[i].gameObject;
 
-            EventTrigger trigger = buttonGameObject.AddComponent<EventTrigger>();
+            // Get the button component
+            Button button = buttons[i];
 
-            EventTrigger.Entry entryEnter = new EventTrigger.Entry();
-            entryEnter.eventID = EventTriggerType.PointerEnter;
-            entryEnter.callback.AddListener((eventData) => { OnPointerEnter(index); });
-            trigger.triggers.Add(entryEnter);
+            // Add event listeners using Unity's UI system
+            EventTriggerListener.Get(button.gameObject).onEnter += (eventData) => OnPointerEnter(index);
+            EventTriggerListener.Get(button.gameObject).onExit += (eventData) => OnPointerEnter(index);
 
-            EventTrigger.Entry entryExit = new EventTrigger.Entry();
-            entryExit.eventID = EventTriggerType.PointerExit;
-            entryExit.callback.AddListener((eventData) => { OnPointerExit(index); });
-            trigger.triggers.Add(entryExit);
-
-            buttons[i].onClick.AddListener(() => OnButtonClicked(index));
+            button.onClick.AddListener(() => OnButtonClicked(index)); 
         }
     }
 
@@ -85,13 +103,13 @@ public class PauseButtonManager : MonoBehaviour
         UpdateButton();
     }
 
-    private void OnPointerExit (int index)
-    {
-        if (EventSystem.current.currentSelectedGameObject == buttons[currentButtonIndex].gameObject)
-        {
-            buttons[currentButtonIndex].OnDeselect(null);
-        }
-    }
+    // private void OnPointerExit (int index)
+    // {
+    //     if (EventSystem.current.currentSelectedGameObject == buttons[currentButtonIndex].gameObject)
+    //     {
+    //         buttons[currentButtonIndex].OnDeselect(null);
+    //     }
+    // }
 
     private void UpdateButton ()
     {
@@ -103,15 +121,21 @@ public class PauseButtonManager : MonoBehaviour
 
     private void UpdateButtonState (Button button, bool isSelected)
     {
+        ColorBlock colors = button.colors;
+
         if (isSelected)
         {
             button.Select();
+            colors.normalColor = Color.red;
         }
 
         else
         {
             button.OnDeselect(null);
+            colors.normalColor = Color.white;
         }
+
+        button.colors = colors;
     }
 
     public void Pause()

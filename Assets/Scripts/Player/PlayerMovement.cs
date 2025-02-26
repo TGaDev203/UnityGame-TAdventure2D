@@ -51,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        HandleGameMechanic();
+        // HandleGameMechanic();
         HandleMovementAndBouncing();
     }
 
@@ -97,14 +97,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (IsPlayerOnTopBouncingPoint())
         {
-        SoundManager.Instance.PlayBouncingSound();
+            SoundManager.Instance.PlayBouncingSound();
             ApplyBouncingJumpForce();
         }
-        
-        // else
-        // {
-        //     SoundManager.Instance.StopBouncingSound();
-        // }
     }
 
     //! On Trigger Enter
@@ -193,18 +188,22 @@ public class PlayerMovement : MonoBehaviour
         playerJumpForce = playerJumpForceAtStart;
     }
 
-    private void HandleGameMechanic()
-    {
-        Die();
-    }
+    // private void HandleGameMechanic()
+    // {
+    //     Die();
+    // }
 
-    private void Die()
+    public void Die()
     {
         if (playerCollider.IsTouchingLayers(LayerMask.GetMask("Enemy")))
         {
             isAlive = false;
+
+            PlayerAnimation playerAnimation = GetComponent<PlayerAnimation>();
+            playerAnimation.PlayerDeathAnimation();
+
             rigidBody.velocity = deathKick;
-            SoundManager.Instance.PlayerHitSound();        
+            SoundManager.Instance.PlayerHitSound();
         }
     }
 }

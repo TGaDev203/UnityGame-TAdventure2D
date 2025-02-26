@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Video;
 
 public class SoundManager : MonoBehaviour
 {
@@ -11,7 +12,6 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip menuButtonProgressSound;
     [SerializeField] private AudioClip menuButtonEndSound;
     [SerializeField] private AudioClip bouncingSound;
-
     private AudioSource audioSource;
 
     private void Awake()
@@ -67,15 +67,14 @@ public class SoundManager : MonoBehaviour
         audioSource.PlayOneShot(menuButtonEndSound);
     }
 
-    public void PlayBouncingSound ()
+    public void PlayBouncingSound()
     {
         audioSource.clip = bouncingSound;
         audioSource.Play();
     }
 
-    public void StopBouncingSound ()
+    public void StopAllSound()
     {
-        audioSource.clip = bouncingSound;
         audioSource.Stop();
     }
 }

@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 
@@ -9,8 +10,8 @@ public class PlayerClimb : MonoBehaviour
     private CapsuleCollider2D playerCollider;
     private Rigidbody2D rigidBody;
     private PlayerMovement playerMovement;
-    [SerializeField] private float gravityAtStart;
     [SerializeField] private float climbSpeed;
+    [SerializeField] private float gravityAtStart;
 
     private void Awake()
     {
@@ -38,6 +39,7 @@ public class PlayerClimb : MonoBehaviour
             ApplyClimbSpeed();
             PerformJumpFromLadder();
         }
+
         else
         {
             rigidBody.gravityScale = gravityAtStart;
@@ -54,7 +56,8 @@ public class PlayerClimb : MonoBehaviour
     {
         Vector2 inputVectorClimb = InputManager.Instance.GetInputVectorClimb();
         rigidBody.velocity = new Vector2(rigidBody.velocity.x, inputVectorClimb.y * climbSpeed);
-        rigidBody.gravityScale = default;
+        rigidBody.gravityScale = 0f;
+
     }
 
 
@@ -67,7 +70,7 @@ public class PlayerClimb : MonoBehaviour
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, playerMovement.GetPlayerJumpForce());
         }
     }
-    
+
     private bool IsPlayerOnTopLadderPoint()
     {
         return playerCollider.IsTouchingLayers(_layerTopLadderPoint);
