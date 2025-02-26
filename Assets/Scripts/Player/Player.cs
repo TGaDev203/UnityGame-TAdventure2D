@@ -1,12 +1,10 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Player : MonoBehaviour
 {
     //! Components
     [Header("Collision For Being Damaged")]
     [SerializeField] private LayerMask _layerTakenDamage;
-
     [SerializeField] private int maxHealth;
     [SerializeField] private int currentHealth;
     [SerializeField] private float damageCooldown;
@@ -34,10 +32,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            StartGame();
-        }
         TouchingEnemy();
     }
 
@@ -59,6 +53,7 @@ public class Player : MonoBehaviour
 
         if (currentHealth <= 0)
         {
+            Debug.Log("cc");
             OnDeath();
         }
     }
@@ -70,16 +65,7 @@ public class Player : MonoBehaviour
 
     private void OnDeath()
     {
-        // PlayerAnimation playerAnimation = GetComponent<PlayerAnimation>();
-        // playerAnimation.PlayerDyingAnimation();
-        // UnityEditor.EditorApplication.isPlaying = false;
         PlayerMovement playerMovement = GetComponent<PlayerMovement>();
         playerMovement.Die();
-    }
-
-    private void StartGame()
-    {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Confined;
     }
 }

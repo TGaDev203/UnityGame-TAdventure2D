@@ -745,12 +745,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f2c21f057b23054d9a6cb68c78dada9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitEnemySound: {fileID: 0}
-  coinEnemySound: {fileID: 0}
-  waterSplashSound: {fileID: 0}
-  waterWalkingSound: {fileID: 0}
+  hitEnemySound: {fileID: 8300000, guid: 26362c5ac97803e4693a1f69962a96cb, type: 3}
+  coinEnemySound: {fileID: 8300000, guid: 2f0894053b7631e41948a031fa3fe99a, type: 3}
+  waterSplashSound: {fileID: 8300000, guid: b4b51e6fab39a244cbedc818ba61e853, type: 3}
+  waterWalkingSound: {fileID: 8300000, guid: 6d5a0984ea0447d4e9eed2fcbe47a42e, type: 3}
   menuButtonProgressSound: {fileID: 8300000, guid: 937e2b0cbb034794090a15e87480ff4d, type: 3}
   menuButtonEndSound: {fileID: 8300000, guid: 0d2f20c90552e5c43a8990c6c2e02af4, type: 3}
+  bouncingSound: {fileID: 8300000, guid: 6d594a25fc345b2479a71014e46d63d2, type: 3}
 --- !u!82 &1117795058
 AudioSource:
   m_ObjectHideFlags: 0

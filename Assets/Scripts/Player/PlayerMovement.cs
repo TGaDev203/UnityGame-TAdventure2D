@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask _layerIgnorePlayerLadder;
     [Header("Collision For TopBouncing Point")]
     [SerializeField] LayerMask _layerTopBouncingPoint;
+    [SerializeField] LayerMask _layerPlayerDieAnimation;
+
     [Header("Set Value")]
     [SerializeField] private float runSpeed;
     [SerializeField] private float playerJumpForceAtStart;
@@ -22,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
     private CapsuleCollider2D playerCollider;
     private BoxCollider2D feetCollider;
     public TilemapCollider2D ladderCollider;
-    bool isAlive = true;
 
     private void Awake()
     {
@@ -46,12 +47,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!isAlive)
-        {
-            return;
-        }
-
-        // HandleGameMechanic();
         HandleMovementAndBouncing();
     }
 
@@ -188,17 +183,10 @@ public class PlayerMovement : MonoBehaviour
         playerJumpForce = playerJumpForceAtStart;
     }
 
-    // private void HandleGameMechanic()
-    // {
-    //     Die();
-    // }
-
     public void Die()
     {
-        if (playerCollider.IsTouchingLayers(LayerMask.GetMask("Enemy")))
+        if (playerCollider.IsTouchingLayers(_layerPlayerDieAnimation))
         {
-            isAlive = false;
-
             PlayerAnimation playerAnimation = GetComponent<PlayerAnimation>();
             playerAnimation.PlayerDeathAnimation();
 

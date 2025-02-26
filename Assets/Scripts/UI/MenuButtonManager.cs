@@ -25,7 +25,7 @@ public class MenuButtonManager : MonoBehaviour
         AddButtonListeners();
     }
 
-    private void AddButtonListeners ()
+    private void AddButtonListeners()
     {
         for (int i = 0; i < buttons.Count; i++)
         {
@@ -38,7 +38,7 @@ public class MenuButtonManager : MonoBehaviour
             EventTriggerListener.Get(button.gameObject).onEnter += (eventData) => OnPointerEnter(index);
             EventTriggerListener.Get(button.gameObject).onExit += (eventData) => OnPointerEnter(index);
 
-            button.onClick.AddListener(() => OnButtonClicked(index)); 
+            button.onClick.AddListener(() => OnButtonClicked(index));
         }
     }
 
@@ -49,21 +49,6 @@ public class MenuButtonManager : MonoBehaviour
         currentButtonIndex = index;
         UpdateButton();
     }
-
-    // private void OnPointerExit(int index)
-    // {
-    //     if (EventSystem.current.currentSelectedGameObject == buttons[currentButtonIndex].gameObject)
-    //     {
-    //         buttons[currentButtonIndex].OnDeselect(null);
-    //     }
-    //     ChangeButtonColor(buttons[index], normalColor);
-    // }
-
-    // private void ChangeButtonColor(Button button, Color newColor)
-    // {
-    //     Image buttonImage = button.GetComponent<Image>();
-    //     buttonImage.color = newColor;
-    // }
 
     private void OnButtonClicked(int index)
     {
@@ -77,6 +62,8 @@ public class MenuButtonManager : MonoBehaviour
                 PlayEndSound();
                 sceneToLoad = "Gameplay Scene";
                 Invoke("LoadScene", delayLoadScene);
+                Cursor.visible = false;
+                Cursor.lockState = CursorLockMode.Confined;
                 break;
 
             case 2:
@@ -131,8 +118,8 @@ public class MenuButtonManager : MonoBehaviour
     {
         if (canPlayEndSound)
         {
-        SoundManager.Instance.PlayMenuButtonEndSound();
-        StartCoroutine(ResetEndSoundCoolDown());
+            SoundManager.Instance.PlayMenuButtonEndSound();
+            StartCoroutine(ResetEndSoundCoolDown());
         }
     }
 
@@ -140,8 +127,8 @@ public class MenuButtonManager : MonoBehaviour
     {
         if (canPlayProgressSound)
         {
-        SoundManager.Instance.PlayMenuButtonProgressSound();
-        StartCoroutine(ResetProgressSoundCoolDown());
+            SoundManager.Instance.PlayMenuButtonProgressSound();
+            StartCoroutine(ResetProgressSoundCoolDown());
         }
     }
 
