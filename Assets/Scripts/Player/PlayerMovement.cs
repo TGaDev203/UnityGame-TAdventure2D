@@ -11,6 +11,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] LayerMask _layerIgnorePlayerLadder;
     [Header("Collision For TopBouncing Point")]
     [SerializeField] LayerMask _layerTopBouncingPoint;
+    [SerializeField] LayerMask _layerPlayerDieAnimation;
+
     [Header("Set Value")]
     [SerializeField] private float runSpeed;
     [SerializeField] private float playerJumpForceAtStart;
@@ -22,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
     private CapsuleCollider2D playerCollider;
     private BoxCollider2D feetCollider;
     public TilemapCollider2D ladderCollider;
-    bool isAlive = true;
 
     private void Awake()
     {
@@ -32,7 +33,6 @@ public class PlayerMovement : MonoBehaviour
     //! Initialization
     private void InitializeComponents()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<CapsuleCollider2D>();
         rigidBody = GetComponent<Rigidbody2D>();
         ladderCollider = GameObject.FindWithTag("Ladder").GetComponent<TilemapCollider2D>();
@@ -46,12 +46,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        if (!isAlive)
-        {
-            return;
-        }
-
-        HandleGameMechanic();
         HandleMovementAndBouncing();
     }
 
@@ -97,14 +91,9 @@ public class PlayerMovement : MonoBehaviour
     {
         if (IsPlayerOnTopBouncingPoint())
         {
-        SoundManager.Instance.PlayBouncingSound();
+            SoundManager.Instance.PlayBouncingSound();
             ApplyBouncingJumpForce();
         }
-        
-        // else
-        // {
-        //     SoundManager.Instance.StopBouncingSound();
-        // }
     }
 
     //! On Trigger Enter
@@ -193,18 +182,15 @@ public class PlayerMovement : MonoBehaviour
         playerJumpForce = playerJumpForceAtStart;
     }
 
-    private void HandleGameMechanic()
+    public void Die()
     {
-        Die();
-    }
-
-    private void Die()
-    {
-        if (playerCollider.IsTouchingLayers(LayerMask.GetMask("Enemy")))
+        if (playerCollider.IsTouchingLayers(_layerPlayerDieAnimation))
         {
-            isAlive = false;
+            PlayerAnimation playerAnimation = GetComponent<PlayerAnimation>();
+            playerAnimation.PlayerDeathAnimation();
+
             rigidBody.velocity = deathKick;
-            SoundManager.Instance.PlayerHitSound();        
+            SoundManager.Instance.PlayerHitSound();
         }
     }
 }

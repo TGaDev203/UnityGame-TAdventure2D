@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using UnityEngine.EventSystems;
 using UnityEngine;
 using UnityEngine.UI;
-using Unity.VisualScripting;
-using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PauseButtonManager : MonoBehaviour
 {
@@ -11,6 +9,8 @@ public class PauseButtonManager : MonoBehaviour
     [SerializeField] private List<Button> buttons;
     [SerializeField] private float coolDownTime;
     private int currentButtonIndex;
+    private string sceneToLoad;
+    private float delayLoadScene;
 
     private void Awake()
     {
@@ -28,6 +28,7 @@ public class PauseButtonManager : MonoBehaviour
 
             else
             {
+                SoundManager.Instance.StopAllSound();
                 Pause();
             }
         }
@@ -38,22 +39,15 @@ public class PauseButtonManager : MonoBehaviour
         for (int i = 0; i < buttons.Count; i++)
         {
             int index = i;
-            
-            GameObject buttonGameObject = buttons[i].gameObject;
 
-            EventTrigger trigger = buttonGameObject.AddComponent<EventTrigger>();
+            // Get the button component
+            Button button = buttons[i];
 
-            EventTrigger.Entry entryEnter = new EventTrigger.Entry();
-            entryEnter.eventID = EventTriggerType.PointerEnter;
-            entryEnter.callback.AddListener((eventData) => { OnPointerEnter(index); });
-            trigger.triggers.Add(entryEnter);
+            // Add event listeners using Unity's UI system
+            EventTriggerListener.Get(button.gameObject).onEnter += (eventData) => OnPointerEnter(index);
+            EventTriggerListener.Get(button.gameObject).onExit += (eventData) => OnPointerEnter(index);
 
-            EventTrigger.Entry entryExit = new EventTrigger.Entry();
-            entryExit.eventID = EventTriggerType.PointerExit;
-            entryExit.callback.AddListener((eventData) => { OnPointerExit(index); });
-            trigger.triggers.Add(entryExit);
-
-            buttons[i].onClick.AddListener(() => OnButtonClicked(index));
+            button.onClick.AddListener(() => OnButtonClicked(index)); 
         }
     }
 
@@ -73,7 +67,7 @@ public class PauseButtonManager : MonoBehaviour
                 break;
 
             case 3:
-                Exit();
+                Back();
                 break;
         }
     }
@@ -83,14 +77,6 @@ public class PauseButtonManager : MonoBehaviour
         SoundManager.Instance.PlayMenuButtonProgressSound();
         currentButtonIndex = index;
         UpdateButton();
-    }
-
-    private void OnPointerExit (int index)
-    {
-        if (EventSystem.current.currentSelectedGameObject == buttons[currentButtonIndex].gameObject)
-        {
-            buttons[currentButtonIndex].OnDeselect(null);
-        }
     }
 
     private void UpdateButton ()
@@ -103,15 +89,21 @@ public class PauseButtonManager : MonoBehaviour
 
     private void UpdateButtonState (Button button, bool isSelected)
     {
+        ColorBlock colors = button.colors;
+
         if (isSelected)
         {
             button.Select();
+            colors.normalColor = Color.red;
         }
 
         else
         {
             button.OnDeselect(null);
+            colors.normalColor = Color.white;
         }
+
+        button.colors = colors;
     }
 
     public void Pause()
@@ -134,12 +126,14 @@ public class PauseButtonManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    public void Exit()
+    public void Back()
     {
-        #if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-        #else
-        Application.Quit();
-        #endif
+        sceneToLoad = "Main Menu Scene";
+        Invoke("LoadScene", delayLoadScene);
+    }
+
+    private void LoadScene ()
+    {
+        SceneManager.LoadScene(sceneToLoad);
     }
 }
