@@ -44,7 +44,6 @@ public class MenuButtonManager : MonoBehaviour
 
     private void OnPointerEnter(int index)
     {
-        // ChangeButtonColor(buttons[index], hoverColor);
         PlayProgressSound();
         currentButtonIndex = index;
         UpdateButton();

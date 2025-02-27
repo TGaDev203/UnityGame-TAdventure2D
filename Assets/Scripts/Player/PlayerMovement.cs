@@ -33,7 +33,6 @@ public class PlayerMovement : MonoBehaviour
     //! Initialization
     private void InitializeComponents()
     {
-        rigidBody = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<CapsuleCollider2D>();
         rigidBody = GetComponent<Rigidbody2D>();
         ladderCollider = GameObject.FindWithTag("Ladder").GetComponent<TilemapCollider2D>();
