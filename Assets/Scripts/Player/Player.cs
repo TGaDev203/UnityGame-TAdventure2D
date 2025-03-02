@@ -2,8 +2,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    //! Components
-    [Header("Collision For Being Damaged")]
     [SerializeField] private LayerMask _layerTakenDamage;
     [SerializeField] private int maxHealth;
     [SerializeField] private int currentHealth;
@@ -13,12 +11,6 @@ public class Player : MonoBehaviour
     private float lastDamageTime;
 
     private void Awake()
-    {
-        InitializeComponents();
-    }
-
-    //! Initialization
-    private void InitializeComponents()
     {
         playerCollider = GetComponent<CapsuleCollider2D>();
         healthBar = GetComponent<HealthBarManager>();
@@ -44,7 +36,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    //! Other Method To Handle Damage
     private void TakeDamage(int damage)
     {
         currentHealth -= damage;
@@ -53,7 +44,6 @@ public class Player : MonoBehaviour
 
         if (currentHealth <= 0)
         {
-            Debug.Log("cc");
             OnDeath();
         }
     }

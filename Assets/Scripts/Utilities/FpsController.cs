@@ -13,7 +13,6 @@ public class FpsController : MonoBehaviour
         QualitySettings.vSyncCount = 0;
     }
 
-    // Update is called once per frame
     void Update()
     {
         deltaTime += (Time.unscaledDeltaTime - deltaTime) * 0.1f;

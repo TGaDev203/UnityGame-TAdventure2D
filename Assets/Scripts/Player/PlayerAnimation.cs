@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    //! Component
     [SerializeField] LayerMask _layerPlayerRunAnimation;
     [SerializeField] LayerMask _layerPlayerClimbAnimation;
     [SerializeField] LayerMask _layerPlayerDieAnimation;
@@ -13,12 +12,6 @@ public class PlayerAnimation : MonoBehaviour
     private Animator playerAnimation;
 
     private void Awake()
-    {
-        InitializeComponents();
-    }
-
-    //! Initialization
-    private void InitializeComponents()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         rigidBody = GetComponent<Rigidbody2D>();
@@ -32,7 +25,6 @@ public class PlayerAnimation : MonoBehaviour
         HandleAnimation();
     }
 
-    //! Handle All Animations
     private void HandleAnimation()
     {
         FlipSprite();
@@ -40,7 +32,6 @@ public class PlayerAnimation : MonoBehaviour
         PlayerClimbAnination();
     }
 
-    //! Flip Sprite
     private void FlipSprite()
     {
         bool isMovingLeft = rigidBody.velocity.x < 0;
@@ -55,7 +46,6 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
-    //! Run Animation
     private void PlayerRunAnimation()
     {
         bool playerHasHorizontalSpeed = Mathf.Abs(rigidBody.velocity.x) > Mathf.Epsilon;
@@ -69,7 +59,6 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
-    //! Climb Animation
     private void PlayerClimbAnination()
     {
         bool playerHasVerticalSpeed = Mathf.Abs(rigidBody.velocity.y) > Mathf.Epsilon;
@@ -83,8 +72,7 @@ public class PlayerAnimation : MonoBehaviour
         }
     }
 
-    //! Dying Animation
-    public void PlayerDeathAnimation ()
+    public void PlayerDeathAnimation()
     {
         if (playerCollider.IsTouchingLayers(_layerPlayerDieAnimation))
         {

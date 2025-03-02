@@ -442,6 +442,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1117795056}
   - {fileID: 2129053554}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -712,7 +713,7 @@ GameObject:
   - component: {fileID: 1117795057}
   - component: {fileID: 1117795058}
   m_Layer: 0
-  m_Name: Singleton
+  m_Name: Sound Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -726,12 +727,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1117795055}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2012.7844, y: 870.25684, z: -12.578104}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 66.760864, y: -246.77759, z: -9.071986}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 600789325}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1117795057
 MonoBehaviour:
@@ -1103,27 +1104,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1556380109}
   m_CullTransparentMesh: 1
---- !u!114 &1773813117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3741525206444680527}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2444cd6deb43a7c40b81878935519df9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buttons:
-  - {fileID: 2999877902458771336}
-  - {fileID: 809674393}
-  - {fileID: 322422075}
-  - {fileID: 1354863545}
-  hoverColor: {r: 0.83137256, g: 0.45882353, b: 0.45882353, a: 1}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
-  delayLoadScene: 0.35
-  coolDownTime: 0.35
 --- !u!1 &1816317059
 GameObject:
   m_ObjectHideFlags: 0
@@ -1576,7 +1556,7 @@ GameObject:
   - component: {fileID: 5710464279044039088}
   - component: {fileID: 3989097286598577834}
   - component: {fileID: 1231004559507556456}
-  - component: {fileID: 1773813117}
+  - component: {fileID: 7336400742272506213}
   m_Layer: 5
   m_Name: Menu Canvas
   m_TagString: Untagged
@@ -1847,6 +1827,23 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &7336400742272506213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3741525206444680527}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2444cd6deb43a7c40b81878935519df9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttons:
+  - {fileID: 2999877902458771336}
+  - {fileID: 809674393}
+  - {fileID: 322422075}
+  - {fileID: 1354863545}
 --- !u!1 &7343232456276213646
 GameObject:
   m_ObjectHideFlags: 0
@@ -1941,4 +1938,3 @@ SceneRoots:
   - {fileID: 85904946}
   - {fileID: 10943555}
   - {fileID: 600789325}
-  - {fileID: 1117795056}

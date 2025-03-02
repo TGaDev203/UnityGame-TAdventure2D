@@ -2,17 +2,10 @@ using UnityEngine;
 
 public class CheckPointAnimation : MonoBehaviour
 {
-    //! Componnents
     private ParticleSystem endEffect;
     private Rigidbody2D rigidBody2D;
 
     private void Awake()
-    {
-        InitializeComponents();
-    }
-
-    //! Initialization
-    private void InitializeComponents()
     {
         endEffect = GetComponent<ParticleSystem>();
         rigidBody2D = GetComponent<Rigidbody2D>();

@@ -2,21 +2,13 @@ using UnityEngine;
 
 public class TrapAnimation : MonoBehaviour
 {
-    //! Components
     private Animator trapAnimation;
 
     private void Awake()
     {
-        InitializeComponents();
-    }
-
-    //! Initialization
-    private void InitializeComponents()
-    {
         trapAnimation = GetComponent<Animator>();
     }
 
-    //! On Trigger Enter
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
@@ -26,7 +18,6 @@ public class TrapAnimation : MonoBehaviour
         }
     }
 
-    //! On Trigger Exit
     private void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player"))

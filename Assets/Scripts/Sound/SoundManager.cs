@@ -15,33 +15,38 @@ public class SoundManager : MonoBehaviour
 
     private void Awake()
     {
-        InitializeComponents();
-    }
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
-    //! Initialization
-    private void InitializeComponents()
-    {
-        audioSource = GetComponent<AudioSource>();
         Instance = this;
+        audioSource = GetComponent<AudioSource>();
     }
 
-    public void PlayerHitSound()
+    private void PlaySound(AudioClip clip)
     {
-        audioSource.PlayOneShot(hitEnemySound);
+        if (audioSource == null || clip == null) return;
+        audioSource.PlayOneShot(clip);
     }
 
-    public void PlayCoinSound()
-    {
-        audioSource.PlayOneShot(coinEnemySound);
-    }
+    public void PlayerHitSound() => PlaySound(hitEnemySound);
+    public void PlayCoinSound() => PlaySound(coinEnemySound);
+    public void PlayWaterSplashSound() => PlaySound(waterSplashSound);
+    public void PlayMenuButtonProgressSound() => PlaySound(menuButtonProgressSound);
+    public void PlayMenuButtonEndSound() => PlaySound(menuButtonEndSound);
 
-    public void PlayWaterSplashSound()
+    public void PlayBouncingSound()
     {
-        audioSource.PlayOneShot(waterSplashSound);
+        if (audioSource == null || bouncingSound == null) return;
+        audioSource.clip = bouncingSound;
+        audioSource.Play();
     }
 
     public void PlayWaterWalkingSound()
     {
+        if (audioSource == null || waterWalkingSound == null) return;
         audioSource.clip = waterWalkingSound;
         audioSource.loop = true;
         audioSource.Play();
@@ -49,31 +54,14 @@ public class SoundManager : MonoBehaviour
 
     public void StopWaterWalkingSound()
     {
-        if (audioSource != null)
-        {
-            audioSource.loop = false;
-            audioSource.Stop();
-        }
-    }
-
-    public void PlayMenuButtonProgressSound()
-    {
-        audioSource.PlayOneShot(menuButtonProgressSound);
-    }
-
-    public void PlayMenuButtonEndSound()
-    {
-        audioSource.PlayOneShot(menuButtonEndSound);
-    }
-
-    public void PlayBouncingSound()
-    {
-        audioSource.clip = bouncingSound;
-        audioSource.Play();
+        if (audioSource == null) return;
+        audioSource.loop = false;
+        audioSource.Stop();
     }
 
     public void StopAllSound()
     {
+        if (audioSource == null) return;
         audioSource.Stop();
     }
 }

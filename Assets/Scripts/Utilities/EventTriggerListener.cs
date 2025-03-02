@@ -18,12 +18,12 @@ public class EventTriggerListener : MonoBehaviour, IPointerEnterHandler, IPointe
         return listener;
     }
 
-    public void OnPointerEnter (PointerEventData eventData)
+    public void OnPointerEnter(PointerEventData eventData)
     {
         onEnter?.Invoke(eventData);
     }
 
-    public void OnPointerExit (PointerEventData eventData)
+    public void OnPointerExit(PointerEventData eventData)
     {
         onExit?.Invoke(eventData);
     }

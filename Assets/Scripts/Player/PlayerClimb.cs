@@ -3,22 +3,14 @@ using UnityEngine;
 
 public class PlayerClimb : MonoBehaviour
 {
-    //! Component
+    [SerializeField] private float climbSpeed;
     [SerializeField] LayerMask _layerPlayerCanClimb;
     [SerializeField] LayerMask _layerTopLadderPoint;
     private CapsuleCollider2D playerCollider;
     private Rigidbody2D rigidBody;
     private PlayerMovement playerMovement;
-    [SerializeField] private float climbSpeed;
-    [SerializeField] private float gravityAtStart;
 
     private void Awake()
-    {
-        InitializeComponents();
-    }
-
-    //! Initialization
-    private void InitializeComponents()
     {
         playerCollider = GetComponent<CapsuleCollider2D>();
         rigidBody = GetComponent<Rigidbody2D>();
@@ -30,7 +22,6 @@ public class PlayerClimb : MonoBehaviour
         Climb();
     }
 
-    //! Climbing Control
     private void Climb()
     {
         if (isPlayerOnClimbableLayer())
@@ -41,11 +32,10 @@ public class PlayerClimb : MonoBehaviour
 
         else
         {
-            rigidBody.gravityScale = gravityAtStart;
+            rigidBody.gravityScale = 5f;
         }
     }
 
-    //! Other Method To Handle Climbing Logic
     private bool isPlayerOnClimbableLayer()
     {
         return playerCollider.IsTouchingLayers(_layerPlayerCanClimb);
@@ -59,14 +49,12 @@ public class PlayerClimb : MonoBehaviour
 
     }
 
-
-    //! Allow To Jump When On Top Ladder Point
     private void PerformJumpFromLadder()
     {
         if (IsPlayerOnTopLadderPoint() && InputManager.Instance.IsJumping())
         {
-            rigidBody.gravityScale = gravityAtStart;
-            rigidBody.velocity = new Vector2(rigidBody.velocity.x, playerMovement.GetPlayerJumpForce());
+            rigidBody.gravityScale = 5f;
+            rigidBody.velocity = new Vector2(rigidBody.velocity.x, playerMovement.GetJumpForce());
         }
     }
 
