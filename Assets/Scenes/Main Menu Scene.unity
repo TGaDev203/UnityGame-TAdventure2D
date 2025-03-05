@@ -753,6 +753,8 @@ MonoBehaviour:
   menuButtonProgressSound: {fileID: 8300000, guid: 937e2b0cbb034794090a15e87480ff4d, type: 3}
   menuButtonEndSound: {fileID: 8300000, guid: 0d2f20c90552e5c43a8990c6c2e02af4, type: 3}
   bouncingSound: {fileID: 8300000, guid: 6d594a25fc345b2479a71014e46d63d2, type: 3}
+  MainMenuSound: {fileID: 8300000, guid: 0f2d5ad638c750e4b85f2e9b4e0bc59c, type: 3}
+  GameplaySound: {fileID: 8300000, guid: 849fc93f7285cea45ab32b8697b16edf, type: 3}
 --- !u!82 &1117795058
 AudioSource:
   m_ObjectHideFlags: 0

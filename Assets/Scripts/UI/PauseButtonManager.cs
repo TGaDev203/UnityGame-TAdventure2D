@@ -8,9 +8,17 @@ public class PauseButtonManager : BaseButtonManager
     {
         if (!Input.GetKeyDown(KeyCode.Escape)) return;
 
-        if (pauseMenu.activeSelf) Resume();
+        if (pauseMenu.activeSelf)
+        {
+            SoundManager.Instance.PlayLoopSound();
+            Resume();
+        }
 
-        else Pause();
+        else
+        {
+            SoundManager.Instance.StopLoopSound();
+            Pause();
+        }
     }
 
     protected override void OnButtonClicked(int index)
