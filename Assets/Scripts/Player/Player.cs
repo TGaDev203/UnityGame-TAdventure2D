@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -6,18 +7,27 @@ public class Player : MonoBehaviour
     [SerializeField] private int maxHealth;
     [SerializeField] private int currentHealth;
     [SerializeField] private float damageCooldown;
+    [SerializeField] GameObject pauseMenu;
+    [SerializeField] private Button optionButton;
+    [SerializeField] private Button replayButton;
+    [SerializeField] private PauseButtonManager pauseButtonManager;
+    private Vector2 initialPosition;
     private CapsuleCollider2D playerCollider;
     private HealthBarManager healthBar;
     private float lastDamageTime;
+    private Rigidbody2D playerBody;
+    private bool isDead = false;
 
     private void Awake()
     {
         playerCollider = GetComponent<CapsuleCollider2D>();
         healthBar = GetComponent<HealthBarManager>();
+        playerBody = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
     {
+        initialPosition = transform.position;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
     }
@@ -38,14 +48,24 @@ public class Player : MonoBehaviour
 
     private void TakeDamage(int damage)
     {
+        if (isDead) return;
+
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
         SoundManager.Instance.PlayerHitSound();
 
         if (currentHealth <= 0)
         {
+            isDead = true;
             OnDeath();
+            Invoke("Replay", 1.2f);
         }
+    }
+
+    private void OnDeath()
+    {
+        PlayerMovement playerMovement = GetComponent<PlayerMovement>();
+        playerMovement.Die();
     }
 
     private bool IsTouchingEnemy()
@@ -53,9 +73,30 @@ public class Player : MonoBehaviour
         return playerCollider.IsTouchingLayers(_layerTakenDamage);
     }
 
-    private void OnDeath()
+    public void Replay()
     {
-        PlayerMovement playerMovement = GetComponent<PlayerMovement>();
-        playerMovement.Die();
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0f;
+
+        optionButton.gameObject.SetActive(false);
+        replayButton.gameObject.SetActive(true);
+    }
+
+    public void ResetPlayer()
+    {
+        transform.position = initialPosition;
+        currentHealth = maxHealth;
+        healthBar.SetHealth(currentHealth);
+        playerBody.velocity = Vector2.zero;
+    }
+
+    public int GetHealth()
+    {
+        return currentHealth;
+    }
+
+    public bool IsDead()
+    {
+        return isDead;
     }
 }

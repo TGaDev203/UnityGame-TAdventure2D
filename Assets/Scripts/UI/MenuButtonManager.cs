@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MenuButtonManager : BaseButtonManager
 {
@@ -11,15 +12,13 @@ public class MenuButtonManager : BaseButtonManager
                 break;
 
             case 1:
-                PlayEndSound();
-                sceneToLoad = "Gameplay Scene";
-                Invoke("LoadScene", 0.35f);
-                Cursor.visible = false;
-                Cursor.lockState = CursorLockMode.Confined;
+                SceneManager.LoadScene("Gameplay Scene");
+                Time.timeScale = 1f;
                 break;
 
             case 2:
                 PlayEndSound();
+                OptionMenu();
                 break;
 
             case 3:
@@ -28,16 +27,16 @@ public class MenuButtonManager : BaseButtonManager
         }
     }
 
+    protected override void OptionMenu()
+    {
+        PlayEndSound();
+        SetMouseOn();
+        mainMenu.SetActive(false);
+        optionMenu.SetActive(true);
+    }
+
     private void QuitGame()
     {
-        // Application.Quit();
-        // UnityEditor.EditorApplication.isPlaying = false;
-#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-
-#else
-            Application.Quit();
-
-#endif
     }
 }

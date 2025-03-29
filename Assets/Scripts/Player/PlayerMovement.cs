@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
         playerBody.velocity = new Vector2(playerBody.velocity.x, bounceForce);
     }
 
-    private bool CanJump() => feetCollider.IsTouchingLayers(jumpableLayers);
+    private bool CanJump() => feetCollider != null && feetCollider.IsTouchingLayers(jumpableLayers);
 
     private void HandleLadderCollision()
     {
@@ -106,13 +106,26 @@ public class PlayerMovement : MonoBehaviour
         if (!playerCollider.IsTouchingLayers(dealthLayers)) return;
 
         GetComponent<PlayerAnimation>()?.PlayerDeathAnimation();
-        playerBody.velocity = deathKick;
+        Vector2 randomDeathKick = new Vector2(deathKick.x * (UnityEngine.Random.Range(0, 2) * 2 - 1), deathKick.y);
+        playerBody.velocity = randomDeathKick;
         SoundManager.Instance.PlayerHitSound();
+
+        DisableInput();
     }
 
     public float GetJumpForce()
     {
         return this.jumpForce;
 
+    }
+
+    public void DisableInput()
+    {
+        this.enabled = false;
+    }
+
+    public void EnableInput()
+    {
+        this.enabled = true;
     }
 }

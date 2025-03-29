@@ -5,13 +5,20 @@ using UnityEngine.UI;
 
 public abstract class BaseButtonManager : MonoBehaviour
 {
+    [SerializeField] protected GameObject mainMenu;
+    [SerializeField] protected GameObject pauseMenu;
+    [SerializeField] protected GameObject optionMenu;
     [SerializeField] protected List<Button> buttons;
     protected int currentButtonIndex = -1;
-    protected string sceneToLoad;
     protected bool canPlayEndSound = true;
     protected bool canPlayProgressSound = true;
+    protected bool showMenu = false;
+    protected float volume = 1.0f;
+    protected int resolutionIndex = 0;
+    // protected enum MenuState { None, PauseMenu, OptionMenu }
+    // protected MenuState currentMenuState = MenuState.None;
 
-    protected virtual void Awake()
+    protected void Awake()
     {
         for (int i = 0; i < buttons.Count; i++)
         {
@@ -26,14 +33,19 @@ public abstract class BaseButtonManager : MonoBehaviour
         }
     }
 
-    protected virtual void OnPointerEnter(int index)
+    protected void LoadMainMenu()
+    {
+        SceneManager.LoadScene("Main Menu Scene");
+    }
+
+    protected void OnPointerEnter(int index)
     {
         PlayProgressSound();
         currentButtonIndex = index;
         UpdateButtons();
     }
 
-    protected virtual void OnPointerExit(int index)
+    protected void OnPointerExit(int index)
     {
         if (currentButtonIndex == index)
         {
@@ -42,7 +54,7 @@ public abstract class BaseButtonManager : MonoBehaviour
         }
     }
 
-    protected virtual void UpdateButtons()
+    protected void UpdateButtons()
     {
         for (int i = 0; i < buttons.Count; i++)
         {
@@ -60,7 +72,15 @@ public abstract class BaseButtonManager : MonoBehaviour
         else button.OnDeselect(null);
     }
 
-    protected virtual void PlayEndSound()
+    //     public void Option()
+    // {
+    //     PlayEndSound();
+    //     SetMouseOn();
+    //     pauseMenu.SetActive(false);
+    //     optionMenu.SetActive(true);
+    // }
+
+    protected void PlayEndSound()
     {
         if (canPlayEndSound)
         {
@@ -70,7 +90,7 @@ public abstract class BaseButtonManager : MonoBehaviour
         }
     }
 
-    protected virtual void PlayProgressSound()
+    protected void PlayProgressSound()
     {
         if (canPlayProgressSound)
         {
@@ -89,10 +109,26 @@ public abstract class BaseButtonManager : MonoBehaviour
     {
         canPlayProgressSound = true;
     }
-    protected virtual void LoadScene()
+
+    protected void SetMouseOn()
     {
-        SceneManager.LoadScene(sceneToLoad);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
+    protected void SetMouseOff()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
+    }
+
+    // public void ToggleButton(int index, bool isActive)
+    // {
+    //     if (index < 0 || index >= buttons.Count) return;
+    //     buttons[index].gameObject.SetActive(isActive);
+    // }
+
     protected abstract void OnButtonClicked(int index);
+
+    protected abstract void OptionMenu();
 }
