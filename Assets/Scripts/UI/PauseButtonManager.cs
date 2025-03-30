@@ -6,7 +6,6 @@ public class PauseButtonManager : BaseButtonManager
 {
     [SerializeField] private Slider bgmSlider;
     [SerializeField] private Slider sfxSlider;
-    private Player player;
 
     private void Start()
     {
@@ -26,6 +25,32 @@ public class PauseButtonManager : BaseButtonManager
     }
 
     private void Update()
+    {
+        // if (player != null && player.IsDead()) return;
+        // if (!Input.GetKeyDown(KeyCode.Escape)) return;
+
+        // if (pauseMenu.activeSelf)
+        // {
+        //     // SoundManager.Instance.PlayLoopSound();
+        //     Resume();
+        //     Time.timeScale = 1f;
+        // }
+
+        // else if (optionMenu.activeSelf)
+        // {
+        //     pauseMenu.SetActive(true);
+        //     optionMenu.SetActive(false);
+        // }
+
+        // else
+        // {
+        //     Time.timeScale = 0f;
+        //     Pause();
+        // }
+        HandlePauseInput();
+    }
+
+    protected override void HandlePauseInput()
     {
         if (player != null && player.IsDead()) return;
         if (!Input.GetKeyDown(KeyCode.Escape)) return;
@@ -57,33 +82,33 @@ public class PauseButtonManager : BaseButtonManager
         else if (index == 1) BackToMain();
     }
 
-    private void Pause()
-    {
-        PlayProgressSound();
-        SetMouseOn();
-        pauseMenu.SetActive(true);
-    }
+    // private void Pause()
+    // {
+    //     SoundManager.Instance.PlayMenuButtonProgressSound();
+    //     SetMouseOn();
+    //     pauseMenu.SetActive(true);
+    // }
 
-    private void Resume()
-    {
-        PlayEndSound();
-        SetMouseOff();
-        pauseMenu.SetActive(false);
-    }
+    // private void Resume()
+    // {
+    //     SoundManager.Instance.PlayMenuButtonEndSound();
+    //     SetMouseOff();
+    //     pauseMenu.SetActive(false);
+    // }
 
     protected override void OptionMenu()
     {
-        PlayEndSound();
+        SoundManager.Instance.PlayMenuButtonEndSound();
         SetMouseOn();
         pauseMenu.SetActive(false);
         optionMenu.SetActive(true);
     }
 
-    private void BackToMain()
-    {
-        PlayEndSound();
-        SceneManager.LoadScene("Main Menu Scene");
-    }
+    // private void BackToMain()
+    // {
+    //     SoundManager.Instance.PlayMenuButtonEndSound();
+    //     SceneManager.LoadScene("Main_Scene");
+    // }
 
     private void SetBGMVolume(float volume)
     {

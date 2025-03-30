@@ -261,13 +261,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3bec3d3eaeff94a97b77cdfac4d1e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenu: {fileID: 0}
+  pauseMenu: {fileID: 1516937610}
+  optionMenu: {fileID: 180652011}
   buttons:
   - {fileID: 26083740}
   - {fileID: 1128307733}
   - {fileID: 694276927}
   - {fileID: 334756580}
-  pauseMenu: {fileID: 1516937610}
-  optionMenu: {fileID: 180652011}
   bgmSlider: {fileID: 2017004355}
   sfxSlider: {fileID: 744048553}
 --- !u!1 &47974343
@@ -979,9 +980,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3bec3d3eaeff94a97b77cdfac4d1e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttons: []
+  mainMenu: {fileID: 0}
   pauseMenu: {fileID: 1516937610}
   optionMenu: {fileID: 180652011}
+  buttons: []
   bgmSlider: {fileID: 2017004355}
   sfxSlider: {fileID: 744048553}
 --- !u!1 &198429514
@@ -147895,12 +147897,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd3bec3d3eaeff94a97b77cdfac4d1e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainMenu: {fileID: 0}
+  pauseMenu: {fileID: 1516937610}
+  optionMenu: {fileID: 180652011}
   buttons:
   - {fileID: 694276927}
   - {fileID: 334756580}
   - {fileID: 1128307733}
-  pauseMenu: {fileID: 1516937610}
-  optionMenu: {fileID: 180652011}
   bgmSlider: {fileID: 2017004355}
   sfxSlider: {fileID: 744048553}
 --- !u!4 &1517624222 stripped

@@ -16,6 +16,8 @@ public class SoundManager : MonoBehaviour
     public AudioClip bouncingSound;
     public AudioClip mainMenuSound;
     public AudioClip gameplaySound;
+    protected bool canPlayEndSound = true;
+    protected bool canPlayProgressSound = true;
 
     private void Awake()
     {
@@ -52,7 +54,7 @@ public class SoundManager : MonoBehaviour
         string scene = SceneManager.GetActiveScene().name;
         backgroundAudioSource.loop = true;
 
-        if (scene == "Main Menu Scene")
+        if (scene == "Main_Scene")
         {
             backgroundAudioSource.clip = mainMenuSound;
         }
@@ -85,4 +87,34 @@ public class SoundManager : MonoBehaviour
 
         effectAudioSource.Stop();
     }
+
+    // public void PlayEndSound()
+    // {
+    //     if (canPlayEndSound)
+    //     {
+    //         SoundManager.Instance.PlayMenuButtonEndSound();
+    //         canPlayEndSound = false;
+    //         Invoke(nameof(ResetEndSoundCoolDown), 0.5f);
+    //     }
+    // }
+
+    // public void PlayProgressSound()
+    // {
+    //     if (canPlayProgressSound)
+    //     {
+    //         SoundManager.Instance.PlayMenuButtonProgressSound();
+    //         canPlayProgressSound = false;
+    //         Invoke(nameof(ResetProgressSoundCoolDown), 0.5f);
+    //     }
+    // }
+
+    // private void ResetEndSoundCoolDown()
+    // {
+    //     canPlayEndSound = true;
+    // }
+
+    // private void ResetProgressSoundCoolDown()
+    // {
+    //     canPlayProgressSound = true;
+    // }
 }
