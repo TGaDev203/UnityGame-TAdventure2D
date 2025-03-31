@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class MainButtonManager : BaseButtonManager
 {
@@ -21,6 +20,7 @@ public class MainButtonManager : BaseButtonManager
 
         if (optionMenu.activeSelf)
         {
+            SoundManager.Instance.PlayMenuButtonProgressSound();
             mainMenu.SetActive(true);
             optionMenu.SetActive(false);
         }
