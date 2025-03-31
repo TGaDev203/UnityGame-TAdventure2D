@@ -4,193 +4,136 @@ using UnityEngine.Tilemaps;
 
 public class PlayerMovement : MonoBehaviour
 {
-    //! Component
-    [Header("Collision For Jumping")]
-    [SerializeField] LayerMask _layersPlayerCanJump;
-    [Header("Collision To Avoid Collider: Player And Ladder")]
-    [SerializeField] LayerMask _layerIgnorePlayerLadder;
-    [Header("Collision For TopBouncing Point")]
-    [SerializeField] LayerMask _layerTopBouncingPoint;
-    [SerializeField] LayerMask _layerPlayerDieAnimation;
-
-    [Header("Set Value")]
-    [SerializeField] private float runSpeed;
-    [SerializeField] private float playerJumpForceAtStart;
-    [SerializeField] private float playerJumpForce;
-    [SerializeField] private float bouncingJumpForce;
-    [SerializeField] private float waterDrag;
+    [SerializeField] LayerMask jumpableLayers;
+    [SerializeField] LayerMask dealthLayers;
+    [SerializeField] LayerMask platformLayer;
+    [SerializeField] LayerMask bouncingLayer;
     [SerializeField] private Vector2 deathKick = new Vector2(0f, 0f);
-    private Rigidbody2D rigidBody;
+    [SerializeField] private float runSpeed;
+    [SerializeField] private float jumpForce;
+    [SerializeField] private float bounceForce;
+    [SerializeField] private float waterDrag;
+    private Rigidbody2D playerBody;
     private CapsuleCollider2D playerCollider;
     private BoxCollider2D feetCollider;
     public TilemapCollider2D ladderCollider;
+    private BaseButtonManager baseButtonManager;
 
     private void Awake()
     {
-        InitializeComponents();
-    }
-
-    //! Initialization
-    private void InitializeComponents()
-    {
         playerCollider = GetComponent<CapsuleCollider2D>();
-        rigidBody = GetComponent<Rigidbody2D>();
+        playerBody = GetComponent<Rigidbody2D>();
         ladderCollider = GameObject.FindWithTag("Ladder").GetComponent<TilemapCollider2D>();
         feetCollider = gameObject.GetComponent<BoxCollider2D>();
+
+        baseButtonManager = FindObjectOfType<BaseButtonManager>();
     }
 
-    private void Start()
-    {
-        InputManager.Instance.OnJump += Jump;
-    }
+    private void Start() => InputManager.Instance.OnJump += Jump;
 
     private void Update()
     {
-        HandleMovementAndBouncing();
-    }
-
-    //! Handle Movement and Bouncing
-    private void HandleMovementAndBouncing()
-    {
         Move();
-        BouncingMushroom();
+        CheckBouncing();
     }
 
-    public float GetPlayerJumpForce()
-    {
-        return this.playerJumpForce;
-    }
-
-    //! Moving Control
     private void Move()
     {
-        // Get the input vector for movement from the InputManager
-        Vector2 inputVectorMove = InputManager.Instance.GetInputVectorMove();
-        rigidBody.velocity = new Vector2(inputVectorMove.x * runSpeed, rigidBody.velocity.y);
+        float moveInput = InputManager.Instance.GetInputVectorMove().x;
+        playerBody.velocity = new Vector2(moveInput * runSpeed, playerBody.velocity.y);
     }
 
-    //! Jumping Comtrol
     private void Jump(object sender, EventArgs e)
     {
-        if (!CanPlayerJump())
-        {
-            return;
-        }
+        if (!CanJump()) return;
 
-        ApplyJumpForce();
-
-        if (!HasPlayerSpeed())
-        {
-            return;
-        }
+        playerBody.velocity = new Vector2(playerBody.velocity.x, jumpForce);
         HandleLadderCollision();
     }
 
-    //! Bouncing Player When Jumping In Mushroom
-    private void BouncingMushroom()
+    private void CheckBouncing()
     {
-        if (IsPlayerOnTopBouncingPoint())
-        {
-            SoundManager.Instance.PlayBouncingSound();
-            ApplyBouncingJumpForce();
-        }
+        if (!playerCollider.IsTouchingLayers(bouncingLayer)) return;
+
+        SoundManager.Instance.PlayBouncingSound();
+        playerBody.velocity = new Vector2(playerBody.velocity.x, bounceForce);
     }
 
-    //! On Trigger Enter
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Water"))
-        {
-            EnterWater();
-        }
-    }
+    private bool CanJump() => feetCollider != null && feetCollider.IsTouchingLayers(jumpableLayers);
 
-    //! On Trigger Exit
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Water"))
-        {
-            ExitWater();
-        }
-    }
-
-    //! Other Methods To Handle Jumping Logic
-    private bool CanPlayerJump()
-    {
-        return feetCollider.IsTouchingLayers(_layersPlayerCanJump);
-    }
-
-    private void ApplyJumpForce()
-    {
-        rigidBody.velocity = new Vector2(rigidBody.velocity.x, playerJumpForce);
-    }
-
-    private bool HasPlayerSpeed()
-    {
-        bool isMovingHorizontally = Mathf.Abs(rigidBody.velocity.x) > Mathf.Epsilon;
-        bool isMovingVertically = Mathf.Abs(rigidBody.velocity.y) > Mathf.Epsilon;
-        return isMovingHorizontally && isMovingVertically;
-    }
-
-    //! Avoid Ladder When Jumping
     private void HandleLadderCollision()
     {
-        if (!playerCollider.IsTouchingLayers(_layerIgnorePlayerLadder) || InputManager.Instance.IsJumping())
-        {
-            Physics2D.IgnoreCollision(playerCollider, ladderCollider, true);
-            ladderCollider.enabled = false;
-            Invoke("StopIgnoringCollisionAfterJumping", 1f);
-        }
+        bool shouldIgnoreLadder = !playerCollider.IsTouchingLayers(platformLayer) || InputManager.Instance.IsJumping();
+        Physics2D.IgnoreCollision(playerCollider, ladderCollider, shouldIgnoreLadder);
+        ladderCollider.enabled = !shouldIgnoreLadder;
 
-        else
-        {
-            Physics2D.IgnoreCollision(playerCollider, ladderCollider, false);
-        }
+        if (shouldIgnoreLadder) Invoke(nameof(ResetLadderCollision), 1f);
     }
 
-    private void StopIgnoringCollisionAfterJumping()
+    private void ResetLadderCollision()
     {
         Physics2D.IgnoreCollision(playerCollider, ladderCollider, false);
         ladderCollider.enabled = true;
     }
 
-    //! Other Methods To Handle Jumping If On Bouncing Mushroom
-    private bool IsPlayerOnTopBouncingPoint()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        return playerCollider.IsTouchingLayers(_layerTopBouncingPoint);
+        if (other.CompareTag("Water")) SetWaterState(true);
     }
 
-    private void ApplyBouncingJumpForce()
+    private void OnTriggerExit2D(Collider2D other)
     {
-        rigidBody.velocity = new Vector2(rigidBody.velocity.x, bouncingJumpForce);
+        if (other.CompareTag("Water")) SetWaterState(false);
     }
 
-    //! Other Methods To Handle Movement In Water
-    private void EnterWater()
+    private void SetWaterState(bool isInWater)
     {
-        SoundManager.Instance.PlayWaterSplashSound();
-        SoundManager.Instance.PlayWaterWalkingSound();
-        playerJumpForce = 40;
-        rigidBody.drag = waterDrag;
-    }
-
-    private void ExitWater()
-    {
-        SoundManager.Instance.StopWaterWalkingSound();
-        rigidBody.drag = default;
-        rigidBody.angularDrag = default;
-        playerJumpForce = playerJumpForceAtStart;
+        if (isInWater)
+        {
+            SoundManager.Instance.PlayWaterSplashSound();
+            SoundManager.Instance.PlayWaterWalkingSound();
+            jumpForce = 40;
+            playerBody.drag = waterDrag;
+        }
+        else
+        {
+            SoundManager.Instance.StopWaterWalkingSound();
+            playerBody.drag = 0;
+            playerBody.angularDrag = 0;
+            jumpForce = 17;
+        }
     }
 
     public void Die()
     {
-        if (playerCollider.IsTouchingLayers(_layerPlayerDieAnimation))
-        {
-            PlayerAnimation playerAnimation = GetComponent<PlayerAnimation>();
-            playerAnimation.PlayerDeathAnimation();
+        if (!playerCollider.IsTouchingLayers(dealthLayers)) return;
 
-            rigidBody.velocity = deathKick;
-            SoundManager.Instance.PlayerHitSound();
-        }
+        PlayerAnimation anim = GetComponent<PlayerAnimation>();
+        if (anim != null) anim.PlayerDeathAnimation();
+
+        Vector2 randomDeathKick = new Vector2(deathKick.x * (UnityEngine.Random.Range(0, 2) * 2 - 1), deathKick.y);
+        playerBody.velocity = randomDeathKick;
+
+        SoundManager.Instance.PlayerHitSound();
+
+        DisableInput();
+        baseButtonManager.ToggleButton(0);
+        baseButtonManager.ToggleButton(2);
+        baseButtonManager.SetMouseOn();
+    }
+
+    public float GetJumpForce()
+    {
+        return this.jumpForce;
+    }
+
+    public void DisableInput()
+    {
+        this.enabled = false;
+    }
+
+    public void EnableInput()
+    {
+        this.enabled = true;
     }
 }

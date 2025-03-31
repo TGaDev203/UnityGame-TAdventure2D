@@ -2,16 +2,9 @@ using UnityEngine;
 
 public class EnemyAnimation : MonoBehaviour
 {
-    //! Components
     private Rigidbody2D rigidBody;
 
     private void Awake()
-    {
-        InitializeComponents();
-    }
-    
-    //! Initialization
-    private void InitializeComponents()
     {
         rigidBody = GetComponent<Rigidbody2D>();
     }
@@ -21,13 +14,11 @@ public class EnemyAnimation : MonoBehaviour
         HandleAnimation();
     }
 
-    //! Handle All Animations
     private void HandleAnimation()
     {
         FlipSprite();
     }
 
-    //! Flip Sprite
     private void FlipSprite()
     {
         float moveDirection = rigidBody.velocity.x;

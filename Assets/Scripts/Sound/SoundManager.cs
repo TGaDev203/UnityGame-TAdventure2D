@@ -1,79 +1,90 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
 
-    [SerializeField] private AudioClip hitEnemySound;
-    [SerializeField] private AudioClip coinEnemySound;
-    [SerializeField] private AudioClip waterSplashSound;
-    [SerializeField] private AudioClip waterWalkingSound;
-    [SerializeField] private AudioClip menuButtonProgressSound;
-    [SerializeField] private AudioClip menuButtonEndSound;
-    [SerializeField] private AudioClip bouncingSound;
-    private AudioSource audioSource;
+    public AudioSource backgroundAudioSource;
+    public AudioSource effectAudioSource;
+    public AudioClip hitEnemySound;
+    public AudioClip coinEnemySound;
+    public AudioClip waterSplashSound;
+    public AudioClip waterWalkingSound;
+    public AudioClip menuButtonProgressSound;
+    public AudioClip menuButtonEndSound;
+    public AudioClip bouncingSound;
+    public AudioClip mainMenuSound;
+    public AudioClip gameplaySound;
+    protected bool canPlayEndSound = true;
+    protected bool canPlayProgressSound = true;
 
     private void Awake()
     {
-        InitializeComponents();
-    }
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
 
-    //! Initialization
-    private void InitializeComponents()
-    {
-        audioSource = GetComponent<AudioSource>();
         Instance = this;
     }
 
-    public void PlayerHitSound()
+    private void Start()
     {
-        audioSource.PlayOneShot(hitEnemySound);
+        PlayLoopSound();
     }
 
-    public void PlayCoinSound()
+    private void PlaySound(AudioClip clip)
     {
-        audioSource.PlayOneShot(coinEnemySound);
+        if (effectAudioSource == null || clip == null) return;
+        effectAudioSource.PlayOneShot(clip);
     }
 
-    public void PlayWaterSplashSound()
-    {
-        audioSource.PlayOneShot(waterSplashSound);
-    }
+    public void PlayerHitSound() => PlaySound(hitEnemySound);
+    public void PlayCoinSound() => PlaySound(coinEnemySound);
+    public void PlayWaterSplashSound() => PlaySound(waterSplashSound);
+    public void PlayMenuButtonProgressSound() => PlaySound(menuButtonProgressSound);
+    public void PlayMenuButtonEndSound() => PlaySound(menuButtonEndSound);
 
-    public void PlayWaterWalkingSound()
+    public void PlayLoopSound()
     {
-        audioSource.clip = waterWalkingSound;
-        audioSource.loop = true;
-        audioSource.Play();
-    }
+        if (backgroundAudioSource == null) return;
 
-    public void StopWaterWalkingSound()
-    {
-        if (audioSource != null)
+        string scene = SceneManager.GetActiveScene().name;
+        backgroundAudioSource.loop = true;
+
+        if (scene == "Main_Scene")
         {
-            audioSource.loop = false;
-            audioSource.Stop();
+            backgroundAudioSource.clip = mainMenuSound;
         }
-    }
 
-    public void PlayMenuButtonProgressSound()
-    {
-        audioSource.PlayOneShot(menuButtonProgressSound);
-    }
+        else
+        {
+            backgroundAudioSource.clip = gameplaySound;
+        }
 
-    public void PlayMenuButtonEndSound()
-    {
-        audioSource.PlayOneShot(menuButtonEndSound);
+        backgroundAudioSource.Play();
     }
 
     public void PlayBouncingSound()
     {
-        audioSource.clip = bouncingSound;
-        audioSource.Play();
+        if (effectAudioSource == null || bouncingSound == null) return;
+        effectAudioSource.PlayOneShot(bouncingSound);
     }
 
-    public void StopAllSound()
+    public void PlayWaterWalkingSound()
     {
-        audioSource.Stop();
+        if (effectAudioSource == null || waterWalkingSound == null) return;
+        effectAudioSource.clip = waterWalkingSound;
+        effectAudioSource.loop = true;
+        effectAudioSource.Play();
+    }
+
+    public void StopWaterWalkingSound()
+    {
+        if (effectAudioSource == null) return;
+
+        effectAudioSource.Stop();
     }
 }

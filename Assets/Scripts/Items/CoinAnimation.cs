@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class ItemAnimation : MonoBehaviour
 {
-    //! Component Variables
     [SerializeField] private float destroyDelay;
 
     private Animator coinAnimation;
@@ -10,16 +9,9 @@ public class ItemAnimation : MonoBehaviour
 
     void Awake()
     {
-        InitializeComponents();
-    }
-
-    //! Initialization
-    private void InitializeComponents()
-    {
         coinAnimation = GetComponent<Animator>();
     }
 
-    //! On Trigger Enter
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!hasBeenPicked && other.CompareTag("Player"))
@@ -28,7 +20,6 @@ public class ItemAnimation : MonoBehaviour
         }
     }
 
-    //! Other Method To Handle Coin Animation
     private void HandleCoinPickup()
     {
         hasBeenPicked = true;

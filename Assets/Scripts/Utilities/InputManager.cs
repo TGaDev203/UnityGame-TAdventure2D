@@ -4,7 +4,7 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
     //! Component
-    public static InputManager Instance { get; private set; } // To ensure that only one instance of this class exists and provide a global point (Singleton Instance)
+    public static InputManager Instance { get; private set; }
     private PlayerAction playerInputAction;
     public event EventHandler OnJump;
     public PlayerAction PlayerInputAction => playerInputAction;

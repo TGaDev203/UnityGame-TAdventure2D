@@ -1,31 +1,32 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    //! Components
-    [Header("Collision For Being Damaged")]
     [SerializeField] private LayerMask _layerTakenDamage;
     [SerializeField] private int maxHealth;
     [SerializeField] private int currentHealth;
     [SerializeField] private float damageCooldown;
+    [SerializeField] GameObject pauseMenu;
+    [SerializeField] private Button optionButton;
+    [SerializeField] private Button replayButton;
+    private Vector2 initialPosition;
     private CapsuleCollider2D playerCollider;
     private HealthBarManager healthBar;
     private float lastDamageTime;
+    private Rigidbody2D playerBody;
+    private bool isDead = false;
 
     private void Awake()
     {
-        InitializeComponents();
-    }
-
-    //! Initialization
-    private void InitializeComponents()
-    {
         playerCollider = GetComponent<CapsuleCollider2D>();
         healthBar = GetComponent<HealthBarManager>();
+        playerBody = GetComponent<Rigidbody2D>();
     }
 
     private void Start()
     {
+        initialPosition = transform.position;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
     }
@@ -39,23 +40,31 @@ public class Player : MonoBehaviour
     {
         if (IsTouchingEnemy() && Time.time - lastDamageTime > damageCooldown)
         {
-            TakeDamage(3);
+            TakeDamage(5);
             lastDamageTime = Time.time;
         }
     }
 
-    //! Other Method To Handle Damage
     private void TakeDamage(int damage)
     {
+        if (isDead) return;
+
         currentHealth -= damage;
         healthBar.SetHealth(currentHealth);
         SoundManager.Instance.PlayerHitSound();
 
         if (currentHealth <= 0)
         {
-            Debug.Log("cc");
+            isDead = true;
             OnDeath();
+            Invoke(nameof(ReplayOn), 1.2f);
         }
+    }
+
+    private void OnDeath()
+    {
+        PlayerMovement playerMovement = GetComponent<PlayerMovement>();
+        playerMovement.Die();
     }
 
     private bool IsTouchingEnemy()
@@ -63,9 +72,40 @@ public class Player : MonoBehaviour
         return playerCollider.IsTouchingLayers(_layerTakenDamage);
     }
 
-    private void OnDeath()
+    public void ReplayOn()
     {
-        PlayerMovement playerMovement = GetComponent<PlayerMovement>();
-        playerMovement.Die();
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0f;
+
+        optionButton.gameObject.SetActive(false);
+        replayButton.gameObject.SetActive(true);
+    }
+
+    // public void ResetPlayer()
+    // {
+    //     Time.timeScale = 1f;
+
+    //     PlayerAnimation anim = GetComponent<PlayerAnimation>();
+    //     if (anim != null) anim.ResetAnimation();
+
+    //     transform.position = initialPosition;
+    //     currentHealth = maxHealth;
+    //     healthBar.SetHealth(currentHealth);
+    //     playerBody.velocity = Vector2.zero;
+    //     playerBody.angularVelocity = 0f;
+
+    //     GetComponent<PlayerMovement>().enabled = true;
+
+    //     playerBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+    // }
+
+    public int GetHealth()
+    {
+        return currentHealth;
+    }
+
+    public bool IsDead()
+    {
+        return isDead;
     }
 }
