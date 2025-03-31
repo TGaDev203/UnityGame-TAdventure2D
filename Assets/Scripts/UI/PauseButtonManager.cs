@@ -47,9 +47,6 @@ public class PauseButtonManager : BaseButtonManager
         else if (clickedButton.gameObject.name == "Option") OptionMenu();
         
         else LoadMainScene();
-        // if (index == 0) OptionMenu();
-
-        // else if (index == 1) BackToMain();
     }
 
     private void ReplayGame()
