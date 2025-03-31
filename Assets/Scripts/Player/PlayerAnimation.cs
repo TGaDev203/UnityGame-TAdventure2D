@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
@@ -22,15 +23,9 @@ public class PlayerAnimation : MonoBehaviour
 
     private void Update()
     {
-        HandleAnimation();
-    }
-
-    private void HandleAnimation()
-    {
         FlipSprite();
         PlayerRunAnimation();
-        PlayerClimbAnination();
-    }
+        PlayerClimbAnination();    }
 
     private void FlipSprite()
     {
@@ -78,5 +73,10 @@ public class PlayerAnimation : MonoBehaviour
         {
             playerAnimation.SetTrigger("Dying");
         }
+    }
+
+    public void ResetAnimation()
+    {
+        playerAnimation.SetTrigger("Reset");
     }
 }

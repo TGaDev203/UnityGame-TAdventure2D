@@ -5,24 +5,23 @@ using UnityEngine.UI;
 
 public abstract class BaseButtonManager : MonoBehaviour
 {
-    protected bool isButtonClicked = false;
     [SerializeField] protected GameObject mainMenu;
     [SerializeField] protected GameObject pauseMenu;
     [SerializeField] protected GameObject optionMenu;
     [SerializeField] protected List<Button> buttons;
+    [SerializeField] private Slider bgmSlider;
+    [SerializeField] private Slider sfxSlider;
     protected int currentButtonIndex = -1;
-    // protected bool canPlayEndSound = true;
-    // protected bool canPlayProgressSound = true;
+    protected bool isButtonClicked = false;
     protected bool showMenu = false;
     protected float volume = 1.0f;
     protected int resolutionIndex = 0;
-        protected Player player;
-
-    // protected enum MenuState { None, PauseMenu, OptionMenu }
-    // protected MenuState currentMenuState = MenuState.None;
+    protected Player player;
 
     protected void Awake()
     {
+        player = FindObjectOfType<Player>();
+
         for (int i = 0; i < buttons.Count; i++)
         {
             int index = i;
@@ -36,9 +35,19 @@ public abstract class BaseButtonManager : MonoBehaviour
         }
     }
 
-    protected void LoadMainMenu()
+    protected void InitializeGameSettings()
     {
-        SceneManager.LoadScene("Main Menu Scene");
+        // Load saved volume settings
+        bgmSlider.value = PlayerPrefs.GetFloat("BGMVolume", 1f);
+        sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume", 1f);
+
+        // Apply loaded values
+        SoundManager.Instance.backgroundAudioSource.volume = bgmSlider.value;
+        SoundManager.Instance.effectAudioSource.volume = sfxSlider.value;
+
+        // Add listeners to sliders
+        bgmSlider.onValueChanged.AddListener(SetBGMVolume);
+        sfxSlider.onValueChanged.AddListener(SetSFXVolume);
     }
 
     protected void OnPointerEnter(int index)
@@ -76,7 +85,7 @@ public abstract class BaseButtonManager : MonoBehaviour
         if (isSelected) button.Select();
         else button.OnDeselect(null);
     }
-    
+
     protected void Pause()
     {
         SoundManager.Instance.PlayMenuButtonProgressSound();
@@ -91,51 +100,7 @@ public abstract class BaseButtonManager : MonoBehaviour
         pauseMenu.SetActive(false);
     }
 
-    protected void BackToMain()
-    {
-        SoundManager.Instance.PlayMenuButtonEndSound();
-        SceneManager.LoadScene("Main_Scene");
-    }
-
-    //     public void Option()
-    // {
-    //     PlayEndSound();
-    //     SetMouseOn();
-    //     pauseMenu.SetActive(false);
-    //     optionMenu.SetActive(true);
-    // }
-
-    // protected void PlayEndSound()
-    // {
-    //     if (canPlayEndSound)
-    //     {
-    //         SoundManager.Instance.PlayMenuButtonEndSound();
-    //         canPlayEndSound = false;
-    //         Invoke(nameof(ResetEndSoundCoolDown), 0.5f);
-    //     }
-    // }
-
-    // protected void PlayProgressSound()
-    // {
-    //     if (canPlayProgressSound)
-    //     {
-    //         SoundManager.Instance.PlayMenuButtonProgressSound();
-    //         canPlayProgressSound = false;
-    //         Invoke(nameof(ResetProgressSoundCoolDown), 0.5f);
-    //     }
-    // }
-
-    // private void ResetEndSoundCoolDown()
-    // {
-    //     canPlayEndSound = true;
-    // }
-
-    // private void ResetProgressSoundCoolDown()
-    // {
-    //     canPlayProgressSound = true;
-    // }
-
-    protected void SetMouseOn()
+    public void SetMouseOn()
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
@@ -147,11 +112,38 @@ public abstract class BaseButtonManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Confined;
     }
 
-    // public void ToggleButton(int index, bool isActive)
-    // {
-    //     if (index < 0 || index >= buttons.Count) return;
-    //     buttons[index].gameObject.SetActive(isActive);
-    // }
+    private void SetBGMVolume(float volume)
+    {
+        SoundManager.Instance.backgroundAudioSource.volume = volume;
+        PlayerPrefs.SetFloat("BGMVolume", volume);
+        PlayerPrefs.Save();
+    }
+
+    private void SetSFXVolume(float volume)
+    {
+        SoundManager.Instance.effectAudioSource.volume = volume;
+        PlayerPrefs.SetFloat("SFXVolume", volume);
+        PlayerPrefs.Save();
+    }
+
+    public void ToggleButton(int index)
+    {
+        if (index < 0 || index >= buttons.Count) return;
+
+        Button button = buttons[index];
+        button.gameObject.SetActive(!button.gameObject.activeSelf);
+    }
+
+    protected void LoadGameplayScene()
+    {
+        SceneManager.LoadScene("Gameplay_Scene");
+    }
+
+    protected void LoadMainScene()
+    {
+        SceneManager.LoadScene("Main_Scene");
+    }
+
     protected abstract void HandlePauseInput();
 
     protected abstract void OnButtonClicked(int index);

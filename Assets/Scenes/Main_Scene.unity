@@ -1215,6 +1215,8 @@ MonoBehaviour:
   pauseMenu: {fileID: 0}
   optionMenu: {fileID: 926675882}
   buttons: []
+  bgmSlider: {fileID: 1878207918}
+  sfxSlider: {fileID: 329505558}
 --- !u!1 &980637496
 GameObject:
   m_ObjectHideFlags: 0
@@ -3156,6 +3158,8 @@ MonoBehaviour:
   - {fileID: 809674393}
   - {fileID: 322422075}
   - {fileID: 1354863545}
+  bgmSlider: {fileID: 1878207918}
+  sfxSlider: {fileID: 329505558}
 --- !u!1 &7343232456276213646
 GameObject:
   m_ObjectHideFlags: 0

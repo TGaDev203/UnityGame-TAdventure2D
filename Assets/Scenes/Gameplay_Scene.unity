@@ -535,6 +535,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1516937614}
+  - {fileID: 180652015}
   - {fileID: 413655640}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -955,13 +957,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 180652011}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 555615710}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 166921299}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -24317,8 +24319,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -3, y: -194}
-  m_SizeDelta: {x: 357.5884, y: 85.3465}
+  m_AnchoredPosition: {x: -7.0001, y: -195}
+  m_SizeDelta: {x: 284.7444, y: 85.3465}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1128307733
 MonoBehaviour:
@@ -29794,7 +29796,6 @@ MonoBehaviour:
   pauseMenu: {fileID: 1516937610}
   optionButton: {fileID: 694276927}
   replayButton: {fileID: 1128307733}
-  pauseButtonManager: {fileID: 0}
 --- !u!114 &1250106912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147247,7 +147248,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Continue
+  m_text: Replay
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d1e39e1fc21614f449ca9f8991341800, type: 2}
   m_sharedMaterial: {fileID: 6031255246027839382, guid: d1e39e1fc21614f449ca9f8991341800, type: 2}
@@ -147878,7 +147879,7 @@ RectTransform:
   m_Children:
   - {fileID: 1628419588}
   - {fileID: 1499266538}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 166921299}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -151419,6 +151420,4 @@ SceneRoots:
   - {fileID: 340561531}
   - {fileID: 1849826096}
   - {fileID: 166921299}
-  - {fileID: 1516937614}
-  - {fileID: 180652015}
   - {fileID: 1034051608}

@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private CapsuleCollider2D playerCollider;
     private BoxCollider2D feetCollider;
     public TilemapCollider2D ladderCollider;
+    private BaseButtonManager baseButtonManager;
 
     private void Awake()
     {
@@ -24,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
         playerBody = GetComponent<Rigidbody2D>();
         ladderCollider = GameObject.FindWithTag("Ladder").GetComponent<TilemapCollider2D>();
         feetCollider = gameObject.GetComponent<BoxCollider2D>();
+
+        baseButtonManager = FindObjectOfType<BaseButtonManager>();
     }
 
     private void Start() => InputManager.Instance.OnJump += Jump;
@@ -105,18 +108,23 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!playerCollider.IsTouchingLayers(dealthLayers)) return;
 
-        GetComponent<PlayerAnimation>()?.PlayerDeathAnimation();
+        PlayerAnimation anim = GetComponent<PlayerAnimation>();
+        if (anim != null) anim.PlayerDeathAnimation();
+
         Vector2 randomDeathKick = new Vector2(deathKick.x * (UnityEngine.Random.Range(0, 2) * 2 - 1), deathKick.y);
         playerBody.velocity = randomDeathKick;
+
         SoundManager.Instance.PlayerHitSound();
 
         DisableInput();
+        baseButtonManager.ToggleButton(0);
+        baseButtonManager.ToggleButton(2);
+        baseButtonManager.SetMouseOn();
     }
 
     public float GetJumpForce()
     {
         return this.jumpForce;
-
     }
 
     public void DisableInput()

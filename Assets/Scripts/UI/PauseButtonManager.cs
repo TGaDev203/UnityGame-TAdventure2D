@@ -1,52 +1,17 @@
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class PauseButtonManager : BaseButtonManager
 {
-    [SerializeField] private Slider bgmSlider;
-    [SerializeField] private Slider sfxSlider;
-
     private void Start()
     {
-        player = FindObjectOfType<Player>();
-
-        // Load saved volume settings
-        bgmSlider.value = PlayerPrefs.GetFloat("BGMVolume", 1f);
-        sfxSlider.value = PlayerPrefs.GetFloat("SFXVolume", 1f);
-
-        // Apply loaded values
-        SoundManager.Instance.backgroundAudioSource.volume = bgmSlider.value;
-        SoundManager.Instance.effectAudioSource.volume = sfxSlider.value;
-
-        // Add listeners to sliders
-        bgmSlider.onValueChanged.AddListener(SetBGMVolume);
-        sfxSlider.onValueChanged.AddListener(SetSFXVolume);
+        InitializeGameSettings();
     }
 
     private void Update()
     {
-        // if (player != null && player.IsDead()) return;
-        // if (!Input.GetKeyDown(KeyCode.Escape)) return;
-
-        // if (pauseMenu.activeSelf)
-        // {
-        //     // SoundManager.Instance.PlayLoopSound();
-        //     Resume();
-        //     Time.timeScale = 1f;
-        // }
-
-        // else if (optionMenu.activeSelf)
-        // {
-        //     pauseMenu.SetActive(true);
-        //     optionMenu.SetActive(false);
-        // }
-
-        // else
-        // {
-        //     Time.timeScale = 0f;
-        //     Pause();
-        // }
         HandlePauseInput();
     }
 
@@ -57,7 +22,6 @@ public class PauseButtonManager : BaseButtonManager
 
         if (pauseMenu.activeSelf)
         {
-            // SoundManager.Instance.PlayLoopSound();
             Resume();
             Time.timeScale = 1f;
         }
@@ -77,24 +41,23 @@ public class PauseButtonManager : BaseButtonManager
 
     protected override void OnButtonClicked(int index)
     {
-        if (index == 0) OptionMenu();
+        Button clickedButton = buttons[index];
+        if (clickedButton.gameObject.name == "Replay") ReplayGame();
 
-        else if (index == 1) BackToMain();
+        else if (clickedButton.gameObject.name == "Option") OptionMenu();
+        
+        else LoadMainScene();
+        // if (index == 0) OptionMenu();
+
+        // else if (index == 1) BackToMain();
     }
 
-    // private void Pause()
-    // {
-    //     SoundManager.Instance.PlayMenuButtonProgressSound();
-    //     SetMouseOn();
-    //     pauseMenu.SetActive(true);
-    // }
-
-    // private void Resume()
-    // {
-    //     SoundManager.Instance.PlayMenuButtonEndSound();
-    //     SetMouseOff();
-    //     pauseMenu.SetActive(false);
-    // }
+    private void ReplayGame()
+    {
+        Invoke(nameof(LoadGameplayScene), 0.4f);
+        Time.timeScale = 1f;
+        Resume();
+    }
 
     protected override void OptionMenu()
     {
@@ -102,23 +65,5 @@ public class PauseButtonManager : BaseButtonManager
         SetMouseOn();
         pauseMenu.SetActive(false);
         optionMenu.SetActive(true);
-    }
-
-    // private void BackToMain()
-    // {
-    //     SoundManager.Instance.PlayMenuButtonEndSound();
-    //     SceneManager.LoadScene("Main_Scene");
-    // }
-
-    private void SetBGMVolume(float volume)
-    {
-        SoundManager.Instance.backgroundAudioSource.volume = volume;
-        PlayerPrefs.SetFloat("BGMVolume", volume);
-    }
-
-    private void SetSFXVolume(float volume)
-    {
-        SoundManager.Instance.effectAudioSource.volume = volume;
-        PlayerPrefs.SetFloat("SFXVolume", volume);
     }
 }

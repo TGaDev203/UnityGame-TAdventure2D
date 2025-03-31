@@ -87,34 +87,4 @@ public class SoundManager : MonoBehaviour
 
         effectAudioSource.Stop();
     }
-
-    // public void PlayEndSound()
-    // {
-    //     if (canPlayEndSound)
-    //     {
-    //         SoundManager.Instance.PlayMenuButtonEndSound();
-    //         canPlayEndSound = false;
-    //         Invoke(nameof(ResetEndSoundCoolDown), 0.5f);
-    //     }
-    // }
-
-    // public void PlayProgressSound()
-    // {
-    //     if (canPlayProgressSound)
-    //     {
-    //         SoundManager.Instance.PlayMenuButtonProgressSound();
-    //         canPlayProgressSound = false;
-    //         Invoke(nameof(ResetProgressSoundCoolDown), 0.5f);
-    //     }
-    // }
-
-    // private void ResetEndSoundCoolDown()
-    // {
-    //     canPlayEndSound = true;
-    // }
-
-    // private void ResetProgressSoundCoolDown()
-    // {
-    //     canPlayProgressSound = true;
-    // }
 }

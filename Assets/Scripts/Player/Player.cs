@@ -10,7 +10,6 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     [SerializeField] private Button optionButton;
     [SerializeField] private Button replayButton;
-    [SerializeField] private PauseButtonManager pauseButtonManager;
     private Vector2 initialPosition;
     private CapsuleCollider2D playerCollider;
     private HealthBarManager healthBar;
@@ -41,7 +40,7 @@ public class Player : MonoBehaviour
     {
         if (IsTouchingEnemy() && Time.time - lastDamageTime > damageCooldown)
         {
-            TakeDamage(3);
+            TakeDamage(5);
             lastDamageTime = Time.time;
         }
     }
@@ -58,7 +57,7 @@ public class Player : MonoBehaviour
         {
             isDead = true;
             OnDeath();
-            Invoke("Replay", 1.2f);
+            Invoke(nameof(ReplayOn), 1.2f);
         }
     }
 
@@ -73,7 +72,7 @@ public class Player : MonoBehaviour
         return playerCollider.IsTouchingLayers(_layerTakenDamage);
     }
 
-    public void Replay()
+    public void ReplayOn()
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
@@ -82,13 +81,23 @@ public class Player : MonoBehaviour
         replayButton.gameObject.SetActive(true);
     }
 
-    public void ResetPlayer()
-    {
-        transform.position = initialPosition;
-        currentHealth = maxHealth;
-        healthBar.SetHealth(currentHealth);
-        playerBody.velocity = Vector2.zero;
-    }
+    // public void ResetPlayer()
+    // {
+    //     Time.timeScale = 1f;
+
+    //     PlayerAnimation anim = GetComponent<PlayerAnimation>();
+    //     if (anim != null) anim.ResetAnimation();
+
+    //     transform.position = initialPosition;
+    //     currentHealth = maxHealth;
+    //     healthBar.SetHealth(currentHealth);
+    //     playerBody.velocity = Vector2.zero;
+    //     playerBody.angularVelocity = 0f;
+
+    //     GetComponent<PlayerMovement>().enabled = true;
+
+    //     playerBody.constraints = RigidbodyConstraints2D.FreezeRotation;
+    // }
 
     public int GetHealth()
     {

@@ -3,6 +3,12 @@ using UnityEngine.SceneManagement;
 
 public class MainButtonManager : BaseButtonManager
 {
+    private void Start()
+    {
+        ToggleButton(0);
+        InitializeGameSettings();
+    }
+
     private void Update()
     {
         HandlePauseInput();
@@ -29,6 +35,7 @@ public class MainButtonManager : BaseButtonManager
 
         switch (index)
         {
+            //!
             case 0:
                 SoundManager.Instance.PlayMenuButtonEndSound();
                 break;
@@ -54,11 +61,6 @@ public class MainButtonManager : BaseButtonManager
     private void ResetButtonClick()
     {
         isButtonClicked = false;
-    }
-
-    private void LoadGameplayScene()
-    {
-        SceneManager.LoadScene("Gameplay_Scene");
     }
 
     protected override void OptionMenu()
