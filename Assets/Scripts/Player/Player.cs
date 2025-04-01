@@ -81,24 +81,6 @@ public class Player : MonoBehaviour
         replayButton.gameObject.SetActive(true);
     }
 
-    // public void ResetPlayer()
-    // {
-    //     Time.timeScale = 1f;
-
-    //     PlayerAnimation anim = GetComponent<PlayerAnimation>();
-    //     if (anim != null) anim.ResetAnimation();
-
-    //     transform.position = initialPosition;
-    //     currentHealth = maxHealth;
-    //     healthBar.SetHealth(currentHealth);
-    //     playerBody.velocity = Vector2.zero;
-    //     playerBody.angularVelocity = 0f;
-
-    //     GetComponent<PlayerMovement>().enabled = true;
-
-    //     playerBody.constraints = RigidbodyConstraints2D.FreezeRotation;
-    // }
-
     public int GetHealth()
     {
         return currentHealth;

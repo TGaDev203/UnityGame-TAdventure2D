@@ -18,6 +18,12 @@ public abstract class BaseButtonManager : MonoBehaviour
     protected int resolutionIndex = 0;
     protected Player player;
 
+    protected void LoadGameplayScene() => SceneManager.LoadScene("Gameplay_Scene");
+    protected void LoadMainScene() => SceneManager.LoadScene("Main_Scene");
+    protected abstract void HandlePauseInput();
+    protected abstract void OnButtonClicked(int index);
+    protected abstract void OptionMenu();
+
     protected void Awake()
     {
         player = FindObjectOfType<Player>();
@@ -133,20 +139,4 @@ public abstract class BaseButtonManager : MonoBehaviour
         Button button = buttons[index];
         button.gameObject.SetActive(!button.gameObject.activeSelf);
     }
-
-    protected void LoadGameplayScene()
-    {
-        SceneManager.LoadScene("Gameplay_Scene");
-    }
-
-    protected void LoadMainScene()
-    {
-        SceneManager.LoadScene("Main_Scene");
-    }
-
-    protected abstract void HandlePauseInput();
-
-    protected abstract void OnButtonClicked(int index);
-
-    protected abstract void OptionMenu();
 }
