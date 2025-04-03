@@ -13,9 +13,6 @@ public abstract class BaseButtonManager : MonoBehaviour
     [SerializeField] private Slider sfxSlider;
     protected int currentButtonIndex = -1;
     protected bool isButtonClicked = false;
-    protected bool showMenu = false;
-    protected float volume = 1.0f;
-    protected int resolutionIndex = 0;
     protected Player player;
 
     protected void LoadGameplayScene() => SceneManager.LoadScene("Gameplay_Scene");

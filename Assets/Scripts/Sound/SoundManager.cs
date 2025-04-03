@@ -8,7 +8,7 @@ public class SoundManager : MonoBehaviour
     public AudioSource backgroundAudioSource;
     public AudioSource effectAudioSource;
     public AudioClip hitEnemySound;
-    public AudioClip coinEnemySound;
+    public AudioClip coinSound;
     public AudioClip waterSplashSound;
     public AudioClip waterWalkingSound;
     public AudioClip menuButtonProgressSound;
@@ -16,12 +16,14 @@ public class SoundManager : MonoBehaviour
     public AudioClip bouncingSound;
     public AudioClip mainMenuSound;
     public AudioClip gameplaySound;
-    protected bool canPlayEndSound = true;
-    protected bool canPlayProgressSound = true;
+    public AudioClip rockFallingSound;
+    // protected bool canPlayEndSound = true;
+    // protected bool canPlayProgressSound = true;
 
     public void PlayerHitSound() => PlaySound(hitEnemySound);
-    public void PlayCoinSound() => PlaySound(coinEnemySound);
+    public void PlayCoinSound() => PlaySound(coinSound);
     public void PlayWaterSplashSound() => PlaySound(waterSplashSound);
+    public void PlayRockFallingSound() => PlaySound(rockFallingSound);
     public void PlayMenuButtonProgressSound() => PlaySound(menuButtonProgressSound);
     public void PlayMenuButtonEndSound() => PlaySound(menuButtonEndSound);
 
