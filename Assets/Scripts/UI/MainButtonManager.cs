@@ -73,6 +73,6 @@ public class MainButtonManager : BaseButtonManager
 
     private void QuitGame()
     {
-        UnityEditor.EditorApplication.isPlaying = false;
+        Application.Quit();
     }
 }

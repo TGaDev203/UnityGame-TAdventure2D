@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public class PlayerClimb : MonoBehaviour
 {
     [SerializeField] private float climbSpeed;
@@ -30,10 +29,7 @@ public class PlayerClimb : MonoBehaviour
             PerformJumpFromLadder();
         }
 
-        else
-        {
-            rigidBody.gravityScale = 5f;
-        }
+        else rigidBody.gravityScale = 5f;
     }
 
     private bool isPlayerOnClimbableLayer()
