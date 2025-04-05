@@ -5,10 +5,8 @@ using UnityEngine.Tilemaps;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] LayerMask jumpableLayers;
-    [SerializeField] LayerMask dealthLayers;
     [SerializeField] LayerMask platformLayer;
     [SerializeField] LayerMask bounceLayer;
-    [SerializeField] private Vector2 deathForce = new Vector2(0f, 0f);
     [SerializeField] private float runSpeed;
     [SerializeField] private float jumpForce;
     [SerializeField] private float bounceForce;
@@ -17,7 +15,6 @@ public class PlayerMovement : MonoBehaviour
     private CapsuleCollider2D playerCollider;
     private BoxCollider2D feetCollider;
     public TilemapCollider2D ladderCollider;
-    private BaseButtonManager baseButtonManager;
 
     public float GetJumpForce() => this.jumpForce;
     public void DisableInput() => this.enabled = false;
@@ -29,7 +26,6 @@ public class PlayerMovement : MonoBehaviour
         playerBody = GetComponent<Rigidbody2D>();
         ladderCollider = GameObject.FindWithTag("Ladder").GetComponent<TilemapCollider2D>();
         feetCollider = gameObject.GetComponent<BoxCollider2D>();
-        baseButtonManager = FindObjectOfType<BaseButtonManager>();
     }
 
     private void Start()
@@ -108,23 +104,5 @@ public class PlayerMovement : MonoBehaviour
             playerBody.angularDrag = 0;
             jumpForce = 17;
         }
-    }
-
-    public void Die()
-    {
-        if (!playerCollider.IsTouchingLayers(dealthLayers)) return;
-
-        PlayerAnimation anim = GetComponent<PlayerAnimation>();
-        if (anim != null) anim.PlayerDeathAnimation();
-
-        Vector2 randomDeathForce = new Vector2(deathForce.x * (UnityEngine.Random.Range(0, 2) * 2 - 1), deathForce.y);
-        playerBody.velocity = randomDeathForce;
-
-        SoundManager.Instance.PlayerHitSound();
-
-        DisableInput();
-        baseButtonManager.ToggleButton(0);
-        baseButtonManager.ToggleButton(1);
-        baseButtonManager.SetMouseOn();
     }
 }

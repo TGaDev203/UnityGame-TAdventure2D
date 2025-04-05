@@ -1,32 +1,40 @@
 using UnityEngine;
+using UnityEngine.Diagnostics;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private LayerMask _layerTakenDamage;
+    [SerializeField] private LayerMask _damageLayers;
     [SerializeField] private int maxHealth;
     [SerializeField] private int currentHealth;
-    [SerializeField] private float damageCooldown;
-    [SerializeField] GameObject pauseMenu;
+    [SerializeField] private int hitDamage;
+    [SerializeField] private int fallDamage;
+    [SerializeField] private float fallThreshold;
+    [SerializeField] private float hitDamageCooldown;
+    [SerializeField] private float fallDamageCooldown;
+    [SerializeField] private Vector2 deathForce = new Vector2(0f, 0f);
+    [SerializeField] private GameObject pauseMenu;
     [SerializeField] private Button optionButton;
     [SerializeField] private Button replayButton;
-    private Vector2 initialPosition;
     private CapsuleCollider2D playerCollider;
-    private HealthBarManager healthBar;
-    private float lastDamageTime;
     private Rigidbody2D playerBody;
+    private HealthBarManager healthBar;
+    private BaseButtonManager baseButtonManager;
+    private float lastGroundY;
+    private float lastDamageTime;
+    private float lastFallDamageTime;
     private bool isDead = false;
 
     private void Awake()
     {
         playerCollider = GetComponent<CapsuleCollider2D>();
-        healthBar = GetComponent<HealthBarManager>();
         playerBody = GetComponent<Rigidbody2D>();
+        healthBar = GetComponent<HealthBarManager>();
+        baseButtonManager = FindObjectOfType<BaseButtonManager>();
     }
 
     private void Start()
     {
-        initialPosition = transform.position;
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
     }
@@ -36,11 +44,33 @@ public class Player : MonoBehaviour
         TouchingEnemy();
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            float fallDistance = lastGroundY - transform.position.y;
+
+            if (fallDistance > fallThreshold && Time.time - lastFallDamageTime > fallDamageCooldown)
+            {
+                TakeDamage(fallDamage);
+                lastFallDamageTime = Time.time;
+            }
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Platform"))
+        {
+            lastGroundY = transform.position.y;
+        }
+    }
+
     private void TouchingEnemy()
     {
-        if (IsTouchingEnemy() && Time.time - lastDamageTime > damageCooldown)
+        if (IsTouchingEnemy() && Time.time - lastDamageTime > hitDamageCooldown)
         {
-            TakeDamage(5);
+            TakeDamage(hitDamage);
             lastDamageTime = Time.time;
         }
     }
@@ -56,20 +86,14 @@ public class Player : MonoBehaviour
         if (currentHealth <= 0)
         {
             isDead = true;
-            OnDeath();
+            Die();
             Invoke(nameof(ReplayOn), 1.2f);
         }
     }
 
-    private void OnDeath()
-    {
-        PlayerMovement playerMovement = GetComponent<PlayerMovement>();
-        playerMovement.Die();
-    }
-
     private bool IsTouchingEnemy()
     {
-        return playerCollider.IsTouchingLayers(_layerTakenDamage);
+        return playerCollider.IsTouchingLayers(_damageLayers);
     }
 
     public void ReplayOn()
@@ -89,5 +113,21 @@ public class Player : MonoBehaviour
     public bool IsDead()
     {
         return isDead;
+    }
+
+    public void Die()
+    {
+        PlayerAnimation anim = GetComponent<PlayerAnimation>();
+        if (anim != null) anim.PlayerDeathAnimation();
+
+        Vector2 randomDeathForce = new Vector2(deathForce.x * (Random.Range(0, 2) * 2 - 1), deathForce.y);
+        playerBody.velocity = randomDeathForce;
+
+        SoundManager.Instance.PlayerHitSound();
+
+        GetComponent<PlayerMovement>().DisableInput();
+        baseButtonManager.ToggleButton(0);
+        baseButtonManager.ToggleButton(1);
+        baseButtonManager.SetMouseOn();
     }
 }

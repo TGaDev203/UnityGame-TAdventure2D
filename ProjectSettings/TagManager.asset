@@ -10,8 +10,14 @@ TagManager:
   - Enemy
   - Water
   - Platform
-  - Moving
   - Falling
+  - Horizontal Moving
+  - Vertical Moving
+  - Moving
+  - Zone1
+  - Zone2
+  - Zone3
+  - Zone4
   layers:
   - Default
   - TransparentFX

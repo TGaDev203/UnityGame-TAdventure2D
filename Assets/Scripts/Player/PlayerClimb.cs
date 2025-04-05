@@ -1,6 +1,5 @@
 using UnityEngine;
 
-
 public class PlayerClimb : MonoBehaviour
 {
     [SerializeField] private float climbSpeed;

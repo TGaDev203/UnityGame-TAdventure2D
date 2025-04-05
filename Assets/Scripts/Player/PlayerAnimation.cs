@@ -1,11 +1,9 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
     [SerializeField] LayerMask _layerPlayerRunAnimation;
     [SerializeField] LayerMask _layerPlayerClimbAnimation;
-    [SerializeField] LayerMask _layerPlayerDieAnimation;
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rigidBody;
     private CapsuleCollider2D playerCollider;
@@ -25,7 +23,8 @@ public class PlayerAnimation : MonoBehaviour
     {
         FlipSprite();
         PlayerRunAnimation();
-        PlayerClimbAnination();    }
+        PlayerClimbAnination();
+    }
 
     private void FlipSprite()
     {
@@ -69,10 +68,7 @@ public class PlayerAnimation : MonoBehaviour
 
     public void PlayerDeathAnimation()
     {
-        if (playerCollider.IsTouchingLayers(_layerPlayerDieAnimation))
-        {
-            playerAnimation.SetTrigger("Dying");
-        }
+        playerAnimation.SetTrigger("Dying");
     }
 
     public void ResetAnimation()
