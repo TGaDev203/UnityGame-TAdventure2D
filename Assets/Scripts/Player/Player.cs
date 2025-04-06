@@ -43,19 +43,21 @@ public class Player : MonoBehaviour
         TouchingEnemy();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Platform"))
-        {
-            float fallDistance = lastGroundY - transform.position.y;
+private void OnCollisionEnter2D(Collision2D collision)
+{
+    if (collision.gameObject.layer != LayerMask.NameToLayer("Platform")) return;
 
-            if (fallDistance > fallThreshold && Time.time - lastFallDamageTime > fallDamageCooldown)
-            {
-                TakeDamage(fallDamage);
-                lastFallDamageTime = Time.time;
-            }
-        }
+    float fallDistance = lastGroundY - transform.position.y;
+    bool isTooFast = fallDistance > fallThreshold;
+    bool cooldownOver = Time.time - lastFallDamageTime > fallDamageCooldown;
+
+    if (isTooFast && cooldownOver)
+    {
+        TakeDamage(fallDamage);
+        lastFallDamageTime = Time.time;
     }
+}
+
 
     private void OnCollisionExit2D(Collision2D collision)
     {
