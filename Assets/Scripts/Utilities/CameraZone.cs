@@ -1,14 +1,16 @@
 using UnityEngine;
 using Cinemachine;
+using System.Collections.Generic;
 
 public class CameraZone : MonoBehaviour
 {
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
-    [SerializeField] private PolygonCollider2D zone1;
-    [SerializeField] private PolygonCollider2D zone2;
-    [SerializeField] private PolygonCollider2D zone3;
-    [SerializeField] private PolygonCollider2D zone4;
-
+    [SerializeField] private List<GameObject> backgrounds;
+    [SerializeField] private List<PolygonCollider2D> zones;
+    // [SerializeField] private PolygonCollider2D zone1;
+    // [SerializeField] private PolygonCollider2D zone2;
+    // [SerializeField] private PolygonCollider2D zone3;
+    // [SerializeField] private PolygonCollider2D zone4;
     private CinemachineConfiner2D confiner;
 
     private void Start()
@@ -37,27 +39,26 @@ public class CameraZone : MonoBehaviour
 
     private void ZoneControl()
     {
-        switch (tag)
+        if (!tag.StartsWith("Zone") || !int.TryParse(tag.Substring(4), out int zoneNumber))
         {
-            case "Zone1":
-                confiner.m_BoundingShape2D = zone1;
-                break;
+            Debug.LogWarning($"Invalid zone tag format: {tag}");
+            return;
+        }
 
-            case "Zone2":
-                confiner.m_BoundingShape2D = zone2;
-                break;
+        int index = zoneNumber - 1;
 
-            case "Zone3":
-                confiner.m_BoundingShape2D = zone3;
-                break;
+        if (index < 0 || index >= zones.Count)
+        {
+            Debug.LogWarning($"Zone index {index} is out of range.");
+            return;
+        }
 
-            case "Zone4":
-                confiner.m_BoundingShape2D = zone4;
-                break;
+        confiner.m_BoundingShape2D = zones[index];
 
-            default:
-                Debug.LogWarning("No valid zone tag matched.");
-                break;
+        for (int i = 0; i < backgrounds.Count; i++)
+        {
+            backgrounds[i].SetActive(i == index);
         }
     }
+
 }
