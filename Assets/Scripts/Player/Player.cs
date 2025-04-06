@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Diagnostics;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour

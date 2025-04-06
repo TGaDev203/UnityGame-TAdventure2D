@@ -37,59 +37,28 @@ public class CameraZone : MonoBehaviour
         }
     }
 
-    // private void ZoneControl()
-    // {
-    //     switch (tag)
-    //     {
-    //         case "Zone1":
-    //             confiner.m_BoundingShape2D = zone1;
-                
-    //             break;
-
-    //         case "Zone2":
-    //             confiner.m_BoundingShape2D = zone2;
-    //             break;
-
-    //         case "Zone3":
-    //             confiner.m_BoundingShape2D = zone3;
-    //             break;
-
-    //         case "Zone4":
-    //             confiner.m_BoundingShape2D = zone4;
-    //             break;
-
-    //         default:
-    //             Debug.LogWarning("No valid zone tag matched.");
-    //             break;
-    //     }
-    // }
-
     private void ZoneControl()
-{
-    // Lấy số ở cuối tag, ví dụ "Zone2" => 2 => index 1
-    if (tag.StartsWith("Zone") && int.TryParse(tag.Substring(4), out int zoneNumber))
     {
+        if (!tag.StartsWith("Zone") || !int.TryParse(tag.Substring(4), out int zoneNumber))
+        {
+            Debug.LogWarning($"Invalid zone tag format: {tag}");
+            return;
+        }
+
         int index = zoneNumber - 1;
 
-        if (index >= 0 && index < zones.Count)
-        {
-            // Gán confiner
-            confiner.m_BoundingShape2D = zones[index];
-
-            // Bật background tương ứng, tắt các cái khác
-            for (int i = 0; i < backgrounds.Count; i++)
-            {
-                backgrounds[i].SetActive(i == index);
-            }
-        }
-        else
+        if (index < 0 || index >= zones.Count)
         {
             Debug.LogWarning($"Zone index {index} is out of range.");
+            return;
+        }
+
+        confiner.m_BoundingShape2D = zones[index];
+
+        for (int i = 0; i < backgrounds.Count; i++)
+        {
+            backgrounds[i].SetActive(i == index);
         }
     }
-    else
-    {
-        Debug.LogWarning($"Invalid zone tag format: {tag}");
-    }
-}
+
 }
