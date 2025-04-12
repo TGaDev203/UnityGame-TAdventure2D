@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseButtonManager : BaseButtonManager
+public class PauseButtonManager : ButtonManagerBase
 {
     private void Start()
     {

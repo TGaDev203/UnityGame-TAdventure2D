@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public abstract class BaseButtonManager : MonoBehaviour
+public abstract class ButtonManagerBase : MonoBehaviour
 {
     [SerializeField] protected GameObject mainMenu;
     [SerializeField] protected GameObject pauseMenu;

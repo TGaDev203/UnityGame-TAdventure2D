@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     private CapsuleCollider2D playerCollider;
     private Rigidbody2D playerBody;
     private HealthBarManager healthBar;
-    private BaseButtonManager baseButtonManager;
+    private ButtonManagerBase buttonManagerBase;
     private float lastGroundY;
     private float lastDamageTime;
     private float lastFallDamageTime;
@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
         playerCollider = GetComponent<CapsuleCollider2D>();
         playerBody = GetComponent<Rigidbody2D>();
         healthBar = GetComponent<HealthBarManager>();
-        baseButtonManager = FindObjectOfType<BaseButtonManager>();
+        buttonManagerBase = FindObjectOfType<ButtonManagerBase>();
     }
 
     private void Start()
@@ -127,8 +127,8 @@ private void OnCollisionEnter2D(Collision2D collision)
         SoundManager.Instance.PlayerHitSound();
 
         GetComponent<PlayerMovement>().DisableInput();
-        baseButtonManager.ToggleButton(0);
-        baseButtonManager.ToggleButton(1);
-        baseButtonManager.SetMouseOn();
+        buttonManagerBase.ToggleButton(0);
+        buttonManagerBase.ToggleButton(1);
+        buttonManagerBase.SetMouseOn();
     }
 }

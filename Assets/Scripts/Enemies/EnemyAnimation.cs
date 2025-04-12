@@ -3,18 +3,15 @@ using UnityEngine;
 public class EnemyAnimation : MonoBehaviour
 {
     private Rigidbody2D rigidBody;
+    private Animator zombieAnimation;
 
     private void Awake()
     {
         rigidBody = GetComponent<Rigidbody2D>();
+        zombieAnimation = GetComponent<Animator>();
     }
 
     private void Update()
-    {
-        HandleAnimation();
-    }
-
-    private void HandleAnimation()
     {
         FlipSprite();
     }
@@ -27,5 +24,10 @@ public class EnemyAnimation : MonoBehaviour
         {
             transform.localScale = new Vector2(Mathf.Sign(moveDirection), 1f);
         }
+    }
+
+    public void ZombieWalkingAnimation()
+    {
+        zombieAnimation.SetBool("isWalking", true);
     }
 }

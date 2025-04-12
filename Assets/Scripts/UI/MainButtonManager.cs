@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MainButtonManager : BaseButtonManager
+public class MainButtonManager : ButtonManagerBase
 {
     private void Start()
     {
