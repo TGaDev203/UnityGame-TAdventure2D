@@ -53,7 +53,7 @@ public class MainButtonManager : ButtonManagerBase
 
             case 3:
                 SoundManager.Instance.PlayMenuButtonEndSound();
-                Invoke(nameof(QuitGame), 0.5f);
+                QuitGame();
                 break;
         }
     }

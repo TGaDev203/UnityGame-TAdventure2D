@@ -1,3 +1,4 @@
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -46,6 +47,7 @@ public class Player : MonoBehaviour
 private void OnCollisionEnter2D(Collision2D collision)
 {
     if (collision.gameObject.layer != LayerMask.NameToLayer("Platform")) return;
+    if (playerCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"))) return;
 
     float fallDistance = lastGroundY - transform.position.y;
     bool isTooFast = fallDistance > fallThreshold;

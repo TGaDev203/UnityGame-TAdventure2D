@@ -16,7 +16,7 @@ public abstract class EnemyBase : MonoBehaviour
         enemyBody.velocity = new Vector2(moveSpeed, enemyBody.velocity.y);
     }
 
-    protected void OnTriggerExit2D(Collider2D other)
+    protected virtual void OnTriggerExit2D(Collider2D other)
     {
         moveSpeed = -moveSpeed;
     }

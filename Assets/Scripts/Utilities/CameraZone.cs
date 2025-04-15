@@ -7,10 +7,7 @@ public class CameraZone : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
     [SerializeField] private List<GameObject> backgrounds;
     [SerializeField] private List<PolygonCollider2D> zones;
-    // [SerializeField] private PolygonCollider2D zone1;
-    // [SerializeField] private PolygonCollider2D zone2;
-    // [SerializeField] private PolygonCollider2D zone3;
-    // [SerializeField] private PolygonCollider2D zone4;
+
     private CinemachineConfiner2D confiner;
 
     private void Start()
