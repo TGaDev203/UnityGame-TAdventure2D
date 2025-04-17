@@ -2,8 +2,8 @@ using UnityEngine;
 
 public abstract class EnemyBase : MonoBehaviour
 {
-    [SerializeField] protected Transform player;
     [SerializeField] protected float moveSpeed;
+    protected float initialSpeed;
     protected Rigidbody2D enemyBody;
 
     protected virtual void Awake()
@@ -16,7 +16,7 @@ public abstract class EnemyBase : MonoBehaviour
         enemyBody.velocity = new Vector2(moveSpeed, enemyBody.velocity.y);
     }
 
-    protected virtual void OnTriggerExit2D(Collider2D other)
+    protected void OnTriggerExit2D(Collider2D other)
     {
         moveSpeed = -moveSpeed;
     }

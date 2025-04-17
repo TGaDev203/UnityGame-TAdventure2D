@@ -1,4 +1,3 @@
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,14 +15,21 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject pauseMenu;
     [SerializeField] private Button optionButton;
     [SerializeField] private Button replayButton;
+
     private CapsuleCollider2D playerCollider;
     private Rigidbody2D playerBody;
     private HealthBarManager healthBar;
     private ButtonManagerBase buttonManagerBase;
+
     private float lastGroundY;
     private float lastDamageTime;
     private float lastFallDamageTime;
     private bool isDead = false;
+    private bool hasJustLanded = false;
+
+    public int GetHealth() => currentHealth;
+
+    public bool IsDead() => isDead;
 
     private void Awake()
     {
@@ -37,6 +43,7 @@ public class Player : MonoBehaviour
     {
         currentHealth = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        lastGroundY = transform.position.y;
     }
 
     private void Update()
@@ -44,28 +51,35 @@ public class Player : MonoBehaviour
         TouchingEnemy();
     }
 
-private void OnCollisionEnter2D(Collision2D collision)
-{
-    if (collision.gameObject.layer != LayerMask.NameToLayer("Platform")) return;
-    if (playerCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"))) return;
-
-    float fallDistance = lastGroundY - transform.position.y;
-    bool isTooFast = fallDistance > fallThreshold;
-    bool cooldownOver = Time.time - lastFallDamageTime > fallDamageCooldown;
-
-    if (isTooFast && cooldownOver)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        TakeDamage(fallDamage);
-        lastFallDamageTime = Time.time;
-    }
-}
+        if (collision.gameObject.layer != LayerMask.NameToLayer("Platform")) return;
+        if (playerCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"))) return;
 
+        if (hasJustLanded)
+        {
+            hasJustLanded = false;
+            lastGroundY = transform.position.y;
+            return;
+        }
+
+        float fallDistance = lastGroundY - transform.position.y;
+        bool isTooFast = fallDistance > fallThreshold;
+        bool cooldownOver = Time.time - lastFallDamageTime > fallDamageCooldown;
+
+        if (isTooFast && cooldownOver)
+        {
+            TakeDamage(fallDamage);
+            lastFallDamageTime = Time.time;
+        }
+    }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Platform"))
         {
             lastGroundY = transform.position.y;
+            hasJustLanded = true;
         }
     }
 
@@ -108,29 +122,23 @@ private void OnCollisionEnter2D(Collision2D collision)
         replayButton.gameObject.SetActive(true);
     }
 
-    public int GetHealth()
-    {
-        return currentHealth;
-    }
-
-    public bool IsDead()
-    {
-        return isDead;
-    }
-
     public void Die()
     {
         PlayerAnimation anim = GetComponent<PlayerAnimation>();
         if (anim != null) anim.PlayerDeathAnimation();
 
-        Vector2 randomDeathForce = new Vector2(deathForce.x * (Random.Range(0, 2) * 2 - 1), deathForce.y);
-        playerBody.velocity = randomDeathForce;
-
+        ApplyRandomDeathForce();
         SoundManager.Instance.PlayerHitSound();
 
         GetComponent<PlayerMovement>().DisableInput();
         buttonManagerBase.ToggleButton(0);
         buttonManagerBase.ToggleButton(1);
         buttonManagerBase.SetMouseOn();
+    }
+
+    public void ApplyRandomDeathForce()
+    {
+        Vector2 randomDeathForce = new Vector2(deathForce.x * (Random.Range(0, 2) * 2 - 1), deathForce.y);
+        playerBody.velocity = randomDeathForce;
     }
 }

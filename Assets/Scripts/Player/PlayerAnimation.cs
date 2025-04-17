@@ -2,10 +2,9 @@ using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    [SerializeField] LayerMask _layerPlayerRunAnimation;
-    [SerializeField] LayerMask _layerPlayerClimbAnimation;
+    [SerializeField] private LayerMask _damageLayers;
     private SpriteRenderer spriteRenderer;
-    private Rigidbody2D rigidBody;
+    private Rigidbody2D playerBody;
     private CapsuleCollider2D playerCollider;
     private BoxCollider2D feetCollider;
     private Animator playerAnimation;
@@ -13,7 +12,7 @@ public class PlayerAnimation : MonoBehaviour
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        rigidBody = GetComponent<Rigidbody2D>();
+        playerBody = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<CapsuleCollider2D>();
         feetCollider = GetComponent<BoxCollider2D>();
         playerAnimation = GetComponent<Animator>();
@@ -28,13 +27,11 @@ public class PlayerAnimation : MonoBehaviour
 
     private void FlipSprite()
     {
-        bool isMovingLeft = rigidBody.velocity.x < 0;
-        bool isMovingRight = rigidBody.velocity.x > 0;
-        if (isMovingLeft)
+        if (playerBody.velocity.x < -0.05f)
         {
             spriteRenderer.flipX = true;
         }
-        else if (isMovingRight)
+        else if (playerBody.velocity.x > 0.05f)
         {
             spriteRenderer.flipX = false;
         }
@@ -42,21 +39,22 @@ public class PlayerAnimation : MonoBehaviour
 
     private void PlayerRunAnimation()
     {
-        bool playerHasHorizontalSpeed = Mathf.Abs(rigidBody.velocity.x) > Mathf.Epsilon;
-        if (feetCollider.IsTouchingLayers(_layerPlayerRunAnimation) && playerHasHorizontalSpeed)
+        float runThreshold = 0.1f;
+        bool playerHasHorizontalSpeed = Mathf.Abs(playerBody.velocity.x) > runThreshold;
+
+        bool isGrounded = feetCollider.IsTouchingLayers(LayerMask.GetMask("Platform"));
+        bool isRunning = isGrounded && playerHasHorizontalSpeed;
+
+        if (playerAnimation.GetBool("isRunning") != isRunning)
         {
-            playerAnimation.SetBool("isRunning", true);
-        }
-        else
-        {
-            playerAnimation.SetBool("isRunning", false);
+            playerAnimation.SetBool("isRunning", isRunning);
         }
     }
 
     private void PlayerClimbAnination()
     {
-        bool playerHasVerticalSpeed = Mathf.Abs(rigidBody.velocity.y) > Mathf.Epsilon;
-        if (playerCollider.IsTouchingLayers(_layerPlayerClimbAnimation) && playerHasVerticalSpeed)
+        bool playerHasVerticalSpeed = Mathf.Abs(playerBody.velocity.y) > Mathf.Epsilon;
+        if (playerCollider.IsTouchingLayers(LayerMask.GetMask("Ladder")) && playerHasVerticalSpeed)
         {
             playerAnimation.SetBool("isClimbing", true);
         }

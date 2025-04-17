@@ -49,7 +49,8 @@ public class PauseButtonManager : ButtonManagerBase
 
     private void ReplayGame()
     {
-        Invoke(nameof(LoadGameplayScene), 0.4f);
+        // Invoke(nameof(LoadGameplayScene), 0.4f);
+        LoadGameplayScene();
         Time.timeScale = 1f;
         Resume();
     }
