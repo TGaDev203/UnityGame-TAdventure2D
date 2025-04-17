@@ -2,17 +2,14 @@ using UnityEngine;
 
 public class ZombieController : EnemyBase
 {
-    [SerializeField] private Transform player;
     [SerializeField] private float chaseRange;
     private Animator zombieAnimation;
-    private SpriteRenderer spriteRenderer;
     private bool canChase = false;
 
     protected override void Awake()
     {
         base.Awake();
         zombieAnimation = GetComponent<Animator>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         ToggleZombie(false);
     }
 
@@ -38,7 +35,7 @@ public class ZombieController : EnemyBase
             StopChasing();
         }
 
-        FlipZombie();
+        FlipSprite();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -65,34 +62,5 @@ public class ZombieController : EnemyBase
         {
             moveSpeed = initialSpeed;
         }
-    }
-
-    private void FlipZombie()
-    {
-        float xDistance = player.position.x - transform.position.x;
-
-        if (Mathf.Abs(xDistance) > 0.2f)
-        {
-            spriteRenderer.flipX = xDistance > 0f;
-        }
-    }
-
-    private void ChasePlayer()
-    {
-        float direction = Mathf.Sign(player.position.x - transform.position.x);
-        enemyBody.velocity = new Vector2(direction * Mathf.Abs(moveSpeed), enemyBody.velocity.y);
-    }
-
-    private void StopChasing()
-    {
-        enemyBody.velocity = new Vector2(0f, enemyBody.velocity.y);
-        zombieAnimation.SetBool("isWalking", false);
-        zombieAnimation.SetBool("isAttacking", false);
-    }
-
-    private void ToggleZombie(bool isActive)
-    {
-        if (spriteRenderer != null) spriteRenderer.enabled = isActive;
-        if (enemyBody != null) enemyBody.simulated = isActive;
     }
 }

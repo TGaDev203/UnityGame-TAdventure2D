@@ -840,9 +840,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b340bdbbfb1b2143a73148823a7fcee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 2
-  chaseRange: 2
   player: {fileID: 1144817625535520360}
+  moveSpeed: 1.5
+  chaseRange: 1.5
 --- !u!60 &166619431
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -19350,6 +19350,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54ad6941a2173f440954782d9581296e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   moveSpeed: 1
 --- !u!1 &334756578
 GameObject:
@@ -31157,6 +31158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 689d6b19d68628a4a809a78fdcbedb69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   moveSpeed: 2
 --- !u!1 &1465527477
 GameObject:
@@ -32277,8 +32279,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b50c2d6b5bf4ae4ea86588dd19705bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 4
   player: {fileID: 1144817625535520360}
+  moveSpeed: 4
   chaseRange: 5
 --- !u!1 &1567164711 stripped
 GameObject:
@@ -33807,6 +33809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54ad6941a2173f440954782d9581296e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   moveSpeed: 1
 --- !u!1 &1655621692
 GameObject:
@@ -33941,6 +33944,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54ad6941a2173f440954782d9581296e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   moveSpeed: 1
 --- !u!1 &1676917008
 GameObject:
@@ -34500,6 +34504,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 689d6b19d68628a4a809a78fdcbedb69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   moveSpeed: 2
 --- !u!4 &1814131483 stripped
 Transform:
@@ -35046,6 +35051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 689d6b19d68628a4a809a78fdcbedb69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  player: {fileID: 0}
   moveSpeed: 2
 --- !u!1 &1921960119
 GameObject:

@@ -4,16 +4,15 @@ public class CrocodileController : EnemyBase
 {
     private bool canChase = false;
     [SerializeField] private float chaseRange;
-    [SerializeField] private Transform player;
+    // [SerializeField] private Transform player;
 
-    private SpriteRenderer spriteRenderer;
+    // private SpriteRenderer spriteRenderer;
     private Animator crocodileAnimation;
 
 
     protected override void Awake()
     {
         base.Awake();
-        spriteRenderer = GetComponent<SpriteRenderer>();
         crocodileAnimation = GetComponent<Animator>();
         ToggleZombie(false);
 
@@ -40,8 +39,7 @@ public class CrocodileController : EnemyBase
         {
             StopChasing();
         }
-
-        // Move();
+        
         FlipSprite();
     }
 
@@ -70,24 +68,4 @@ public class CrocodileController : EnemyBase
             moveSpeed = initialSpeed;
         }
     }
-
-    private void StopChasing()
-    {
-        enemyBody.velocity = new Vector2(0f, enemyBody.velocity.y);
-        // zombieAnimation.SetBool("isWalking", false);
-        // zombieAnimation.SetBool("isAttacking", false);
-    }
-
-    private void ToggleZombie(bool isActive)
-    {
-        if (spriteRenderer != null) spriteRenderer.enabled = isActive;
-        if (enemyBody != null) enemyBody.simulated = isActive;
-    }
-
-    private void ChasePlayer()
-    {
-        float direction = Mathf.Sign(player.position.x - transform.position.x);
-        enemyBody.velocity = new Vector2(direction * Mathf.Abs(moveSpeed), enemyBody.velocity.y);
-    }
-
 }
