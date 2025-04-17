@@ -28,6 +28,7 @@ public class ZombieController : EnemyBase
 
         if (canChase)
         {
+            zombieAnimation.SetBool("isAppearing", true);
             ToggleZombie(true);
             ChasePlayer();
             zombieAnimation.SetBool("isWalking", true);
@@ -37,7 +38,7 @@ public class ZombieController : EnemyBase
             StopChasing();
         }
 
-        FlipSprite();
+        FlipZombie();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -63,6 +64,16 @@ public class ZombieController : EnemyBase
         if (collision.CompareTag("Player"))
         {
             moveSpeed = initialSpeed;
+        }
+    }
+
+    private void FlipZombie()
+    {
+        float xDistance = player.position.x - transform.position.x;
+
+        if (Mathf.Abs(xDistance) > 0.2f)
+        {
+            spriteRenderer.flipX = xDistance > 0f;
         }
     }
 
