@@ -17,13 +17,15 @@ public class SoundManager : MonoBehaviour
     public AudioClip mainMenuSound;
     public AudioClip gameplaySound;
     public AudioClip rockFallingSound;
-    // protected bool canPlayEndSound = true;
-    // protected bool canPlayProgressSound = true;
+    public AudioClip zombieSound;
+    public AudioClip crocodileSound;
 
     public void PlayerHitSound() => PlaySound(hitEnemySound);
     public void PlayCoinSound() => PlaySound(coinSound);
     public void PlayWaterSplashSound() => PlaySound(waterSplashSound);
     public void PlayRockFallingSound() => PlaySound(rockFallingSound);
+    public void PlayZombieSound() => PlaySound(zombieSound);
+    public void PlayCrocodileSound() => PlaySound(crocodileSound);
     public void PlayMenuButtonProgressSound() => PlaySound(menuButtonProgressSound);
     public void PlayMenuButtonEndSound() => PlaySound(menuButtonEndSound);
 

@@ -44,15 +44,7 @@ public class ZombieController : EnemyBase
     {
         if (collision.CompareTag("Player"))
         {
-            zombieAnimation.SetBool("isAttacking", true);
-            StopChasing();
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
+            SoundManager.Instance.PlayZombieSound();
             zombieAnimation.SetBool("isAttacking", true);
             moveSpeed = 0f;
         }
