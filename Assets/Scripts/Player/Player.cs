@@ -59,8 +59,8 @@ public class Player : MonoBehaviour
         if (hasJustLanded)
         {
             hasJustLanded = false;
-            lastGroundY = transform.position.y;
-            return;
+            // lastGroundY = transform.position.y;
+            // return;
         }
 
         float fallDistance = lastGroundY - transform.position.y;

@@ -26,13 +26,15 @@ public class ZombieController : EnemyBase
         if (canChase)
         {
             zombieAnimation.SetBool("isAppearing", true);
+            zombieAnimation.SetBool("isWalking", true);
             ToggleZombie(true);
             ChasePlayer();
-            zombieAnimation.SetBool("isWalking", true);
         }
         else
         {
             StopChasing();
+            zombieAnimation.SetBool("isAttacking", false);
+            zombieAnimation.SetBool("isWalking", false);
         }
 
         FlipSprite();

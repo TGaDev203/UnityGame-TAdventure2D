@@ -5,10 +5,9 @@ public abstract class EnemyBase : MonoBehaviour
     [SerializeField] protected Transform player;
 
     [SerializeField] protected float moveSpeed;
-    protected float initialSpeed;
-    protected Rigidbody2D enemyBody;
     private SpriteRenderer spriteRenderer;
-
+    protected Rigidbody2D enemyBody;
+    protected float initialSpeed;
 
     protected virtual void Awake()
     {
@@ -17,14 +16,14 @@ public abstract class EnemyBase : MonoBehaviour
 
     }
 
+    protected virtual void OnTriggerExit2D(Collider2D other)
+    {
+        moveSpeed = -moveSpeed;
+    }
+
     protected virtual void Move()
     {
         enemyBody.velocity = new Vector2(moveSpeed, enemyBody.velocity.y);
-    }
-
-    protected void OnTriggerExit2D(Collider2D other)
-    {
-        moveSpeed = -moveSpeed;
     }
 
     protected void FlipSprite()
