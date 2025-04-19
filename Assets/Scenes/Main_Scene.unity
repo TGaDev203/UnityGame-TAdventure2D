@@ -1511,7 +1511,7 @@ MonoBehaviour:
   backgroundAudioSource: {fileID: 1117795058}
   effectAudioSource: {fileID: 1117795059}
   hitEnemySound: {fileID: 8300000, guid: 26362c5ac97803e4693a1f69962a96cb, type: 3}
-  coinEnemySound: {fileID: 8300000, guid: 2f0894053b7631e41948a031fa3fe99a, type: 3}
+  coinSound: {fileID: 0}
   waterSplashSound: {fileID: 8300000, guid: b4b51e6fab39a244cbedc818ba61e853, type: 3}
   waterWalkingSound: {fileID: 8300000, guid: 6d5a0984ea0447d4e9eed2fcbe47a42e, type: 3}
   menuButtonProgressSound: {fileID: 8300000, guid: 937e2b0cbb034794090a15e87480ff4d, type: 3}
@@ -1519,6 +1519,7 @@ MonoBehaviour:
   bouncingSound: {fileID: 8300000, guid: 6d594a25fc345b2479a71014e46d63d2, type: 3}
   mainMenuSound: {fileID: 8300000, guid: 0f2d5ad638c750e4b85f2e9b4e0bc59c, type: 3}
   gameplaySound: {fileID: 8300000, guid: 849fc93f7285cea45ab32b8697b16edf, type: 3}
+  rockFallingSound: {fileID: 0}
 --- !u!82 &1117795058
 AudioSource:
   m_ObjectHideFlags: 0

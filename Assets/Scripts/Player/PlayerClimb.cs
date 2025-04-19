@@ -3,8 +3,6 @@ using UnityEngine;
 public class PlayerClimb : MonoBehaviour
 {
     [SerializeField] private float climbSpeed;
-    [SerializeField] LayerMask _layerPlayerCanClimb;
-    [SerializeField] LayerMask _layerTopLadderPoint;
     private CapsuleCollider2D playerCollider;
     private Rigidbody2D rigidBody;
     private PlayerMovement playerMovement;
@@ -34,7 +32,7 @@ public class PlayerClimb : MonoBehaviour
 
     private bool isPlayerOnClimbableLayer()
     {
-        return playerCollider.IsTouchingLayers(_layerPlayerCanClimb);
+        return playerCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"));
     }
 
     private void ApplyClimbSpeed()
@@ -56,6 +54,6 @@ public class PlayerClimb : MonoBehaviour
 
     private bool IsPlayerOnTopLadderPoint()
     {
-        return playerCollider.IsTouchingLayers(_layerTopLadderPoint);
+        return playerCollider.IsTouchingLayers(LayerMask.GetMask("TopLadder"));
     }
 }

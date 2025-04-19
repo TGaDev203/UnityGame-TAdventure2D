@@ -4,9 +4,7 @@ using UnityEngine.Tilemaps;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] LayerMask jumpableLayers;
-    [SerializeField] LayerMask platformLayer;
-    [SerializeField] LayerMask bounceLayer;
+    [SerializeField] LayerMask _jumpableLayers;
     [SerializeField] private float runSpeed;
     [SerializeField] private float jumpForce;
     [SerializeField] private float bounceForce;
@@ -55,17 +53,17 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckBouncing()
     {
-        if (!playerCollider.IsTouchingLayers(bounceLayer)) return;
+        if (!playerCollider.IsTouchingLayers(LayerMask.GetMask("Mushroom"))) return;
 
         SoundManager.Instance.PlayBouncingSound();
         playerBody.velocity = new Vector2(playerBody.velocity.x, bounceForce);
     }
 
-    private bool CanJump() => feetCollider != null && feetCollider.IsTouchingLayers(jumpableLayers);
+    private bool CanJump() => feetCollider != null && feetCollider.IsTouchingLayers(_jumpableLayers);
 
     private void HandleLadderCollision()
     {
-        bool shouldIgnoreLadder = !playerCollider.IsTouchingLayers(platformLayer) || InputManager.Instance.IsJumping();
+        bool shouldIgnoreLadder = !playerCollider.IsTouchingLayers(LayerMask.GetMask("Platform")) || InputManager.Instance.IsJumping();
         Physics2D.IgnoreCollision(playerCollider, ladderCollider, shouldIgnoreLadder);
         ladderCollider.enabled = !shouldIgnoreLadder;
 

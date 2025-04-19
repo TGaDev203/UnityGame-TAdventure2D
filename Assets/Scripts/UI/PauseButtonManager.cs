@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PauseButtonManager : BaseButtonManager
+public class PauseButtonManager : ButtonManagerBase
 {
     private void Start()
     {
@@ -49,7 +49,7 @@ public class PauseButtonManager : BaseButtonManager
 
     private void ReplayGame()
     {
-        Invoke(nameof(LoadGameplayScene), 0.4f);
+        LoadGameplayScene();
         Time.timeScale = 1f;
         Resume();
     }

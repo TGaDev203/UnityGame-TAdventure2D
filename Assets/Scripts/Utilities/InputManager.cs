@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    //! Component
     public static InputManager Instance { get; private set; }
     private PlayerAction playerInputAction;
     public event EventHandler OnJump;

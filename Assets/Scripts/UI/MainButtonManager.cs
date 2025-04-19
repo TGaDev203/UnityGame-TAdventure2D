@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MainButtonManager : BaseButtonManager
+public class MainButtonManager : ButtonManagerBase
 {
     private void Start()
     {
@@ -53,7 +53,7 @@ public class MainButtonManager : BaseButtonManager
 
             case 3:
                 SoundManager.Instance.PlayMenuButtonEndSound();
-                Invoke(nameof(QuitGame), 0.5f);
+                QuitGame();
                 break;
         }
     }

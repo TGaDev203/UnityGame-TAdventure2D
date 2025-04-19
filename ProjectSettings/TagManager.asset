@@ -21,7 +21,7 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Lava
   - Water
   - UI
   - Platform
@@ -30,7 +30,7 @@ TagManager:
   - BackGround
   - Mushroom
   - TopLadder
-  - 
+  - Arrow
   - Items
   - Enemy
   - Trap
