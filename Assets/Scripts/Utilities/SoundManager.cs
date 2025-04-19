@@ -16,6 +16,7 @@ public class SoundManager : MonoBehaviour
     public AudioClip bouncingSound;
     public AudioClip mainMenuSound;
     public AudioClip gameplaySound;
+    public AudioClip endGameSound;
     public AudioClip rockFallingSound;
     public AudioClip zombieSound;
     public AudioClip crocodileSound;
@@ -73,6 +74,14 @@ public class SoundManager : MonoBehaviour
     {
         if (effectAudioSource == null || waterWalkingSound == null) return;
         effectAudioSource.clip = waterWalkingSound;
+        effectAudioSource.loop = true;
+        effectAudioSource.Play();
+    }
+
+    public void PlayEndGameSound()
+    {
+        if (effectAudioSource == null || endGameSound == null) return;
+        effectAudioSource.clip = endGameSound;
         effectAudioSource.loop = true;
         effectAudioSource.Play();
     }
