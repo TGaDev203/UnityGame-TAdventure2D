@@ -4,7 +4,7 @@ using UnityEngine.Tilemaps;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [SerializeField] LayerMask jumpableLayers;
+    [SerializeField] LayerMask _jumpableLayers;
     [SerializeField] private float runSpeed;
     [SerializeField] private float jumpForce;
     [SerializeField] private float bounceForce;
@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
         playerBody.velocity = new Vector2(playerBody.velocity.x, bounceForce);
     }
 
-    private bool CanJump() => feetCollider != null && feetCollider.IsTouchingLayers(jumpableLayers);
+    private bool CanJump() => feetCollider != null && feetCollider.IsTouchingLayers(_jumpableLayers);
 
     private void HandleLadderCollision()
     {

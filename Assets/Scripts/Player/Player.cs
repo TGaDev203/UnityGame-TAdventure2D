@@ -59,8 +59,6 @@ public class Player : MonoBehaviour
         if (hasJustLanded)
         {
             hasJustLanded = false;
-            // lastGroundY = transform.position.y;
-            // return;
         }
 
         float fallDistance = lastGroundY - transform.position.y;
@@ -92,7 +90,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         if (isDead) return;
 

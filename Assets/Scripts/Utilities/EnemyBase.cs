@@ -3,7 +3,6 @@ using UnityEngine;
 public abstract class EnemyBase : MonoBehaviour
 {
     [SerializeField] protected Transform player;
-
     [SerializeField] protected float moveSpeed;
     private SpriteRenderer spriteRenderer;
     protected Rigidbody2D enemyBody;
@@ -13,15 +12,6 @@ public abstract class EnemyBase : MonoBehaviour
     {
         enemyBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            moveSpeed = -moveSpeed;
-        }
     }
 
     protected virtual void OnTriggerExit2D(Collider2D other)
