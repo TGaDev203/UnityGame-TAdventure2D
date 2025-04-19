@@ -16,9 +16,20 @@ public abstract class EnemyBase : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            moveSpeed = -moveSpeed;
+        }
+    }
+
     protected virtual void OnTriggerExit2D(Collider2D other)
     {
-        moveSpeed = -moveSpeed;
+        if (!other.CompareTag("Player"))
+        {
+            moveSpeed = -moveSpeed;
+        }
     }
 
     protected virtual void Move()

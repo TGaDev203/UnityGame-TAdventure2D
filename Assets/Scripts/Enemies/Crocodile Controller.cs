@@ -13,7 +13,6 @@ public class CrocodileController : EnemyBase
     protected override void Update()
     {
         crocodileAnimation.SetBool("isEmerging", true);
-
         Move();
         FlipSprite();
     }
@@ -23,7 +22,7 @@ public class CrocodileController : EnemyBase
     {
         if (collision.CompareTag("Player"))
         {
-                        SoundManager.Instance.PlayCrocodileSound();
+            SoundManager.Instance.PlayCrocodileSound();
 
             crocodileAnimation.SetBool("isAttacking", true);
         }
