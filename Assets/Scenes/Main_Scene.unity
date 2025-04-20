@@ -818,7 +818,7 @@ GameObject:
   m_Component:
   - component: {fileID: 600789325}
   m_Layer: 0
-  m_Name: Utility
+  m_Name: Others
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1519,10 +1519,7 @@ MonoBehaviour:
   bouncingSound: {fileID: 8300000, guid: 6d594a25fc345b2479a71014e46d63d2, type: 3}
   mainMenuSound: {fileID: 8300000, guid: 0f2d5ad638c750e4b85f2e9b4e0bc59c, type: 3}
   gameplaySound: {fileID: 8300000, guid: 849fc93f7285cea45ab32b8697b16edf, type: 3}
-  endGameSound: {fileID: 0}
   rockFallingSound: {fileID: 0}
-  zombieSound: {fileID: 0}
-  crocodileSound: {fileID: 0}
 --- !u!82 &1117795058
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3132,9 +3129,9 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 6339282791131698727}
-  - {fileID: 7657010944483811161}
   - {fileID: 3169496595463417799}
+  - {fileID: 7657010944483811161}
+  - {fileID: 6339282791131698727}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -3255,7 +3252,7 @@ CanvasRenderer:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 85904946}
   - {fileID: 7336400742272506212}
   - {fileID: 926675887}
   - {fileID: 600789325}
-  - {fileID: 85904946}

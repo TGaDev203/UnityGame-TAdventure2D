@@ -52802,13 +52802,13 @@ MonoBehaviour:
   backgrounds:
   - {fileID: 1116260266}
   - {fileID: 491535042}
-  - {fileID: 579804042}
   - {fileID: 1519343233}
+  - {fileID: 579804042}
   zones:
   - {fileID: 339508159}
   - {fileID: 1582842542}
-  - {fileID: 1343468880}
   - {fileID: 1465527479}
+  - {fileID: 1343468880}
 --- !u!114 &339508162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -52821,10 +52821,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1f3798dc7d165440be610447840bd10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zone1: {fileID: 823159482}
-  zone2: {fileID: 497101023}
-  zone3: {fileID: 1045125573}
-  zone4: {fileID: 722777790}
+  objectZone1: {fileID: 823159482}
+  objectZone2: {fileID: 497101023}
+  objectZone3: {fileID: 1045125573}
+  objectZone4: {fileID: 722777790}
 --- !u!1001 &350453019
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -53961,7 +53961,7 @@ GameObject:
   - component: {fileID: 491535045}
   - component: {fileID: 491535044}
   m_Layer: 9
-  m_Name: Background
+  m_Name: Background 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54070,7 +54070,7 @@ GameObject:
   m_Component:
   - component: {fileID: 497101024}
   m_Layer: 0
-  m_Name: Game Object
+  m_Name: Game Object 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54198,11 +54198,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.1
-  far clip plane: 5000
-  field of view: 40
+  near clip plane: 0.3
+  far clip plane: 1000
+  field of view: 34
   orthographic: 1
-  orthographic size: 10
+  orthographic size: 6
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -54226,8 +54226,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -1.8626452e-10, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 38.259445, y: 21.04778, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -55047,7 +55047,7 @@ GameObject:
   - component: {fileID: 579804045}
   - component: {fileID: 579804044}
   m_Layer: 9
-  m_Name: Background
+  m_Name: Background 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55060,8 +55060,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 579804042}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -80.961525}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -55078,7 +55078,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 34.90961, y: -2.8293724}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &579804044
@@ -56570,7 +56570,7 @@ GameObject:
   m_Component:
   - component: {fileID: 722777791}
   m_Layer: 0
-  m_Name: Game Object
+  m_Name: Game Object 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57112,12 +57112,12 @@ GameObject:
   m_Component:
   - component: {fileID: 823159483}
   m_Layer: 0
-  m_Name: Game Object
+  m_Name: Game Object 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &823159483
 Transform:
   m_ObjectHideFlags: 0
@@ -57615,7 +57615,7 @@ Transform:
   m_GameObject: {fileID: 884978006}
   serializedVersion: 2
   m_LocalRotation: {x: -1.8626452e-10, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14.529095, y: 4.447626, z: -8.057659}
+  m_LocalPosition: {x: 74.4009, y: 24.997627, z: -8.057659}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -58885,7 +58885,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1045125574}
   m_Layer: 0
-  m_Name: Game Object
+  m_Name: Game Object 4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59179,7 +59179,7 @@ GameObject:
   - component: {fileID: 1116260269}
   - component: {fileID: 1116260268}
   m_Layer: 9
-  m_Name: Background
+  m_Name: Background 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59923,10 +59923,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1f3798dc7d165440be610447840bd10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zone1: {fileID: 0}
-  zone2: {fileID: 0}
-  zone3: {fileID: 0}
-  zone4: {fileID: 0}
+  objectZone1: {fileID: 0}
+  objectZone2: {fileID: 0}
+  objectZone3: {fileID: 0}
+  objectZone4: {fileID: 0}
 --- !u!4 &1156604960 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5876857530035036969, guid: 5e3a778a80bbf044d80e02358a7508f6, type: 3}
@@ -65845,8 +65845,8 @@ GameObject:
   - component: {fileID: 1343468881}
   - component: {fileID: 1343468882}
   m_Layer: 0
-  m_Name: Zone 3
-  m_TagString: Zone3
+  m_Name: Zone 4
+  m_TagString: Zone4
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -65934,13 +65934,13 @@ MonoBehaviour:
   backgrounds:
   - {fileID: 1116260266}
   - {fileID: 491535042}
-  - {fileID: 579804042}
   - {fileID: 1519343233}
+  - {fileID: 579804042}
   zones:
   - {fileID: 339508159}
   - {fileID: 1582842542}
-  - {fileID: 1343468880}
   - {fileID: 1465527479}
+  - {fileID: 1343468880}
 --- !u!114 &1343468882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65953,10 +65953,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1f3798dc7d165440be610447840bd10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zone1: {fileID: 823159482}
-  zone2: {fileID: 497101023}
-  zone3: {fileID: 1045125573}
-  zone4: {fileID: 722777790}
+  objectZone1: {fileID: 823159482}
+  objectZone2: {fileID: 497101023}
+  objectZone3: {fileID: 1045125573}
+  objectZone4: {fileID: 722777790}
 --- !u!4 &1345174540 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5876857530035036969, guid: 5e3a778a80bbf044d80e02358a7508f6, type: 3}
@@ -66069,8 +66069,8 @@ Transform:
   m_Children:
   - {fileID: 339508160}
   - {fileID: 1582842541}
-  - {fileID: 1343468879}
   - {fileID: 1465527478}
+  - {fileID: 1343468879}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1354097272 stripped
@@ -66400,8 +66400,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 519420032}
   - {fileID: 841649168}
+  - {fileID: 519420032}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1395160121
@@ -67057,8 +67057,8 @@ GameObject:
   - component: {fileID: 1465527480}
   - component: {fileID: 1465527481}
   m_Layer: 0
-  m_Name: Zone 4
-  m_TagString: Zone4
+  m_Name: Zone 3
+  m_TagString: Zone3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -67146,13 +67146,13 @@ MonoBehaviour:
   backgrounds:
   - {fileID: 1116260266}
   - {fileID: 491535042}
-  - {fileID: 579804042}
   - {fileID: 1519343233}
+  - {fileID: 579804042}
   zones:
   - {fileID: 339508159}
   - {fileID: 1582842542}
-  - {fileID: 1343468880}
   - {fileID: 1465527479}
+  - {fileID: 1343468880}
 --- !u!114 &1465527481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67165,10 +67165,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1f3798dc7d165440be610447840bd10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zone1: {fileID: 823159482}
-  zone2: {fileID: 497101023}
-  zone3: {fileID: 1045125573}
-  zone4: {fileID: 722777790}
+  objectZone1: {fileID: 823159482}
+  objectZone2: {fileID: 497101023}
+  objectZone3: {fileID: 1045125573}
+  objectZone4: {fileID: 722777790}
 --- !u!4 &1467660340 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3243534171406784808, guid: 86b3d7f165cbdf14fa4356b42a862991, type: 3}
@@ -67709,7 +67709,7 @@ GameObject:
   - component: {fileID: 1519343236}
   - component: {fileID: 1519343235}
   m_Layer: 9
-  m_Name: Background
+  m_Name: Background 3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67722,8 +67722,8 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1519343233}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -80.961525}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -67738,7 +67738,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 34.90961, y: -2.8293724}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &1519343235
@@ -68355,13 +68355,13 @@ MonoBehaviour:
   backgrounds:
   - {fileID: 1116260266}
   - {fileID: 491535042}
-  - {fileID: 579804042}
   - {fileID: 1519343233}
+  - {fileID: 579804042}
   zones:
   - {fileID: 339508159}
   - {fileID: 1582842542}
-  - {fileID: 1343468880}
   - {fileID: 1465527479}
+  - {fileID: 1343468880}
 --- !u!114 &1582842544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68374,10 +68374,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f1f3798dc7d165440be610447840bd10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zone1: {fileID: 823159482}
-  zone2: {fileID: 497101023}
-  zone3: {fileID: 1045125573}
-  zone4: {fileID: 722777790}
+  objectZone1: {fileID: 823159482}
+  objectZone2: {fileID: 497101023}
+  objectZone3: {fileID: 1045125573}
+  objectZone4: {fileID: 722777790}
 --- !u!1 &1585695175
 GameObject:
   m_ObjectHideFlags: 0
@@ -73304,7 +73304,7 @@ Transform:
   m_GameObject: {fileID: 2032007934433769659}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -21.43, y: 4.55, z: 0}
+  m_LocalPosition: {x: 67.5, y: 25.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

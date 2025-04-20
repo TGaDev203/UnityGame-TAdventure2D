@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] GameObject zone1;
-    [SerializeField] GameObject zone2;
-    [SerializeField] GameObject zone3;
-    [SerializeField] GameObject zone4;
+    [SerializeField] GameObject objectZone1;
+    [SerializeField] GameObject objectZone2;
+    [SerializeField] GameObject objectZone3;
+    [SerializeField] GameObject objectZone4;
     private float deltaTime = 0.0f;
 
     void Start()
@@ -37,34 +37,34 @@ public class GameManager : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            string zoneTag = gameObject.tag;
+            string zoneTag = this.tag;
             HandleZoneActivation(zoneTag);
         }
     }
 
     private void HandleZoneActivation(string zoneTag)
     {
-    zone1.SetActive(false);
-    zone2.SetActive(false);
-    zone3.SetActive(false);
-    zone4.SetActive(false);
+        objectZone1.SetActive(false);
+        objectZone2.SetActive(false);
+        objectZone3.SetActive(false);
+        objectZone4.SetActive(false);
 
         switch (zoneTag)
         {
             case "Zone1":
-                zone1.SetActive(true);
+                objectZone1.SetActive(true);
                 break;
 
             case "Zone2":
-                zone2.SetActive(true);
+                objectZone2.SetActive(true);
                 break;
 
             case "Zone3":
-                zone3.SetActive(true);
+                objectZone3.SetActive(true);
                 break;
 
             case "Zone4":
-                zone4.SetActive(true);
+                objectZone4.SetActive(true);
                 break;
 
             default:
