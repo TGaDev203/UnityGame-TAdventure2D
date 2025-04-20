@@ -40,11 +40,22 @@ public class PauseButtonManager : ButtonManagerBase
     protected override void OnButtonClicked(int index)
     {
         Button clickedButton = buttons[index];
-        if (clickedButton.gameObject.name == "Replay") ReplayGame();
+        if (clickedButton.gameObject.name == "Replay")
+        {
+            ReplayGame();
+        }
 
-        else if (clickedButton.gameObject.name == "Option") OptionMenu();
-        
-        else LoadMainScene();
+        else if (clickedButton.gameObject.name == "Option")
+        {
+            OptionMenu();
+        }
+
+        else
+        {
+            Player player = FindObjectOfType<Player>();
+            player.SavePlayerData();
+            LoadMainScene();
+        }
     }
 
     private void ReplayGame()

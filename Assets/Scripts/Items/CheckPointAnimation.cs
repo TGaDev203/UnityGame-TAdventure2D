@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,8 +7,6 @@ public class CheckPointAnimation : MonoBehaviour
     [SerializeField] private GameObject endGamePanel;
     [SerializeField] protected GameObject pauseMenu;
     private ButtonManagerBase buttonManagerBase;
-
-
     private ParticleSystem endEffect;
     private Image panelImage;
     private Color targetColor;
@@ -18,7 +17,6 @@ public class CheckPointAnimation : MonoBehaviour
     {
         endEffect = GetComponent<ParticleSystem>();
         buttonManagerBase = FindObjectOfType<ButtonManagerBase>();
-
 
         if (endGamePanel != null)
         {
@@ -33,16 +31,6 @@ public class CheckPointAnimation : MonoBehaviour
             panelImage.color = Color.Lerp(panelImage.color, targetColor, colorChangeSpeed * Time.unscaledDeltaTime);
 
             if (Vector4.Distance(panelImage.color, targetColor) < 0.02f) targetColor = GetRandomColor();
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            endGamePanel.SetActive(false);
-
-            pauseMenu.SetActive(true);
-            buttonManagerBase.ToggleButton(0);
-            buttonManagerBase.ToggleButton(1);
-            buttonManagerBase.SetMouseOn();
         }
     }
 
@@ -76,6 +64,8 @@ public class CheckPointAnimation : MonoBehaviour
         {
             endGamePanel.SetActive(true);
             Time.timeScale = 0f;
+
+            StartCoroutine(ReturnToGame(10f));
         }
     }
 
@@ -87,5 +77,15 @@ public class CheckPointAnimation : MonoBehaviour
             Random.Range(0.4f, 1f),
             1f
         );
+    }
+
+    private IEnumerator ReturnToGame(float delay)
+    {
+        yield return new WaitForSecondsRealtime(delay);
+
+        Time.timeScale = 1f;
+        endGamePanel.SetActive(false);
+        pauseMenu.SetActive(true);
+        buttonManagerBase.SetMouseOn();
     }
 }

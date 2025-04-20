@@ -4,8 +4,11 @@ public class MainButtonManager : ButtonManagerBase
 {
     private void Start()
     {
-        ToggleButton(0);
+        // ToggleButton(0);
         InitializeGameSettings();
+
+        bool hasSave = SaveManager.SaveExists();
+        SetButtonActive(0, hasSave);
     }
 
     private void Update()
@@ -35,14 +38,15 @@ public class MainButtonManager : ButtonManagerBase
 
         switch (index)
         {
-            //!
             case 0:
-                SoundManager.Instance.PlayMenuButtonEndSound();
+                SaveManager.LoadPlayerData();
+                LoadGameplayScene();
+                Time.timeScale = 1f;
                 break;
 
             case 1:
-                SoundManager.Instance.PlayMenuButtonEndSound();
-                Invoke(nameof(LoadGameplayScene), 0.4f);
+                SaveManager.DeleteSave();
+                LoadGameplayScene();
                 Time.timeScale = 1f;
                 break;
 
