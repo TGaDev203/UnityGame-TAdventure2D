@@ -57,5 +57,4 @@ public class CameraZone : MonoBehaviour
             backgrounds[i].SetActive(i == index);
         }
     }
-
 }
