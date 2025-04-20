@@ -17,6 +17,8 @@ TagManager:
   - Zone2
   - Zone3
   - Zone4
+  - Horizontal
+  - Vertical
   layers:
   - Default
   - TransparentFX

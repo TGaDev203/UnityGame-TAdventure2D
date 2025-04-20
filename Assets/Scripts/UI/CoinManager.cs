@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class CoinManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI coinText;
+    private TextMeshProUGUI coinText;
     private int totalCoinCollected = 0;
 
     private void Awake()

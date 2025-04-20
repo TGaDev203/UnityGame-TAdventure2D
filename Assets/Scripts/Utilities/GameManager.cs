@@ -44,21 +44,26 @@ public class GameManager : MonoBehaviour
 
     private void HandleZoneActivation(string zoneTag)
     {
+    zone1.SetActive(false);
+    zone2.SetActive(false);
+    zone3.SetActive(false);
+    zone4.SetActive(false);
+
         switch (zoneTag)
         {
-            case "zone1":
+            case "Zone1":
                 zone1.SetActive(true);
                 break;
 
-            case "zone2":
+            case "Zone2":
                 zone2.SetActive(true);
                 break;
 
-            case "zone3":
+            case "Zone3":
                 zone3.SetActive(true);
                 break;
 
-            case "zone4":
+            case "Zone4":
                 zone4.SetActive(true);
                 break;
 

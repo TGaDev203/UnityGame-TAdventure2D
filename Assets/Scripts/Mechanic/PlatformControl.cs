@@ -45,12 +45,12 @@ public class PlatformControl : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (CompareTag("Horizontal Moving") && !isFalling)
+        if (CompareTag("Horizontal") && !isFalling)
         {
             HorizontalMoving();
         }
 
-        if (CompareTag("Vertical Moving") && !isFalling)
+        if (CompareTag("Vertical") && !isFalling)
         {
             VerticalMoving();
         }
