@@ -3,7 +3,6 @@ using UnityEngine;
 public class ItemAnimation : MonoBehaviour
 {
     [SerializeField] private float destroyDelay;
-
     private Animator coinAnimation;
     private bool hasBeenPicked = false;
 
@@ -33,10 +32,9 @@ public class ItemAnimation : MonoBehaviour
     private void IncrementCoinCount()
     {
         int coinValue = 1;
-        CoinManager totalCoinCollected = FindObjectOfType<CoinManager>();
-        if (totalCoinCollected != null)
+        if (CoinManager.Instance != null)
         {
-            totalCoinCollected.CountCoin(coinValue);
+            CoinManager.Instance.CountCoin(coinValue);
         }
     }
 

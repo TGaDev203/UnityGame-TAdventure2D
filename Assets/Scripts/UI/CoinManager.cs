@@ -3,11 +3,15 @@ using UnityEngine;
 
 public class CoinManager : MonoBehaviour
 {
-    [SerializeField] private TextMeshProUGUI coinText;
+    public static CoinManager Instance { get; private set; }
+    private TextMeshProUGUI coinText;
     private int totalCoinCollected = 0;
 
     private void Awake()
     {
+        if (Instance == null) Instance = this;
+        else Destroy(gameObject);
+        
         coinText = GetComponent<TextMeshProUGUI>();
     }
 
@@ -28,5 +32,15 @@ public class CoinManager : MonoBehaviour
         {
             coinText.text = "Total: " + totalCoinCollected.ToString();
         }
+    }
+
+    public int GetCoin()
+    {
+        return totalCoinCollected;
+    }
+
+    public void SetCoin(int value)
+    {
+        totalCoinCollected = value;
     }
 }

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -13,9 +12,6 @@ public class Player : MonoBehaviour
     [SerializeField] private float fallDamageCooldown;
     [SerializeField] private Vector2 deathForce = new Vector2(0f, 0f);
     [SerializeField] private GameObject pauseMenu;
-    [SerializeField] private Button optionButton;
-    [SerializeField] private Button replayButton;
-
     private CapsuleCollider2D playerCollider;
     private Rigidbody2D playerBody;
     private HealthBarManager healthBar;
@@ -41,8 +37,21 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        currentHealth = maxHealth;
+        if (SaveManager.SaveExists())
+        {
+            PlayerData data = SaveManager.LoadPlayerData();
+            transform.position = new Vector2(data.positionX, data.positionY);
+            currentHealth = data.currentHealth;
+            CoinManager.Instance.SetCoin(data.coin);
+        }
+        else
+        {
+            currentHealth = maxHealth;
+            CoinManager.Instance.SetCoin(0);
+        }
+
         healthBar.SetMaxHealth(maxHealth);
+        healthBar.SetHealth(currentHealth);
         lastGroundY = transform.position.y;
     }
 
@@ -115,9 +124,6 @@ public class Player : MonoBehaviour
     {
         pauseMenu.SetActive(true);
         Time.timeScale = 0f;
-
-        optionButton.gameObject.SetActive(false);
-        replayButton.gameObject.SetActive(true);
     }
 
     public void Die()
@@ -129,8 +135,6 @@ public class Player : MonoBehaviour
         SoundManager.Instance.PlayerHitSound();
 
         GetComponent<PlayerMovement>().DisableInput();
-        buttonManagerBase.ToggleButton(0);
-        buttonManagerBase.ToggleButton(1);
         buttonManagerBase.SetMouseOn();
     }
 
@@ -138,5 +142,11 @@ public class Player : MonoBehaviour
     {
         Vector2 randomDeathForce = new Vector2(deathForce.x * (Random.Range(0, 2) * 2 - 1), deathForce.y);
         playerBody.velocity = randomDeathForce;
+    }
+
+    public void SavePlayerData()
+    {
+        int coinAmount = CoinManager.Instance.GetCoin();
+        SaveManager.SavePlayerData(transform.position.x, transform.position.y, currentHealth, coinAmount);
     }
 }

@@ -136,4 +136,11 @@ public abstract class ButtonManagerBase : MonoBehaviour
         Button button = buttons[index];
         button.gameObject.SetActive(!button.gameObject.activeSelf);
     }
+
+    public void SetButtonActive(int index, bool isActive)
+    {
+        if (index < 0 || index >= buttons.Count) return;
+
+        buttons[index].gameObject.SetActive(isActive);
+    }
 }

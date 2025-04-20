@@ -10,13 +10,13 @@ TagManager:
   - Water
   - Platform
   - Falling
-  - Horizontal Moving
-  - Vertical Moving
   - Moving
   - Zone1
   - Zone2
   - Zone3
   - Zone4
+  - Horizontal
+  - Vertical
   layers:
   - Default
   - TransparentFX
