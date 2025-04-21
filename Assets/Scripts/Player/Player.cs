@@ -128,11 +128,11 @@ public class Player : MonoBehaviour
 
     public void Die()
     {
+        SoundManager.Instance.PlayDeathSound();
         PlayerAnimation anim = GetComponent<PlayerAnimation>();
         if (anim != null) anim.PlayerDeathAnimation();
 
         ApplyRandomDeathForce();
-        SoundManager.Instance.PlayerHitSound();
 
         GetComponent<PlayerMovement>().DisableInput();
         buttonManagerBase.SetMouseOn();
