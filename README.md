@@ -1,13 +1,11 @@
 ---
+title: TileVania2D
+description: |
+  **TileVania2D** is a challenging 2D platformer game built using Unity, where players aim to collect coins and reach the end of each level with a limited health bar. The game features intricate levels with various obstacles, such as enemies, traps, and hazards like lava. The goal is to navigate through these dangers, collect enough coins, and reach the target while avoiding death.
 
-# TileVania2D
+  The game offers a retro-inspired experience, emphasizing precise control and timing. You’ll need to be cautious of hidden traps and enemies that can quickly deplete your health, as you only have one life to make it to the end.
 
-**TileVania2D** is a challenging 2D platformer game built using Unity, where players aim to collect coins and reach the end of each level with a limited health bar. The game features intricate levels with various obstacles, such as enemies, traps, and hazards like lava. The goal is to navigate through these dangers, collect enough coins, and reach the target while avoiding death.
-
-The game offers a retro-inspired experience, emphasizing precise control and timing. You’ll need to be cautious of hidden traps and enemies that can quickly deplete your health, as you only have one life to make it to the end.
-
-This game is a **personal project** and is not intended for commercial purposes. It is still in development, and there are a few **minor bugs** to be addressed.
-
+  This game is a **personal project** and is not intended for commercial purposes. It is still in development, and there are a few **minor bugs** to be addressed.
 ---
 
 ## Features:
