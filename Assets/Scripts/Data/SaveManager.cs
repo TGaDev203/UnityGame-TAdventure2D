@@ -1,39 +1,52 @@
+using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public class SaveManager : MonoBehaviour
+public static class SaveManager
 {
-    private static string savePath = Application.persistentDataPath + "/playerSave.json";
+    private static readonly string SavePath = Application.persistentDataPath + "/save.json";
+    private static HashSet<string> collectedCoins = new HashSet<string>();
 
-    public static void SavePlayerData(float posX, float posY, int health, int coin)
+    public static void SavePlayerData(float x, float y, int health, int coin)
     {
-        PlayerData data = new PlayerData(posX, posY, health, coin);
+        var data = new PlayerData(x, y, health, coin, new List<string>(collectedCoins).ToArray());
         string json = JsonUtility.ToJson(data);
-        File.WriteAllText(savePath, json);
+        File.WriteAllText(SavePath, json);
     }
 
     public static PlayerData LoadPlayerData()
     {
-        if (!File.Exists(savePath))
-        {
-            Debug.Log("No save file found");
-            return null;
-        }
+        if (!File.Exists(SavePath)) return null;
 
-        string json = File.ReadAllText(savePath);
-        return JsonUtility.FromJson<PlayerData>(json);
-    }
+        string json = File.ReadAllText(SavePath);
+        PlayerData data = JsonUtility.FromJson<PlayerData>(json);
 
-    public static bool SaveExists()
-    {
-        return File.Exists(savePath);
+        collectedCoins = new HashSet<string>(data.collectedCoinIDs ?? new string[0]);
+
+        return data;
     }
 
     public static void DeleteSave()
     {
-        if (File.Exists(savePath))
+        if (File.Exists(SavePath))
         {
-            File.Delete(savePath);
+            File.Delete(SavePath);
         }
+        collectedCoins.Clear();
+    }
+
+    public static bool SaveExists()
+    {
+        return File.Exists(SavePath);
+    }
+
+    public static void MarkCoinCollected(string coinID)
+    {
+        collectedCoins.Add(coinID);
+    }
+
+    public static bool IsCoinCollected(string coinID)
+    {
+        return collectedCoins.Contains(coinID);
     }
 }

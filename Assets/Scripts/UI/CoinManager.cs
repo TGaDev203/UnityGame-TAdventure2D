@@ -4,15 +4,31 @@ using UnityEngine;
 public class CoinManager : MonoBehaviour
 {
     public static CoinManager Instance { get; private set; }
-    private TextMeshProUGUI coinText;
+    public TextMeshProUGUI totalCoinText;
+    public TextMeshProUGUI targetCoinText;
     private int totalCoinCollected = 0;
+    private int targetCoin;
 
     private void Awake()
     {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
-        
-        coinText = GetComponent<TextMeshProUGUI>();
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+
+        GameObject[] allGameObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+        int count = 0;
+
+        foreach (GameObject go in allGameObjects)
+        {
+            if (go.CompareTag("Coin") && go.hideFlags == HideFlags.None && go.scene.IsValid())
+            {
+                count++;
+            }
+        }
+
+        targetCoin = count;
+        UpdateTargetCoinText();
     }
 
     private void Start()
@@ -28,9 +44,17 @@ public class CoinManager : MonoBehaviour
 
     private void UpdateCoinText()
     {
-        if (coinText != null)
+        if (totalCoinText != null)
         {
-            coinText.text = "Total: " + totalCoinCollected.ToString();
+            totalCoinText.text = "Total: " + totalCoinCollected.ToString();
+        }
+    }
+
+    private void UpdateTargetCoinText()
+    {
+        if (targetCoinText != null)
+        {
+            targetCoinText.text = "Target: " + targetCoin.ToString();
         }
     }
 
@@ -42,5 +66,11 @@ public class CoinManager : MonoBehaviour
     public void SetCoin(int value)
     {
         totalCoinCollected = value;
+        UpdateCoinText();
+    }
+
+    public bool HasReachedTargetCoin()
+    {
+        return totalCoinCollected == targetCoin;
     }
 }
