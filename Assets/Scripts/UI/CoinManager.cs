@@ -6,8 +6,8 @@ public class CoinManager : MonoBehaviour
     public static CoinManager Instance { get; private set; }
     public TextMeshProUGUI totalCoinText;
     public TextMeshProUGUI targetCoinText;
-    private int totalCoinCollected = 0;
-    private int targetCoin;
+    public int totalCoinCollected = 0;
+    public int targetCoin;
 
     private void Awake()
     {
@@ -68,6 +68,20 @@ public class CoinManager : MonoBehaviour
         totalCoinCollected = value;
         UpdateCoinText();
     }
+
+    public void HandleEndGame(PlayerMovement playerMovement)
+    {
+        if (HasReachedTargetCoin())
+        {
+            if (playerMovement != null)
+            {
+                playerMovement.enabled = false;
+            }
+
+            SoundManager.Instance.PlayEndGameSound();
+        }
+    }
+
 
     public bool HasReachedTargetCoin()
     {

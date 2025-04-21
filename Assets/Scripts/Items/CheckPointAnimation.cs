@@ -1,4 +1,5 @@
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -6,12 +7,12 @@ public class CheckPointAnimation : MonoBehaviour
 {
     [SerializeField] private GameObject endGamePanel;
     [SerializeField] protected GameObject pauseMenu;
+    [SerializeField] private float colorChangeSpeed;
+    [SerializeField] private TextMeshProUGUI requirementText;
+    private Color targetColor;
     private ButtonManagerBase buttonManagerBase;
     private ParticleSystem endEffect;
     private Image panelImage;
-    private Color targetColor;
-    private bool hasPlayed = false;
-    private float colorChangeSpeed = 10f;
 
     private void Awake()
     {
@@ -36,25 +37,21 @@ public class CheckPointAnimation : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (!hasPlayed && other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        PlayerMovement playerMovement = other.GetComponent<PlayerMovement>();
+
+        if (CoinManager.Instance.HasReachedTargetCoin())
         {
-            hasPlayed = true;
             endEffect.Play();
-
-            PlayerMovement playerMovement = other.GetComponent<PlayerMovement>();
-            if (playerMovement != null)
-            {
-                playerMovement.enabled = false;
-            }
-
-            panelImage = endGamePanel.GetComponentInChildren<Image>();
-            if (panelImage != null)
-            {
-                targetColor = GetRandomColor();
-            }
-
-            SoundManager.Instance.PlayEndGameSound();
+            CoinManager.Instance.HandleEndGame(playerMovement);
             Invoke(nameof(ShowEndGameMessage), 0.5f);
+        }
+        else
+        {
+            int coinsLeft = CoinManager.Instance.targetCoin - CoinManager.Instance.GetCoin();
+            string coinWord = coinsLeft == 1 ? "coin" : "coins";
+
+            requirementText.text = $"You need to collect {coinsLeft} more {coinWord} to win ^^";
+            Invoke(nameof(HideRequirementText), 3f);
         }
     }
 
@@ -88,4 +85,10 @@ public class CheckPointAnimation : MonoBehaviour
         pauseMenu.SetActive(true);
         buttonManagerBase.SetMouseOn();
     }
+
+    private void HideRequirementText()
+    {
+        requirementText.text = "";
+    }
+
 }
