@@ -82,7 +82,6 @@ public class CoinManager : MonoBehaviour
         }
     }
 
-
     public bool HasReachedTargetCoin()
     {
         return totalCoinCollected == targetCoin;

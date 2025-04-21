@@ -36,5 +36,4 @@ public class Coin : MonoBehaviour
 
         Destroy(gameObject, 0.1f);
     }
-
 }

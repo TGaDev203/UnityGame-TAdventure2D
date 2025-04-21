@@ -54453,7 +54453,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: -1.8626452e-10, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14.274281, y: 4.5520997, z: -10}
+  m_LocalPosition: {x: -14.274209, y: 4.4921, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -57985,7 +57985,7 @@ Transform:
   m_GameObject: {fileID: 884978006}
   serializedVersion: 2
   m_LocalRotation: {x: -1.8626452e-10, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -14.599094, y: 4.447626, z: -8.057659}
+  m_LocalPosition: {x: -14.639095, y: 4.3876257, z: -8.057659}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -60483,6 +60483,8 @@ MonoBehaviour:
   pauseMenu: {fileID: 1516937610}
   colorChangeSpeed: 10
   requirementText: {fileID: 409574735}
+  deniedSoundCooldown: 2
+  lastDeniedSoundTime: -10
 --- !u!50 &1157893625
 Rigidbody2D:
   serializedVersion: 4
@@ -72896,7 +72898,7 @@ MonoBehaviour:
   backgroundAudioSource: {fileID: 2049535860}
   effectAudioSource: {fileID: 2049535861}
   hitEnemySound: {fileID: 8300000, guid: 26362c5ac97803e4693a1f69962a96cb, type: 3}
-  coinSound: {fileID: 8300000, guid: bd74ccc6eaeac9d4dad9339b866714bb, type: 3}
+  coinCollectedSound: {fileID: 8300000, guid: bd74ccc6eaeac9d4dad9339b866714bb, type: 3}
   waterSplashSound: {fileID: 8300000, guid: b4b51e6fab39a244cbedc818ba61e853, type: 3}
   waterWalkingSound: {fileID: 8300000, guid: 6d5a0984ea0447d4e9eed2fcbe47a42e, type: 3}
   menuButtonProgressSound: {fileID: 8300000, guid: 937e2b0cbb034794090a15e87480ff4d, type: 3}
@@ -72908,6 +72910,8 @@ MonoBehaviour:
   rockFallingSound: {fileID: 8300000, guid: 6ac7916aba5bd2f4b95f241ce3e0925f, type: 3}
   zombieSound: {fileID: 8300000, guid: 8fd7add8ca1503a4f98cadcf8b4b0e85, type: 3}
   crocodileSound: {fileID: 8300000, guid: 7624fd0f91ca7264c9b20046792546b8, type: 3}
+  goalDeniedSound: {fileID: 8300000, guid: 051f04e76a0cbd541946d8376e795b69, type: 3}
+  deathSound: {fileID: 8300000, guid: 8f4848cda4063a7478d11e88adae98f0, type: 3}
 --- !u!82 &2049535860
 AudioSource:
   m_ObjectHideFlags: 0
@@ -73831,7 +73835,7 @@ Transform:
   m_GameObject: {fileID: 2032007934433769659}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -21.5, y: 4.55, z: 0}
+  m_LocalPosition: {x: -21.54, y: 4.49, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

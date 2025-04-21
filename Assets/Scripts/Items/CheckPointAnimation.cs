@@ -9,6 +9,8 @@ public class CheckPointAnimation : MonoBehaviour
     [SerializeField] protected GameObject pauseMenu;
     [SerializeField] private float colorChangeSpeed;
     [SerializeField] private TextMeshProUGUI requirementText;
+    [SerializeField] private float deniedSoundCooldown;
+    [SerializeField] private float lastDeniedSoundTime;
     private Color targetColor;
     private ButtonManagerBase buttonManagerBase;
     private ParticleSystem endEffect;
@@ -50,6 +52,11 @@ public class CheckPointAnimation : MonoBehaviour
             int coinsLeft = CoinManager.Instance.targetCoin - CoinManager.Instance.GetCoin();
             string coinWord = coinsLeft == 1 ? "coin" : "coins";
 
+            if (Time.time - lastDeniedSoundTime > deniedSoundCooldown)
+            {
+                lastDeniedSoundTime = Time.time;
+                SoundManager.Instance.PlayGoalDeniedSound();
+            }
             requirementText.text = $"You need to collect {coinsLeft} more {coinWord} to win ^^";
             Invoke(nameof(HideRequirementText), 3f);
         }
@@ -90,5 +97,4 @@ public class CheckPointAnimation : MonoBehaviour
     {
         requirementText.text = "";
     }
-
 }

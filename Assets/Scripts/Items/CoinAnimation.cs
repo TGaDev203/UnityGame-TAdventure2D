@@ -48,7 +48,7 @@ public class ItemAnimation : MonoBehaviour
 
     private void DisableCollider()
     {
-        GetComponent<Collider2D>().enabled = false; // Turn off collider to avoid recollecting coin
+        GetComponent<Collider2D>().enabled = false; 
     }
 
     private void ScheduleDestroy()
