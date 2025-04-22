@@ -92,7 +92,6 @@ public abstract class ButtonManagerBase : MonoBehaviour
     protected void Pause()
     {
         SoundManager.Instance.PlayMenuButtonProgressSound();
-        SetMouseOn();
         pauseMenu.SetActive(true);
     }
 
@@ -101,6 +100,13 @@ public abstract class ButtonManagerBase : MonoBehaviour
         SoundManager.Instance.PlayMenuButtonEndSound();
         SetMouseOff();
         pauseMenu.SetActive(false);
+    }
+
+    protected void ReplayGame()
+    {
+        LoadGameplayScene();
+        Time.timeScale = 1f;
+        Resume();
     }
 
     public void SetMouseOn()
@@ -142,5 +148,42 @@ public abstract class ButtonManagerBase : MonoBehaviour
         if (index < 0 || index >= buttons.Count) return;
 
         buttons[index].gameObject.SetActive(isActive);
+    }
+
+    protected void SaveAndReturnToMain()
+    {
+        FindObjectOfType<Player>()?.SavePlayerData();
+        LoadMainScene();
+    }
+
+    protected void Continue()
+    {
+        SaveManager.LoadPlayerData();
+        LoadGameplayScene();
+        Time.timeScale = 1f;
+    }
+
+    protected void StartNewGame()
+    {
+        SaveManager.DeleteSave();
+        LoadGameplayScene();
+        Time.timeScale = 1f;
+    }
+
+    protected void BackToMainMenu()
+    {
+        SoundManager.Instance.PlayMenuButtonProgressSound();
+        mainMenu.SetActive(true);
+        optionMenu.SetActive(false);
+    }
+
+    protected void ResetButtonClick()
+    {
+        isButtonClicked = false;
+    }
+
+    protected void QuitGame()
+    {
+        Application.Quit();
     }
 }

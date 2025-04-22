@@ -1,3 +1,4 @@
+using UnityEditor.ShortcutManagement;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -15,7 +16,6 @@ public class Player : MonoBehaviour
     private CapsuleCollider2D playerCollider;
     private Rigidbody2D playerBody;
     private HealthBarManager healthBar;
-    private ButtonManagerBase buttonManagerBase;
 
     private float lastGroundY;
     private float lastDamageTime;
@@ -32,7 +32,6 @@ public class Player : MonoBehaviour
         playerCollider = GetComponent<CapsuleCollider2D>();
         playerBody = GetComponent<Rigidbody2D>();
         healthBar = GetComponent<HealthBarManager>();
-        buttonManagerBase = FindObjectOfType<ButtonManagerBase>();
     }
 
     private void Start()
@@ -133,9 +132,7 @@ public class Player : MonoBehaviour
         if (anim != null) anim.PlayerDeathAnimation();
 
         ApplyRandomDeathForce();
-
         GetComponent<PlayerMovement>().DisableInput();
-        buttonManagerBase.SetMouseOn();
     }
 
     public void ApplyRandomDeathForce()
@@ -148,5 +145,10 @@ public class Player : MonoBehaviour
     {
         int coinAmount = CoinManager.Instance.GetCoin();
         SaveManager.SavePlayerData(transform.position.x, transform.position.y, currentHealth, coinAmount);
+    }
+
+    public int GetCurrentHealth()
+    {
+        return currentHealth;
     }
 }

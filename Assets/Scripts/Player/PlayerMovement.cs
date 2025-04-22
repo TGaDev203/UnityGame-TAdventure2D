@@ -35,6 +35,12 @@ public class PlayerMovement : MonoBehaviour
     {
         Move();
         CheckBouncing();
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Confined;
+        }
     }
 
     private void Move()
