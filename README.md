@@ -1,5 +1,5 @@
 ---
-Title: TileVania2D
+Title: T-Adventure
 Description: |
   TileVania2D is a challenging 2D platformer game built using Unity, where players aim to collect coins and reach the end of each level with a limited health bar. The game features intricate levels with various obstacles, such as enemies, traps, and hazards like lava. The goal is to navigate through these dangers, collect enough coins, and reach the target while avoiding death.
 
@@ -38,7 +38,7 @@ And there’s still more to discover – take a look around in-game!
 
 ## Gameplay:
 
-In **TileVania2D**, you will journey through several challenging levels. Each level presents a series of obstacles designed to test your precision, timing, and reflexes. As you progress, you'll face increasingly difficult enemies and tricky traps, including hidden dangers such as invisible spikes and lava pits.
+In **T-Adventure**, you will journey through several challenging levels. Each level presents a series of obstacles designed to test your precision, timing, and reflexes. As you progress, you'll face increasingly difficult enemies and tricky traps, including hidden dangers such as invisible spikes and lava pits.
 
 The game’s mechanics revolve around managing your health bar, which depletes when you take damage from enemies or traps. Be sure to avoid unnecessary risks, as one hit could be the difference between success and failure.
 
@@ -56,7 +56,7 @@ Your main goal is to collect all the coins scattered throughout each level. Once
 
 ## Development:
 
-**TileVania2D** was developed by **Nguyen Van Tri**. The game design, level mapping, coding, and overall gameplay were all created by me. However, the sprite art and sound effects were sourced from online assets to match the game’s retro aesthetic. 
+**T-Adventure** was developed by **Nguyen Van Tri**. The game design, level mapping, coding, and overall gameplay were all created by me. However, the sprite art and sound effects were sourced from online assets to match the game’s retro aesthetic. 
 
 The **UI** is fully designed and created by me, featuring an intuitive and simple layout that allows players to adjust audio levels easily. The UI includes options for adjusting background music and SFX volume during gameplay.
 
@@ -80,6 +80,6 @@ This game is a **personal project** for learning and practice, and is **not for 
 
 ---
 
-Thank you for playing **TileVania2D**! I hope you enjoy the game and the challenge it brings. Feel free to provide feedback or suggestions for future updates!
+Thank you for playing **T-Adventure**! I hope you enjoy the game and the challenge it brings. Feel free to provide feedback or suggestions for future updates!
 
 ---
