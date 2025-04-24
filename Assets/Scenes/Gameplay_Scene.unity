@@ -66076,7 +66076,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87cf26d4c3fbcd74680e9f5c75b315f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fill: {fileID: 1416698635}
   gradient:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
@@ -66107,6 +66106,7 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+  fill: {fileID: 1416698635}
   slider: {fileID: 2055509001}
 --- !u!1 &1264378624
 GameObject:
@@ -73588,7 +73588,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87cf26d4c3fbcd74680e9f5c75b315f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fill: {fileID: 1416698635}
   gradient:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
@@ -73619,6 +73618,7 @@ MonoBehaviour:
     m_ColorSpace: -1
     m_NumColorKeys: 2
     m_NumAlphaKeys: 2
+  fill: {fileID: 1416698635}
   slider: {fileID: 2055509001}
 --- !u!1001 &2071016767
 PrefabInstance:

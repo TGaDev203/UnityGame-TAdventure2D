@@ -7,7 +7,6 @@ public class InputManager : MonoBehaviour
     public static InputManager Instance { get; private set; }
 
     [SerializeField] private TextMeshProUGUI mouseOffText;
-    private static bool isDisplayed = false;
     public event EventHandler OnJump;
     private PlayerAction playerInputAction;
     public PlayerAction PlayerInputAction => playerInputAction;
@@ -23,11 +22,7 @@ public class InputManager : MonoBehaviour
 
     private void Start()
     {
-        if (!isDisplayed)
-        {
-            ShowMouseInstruction();
-            isDisplayed = true;
-        }
+        ShowMouseInstruction();
         playerInputAction.Player.Move.Enable();
         playerInputAction.Player.Climb.Enable();
     }
