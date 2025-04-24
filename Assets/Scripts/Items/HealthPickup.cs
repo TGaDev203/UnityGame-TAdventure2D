@@ -8,6 +8,7 @@ public class HealthPickup : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            SoundManager.Instance.PlayHealthPickupSound();
             ApplyHealing(healthValue);
             Destroy(gameObject);
         }
@@ -15,7 +16,7 @@ public class HealthPickup : MonoBehaviour
 
     private void ApplyHealing(int healthValue)
     {
-        int playerHealth = FindObjectOfType<Player>().GetCurrentHealth();
+        float playerHealth = FindObjectOfType<Player>().GetCurrentHealth();
         playerHealth += healthValue;
         FindObjectOfType<HealthBarManager>().SetHealth(playerHealth);
     }

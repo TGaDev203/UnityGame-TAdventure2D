@@ -3,11 +3,11 @@ using UnityEngine;
 public class PlayerAnimation : MonoBehaviour
 {
     [SerializeField] private LayerMask _damageLayers;
-    private SpriteRenderer spriteRenderer;
-    private Rigidbody2D playerBody;
-    private CapsuleCollider2D playerCollider;
     private BoxCollider2D feetCollider;
+    private CapsuleCollider2D playerCollider;
     private Animator playerAnimation;
+    private Rigidbody2D playerBody;
+    private SpriteRenderer spriteRenderer;
 
     private void Awake()
     {

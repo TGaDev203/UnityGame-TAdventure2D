@@ -7,8 +7,9 @@ public class InputManager : MonoBehaviour
     public static InputManager Instance { get; private set; }
 
     [SerializeField] private TextMeshProUGUI mouseOffText;
-    private PlayerAction playerInputAction;
+    private static bool isDisplayed = false;
     public event EventHandler OnJump;
+    private PlayerAction playerInputAction;
     public PlayerAction PlayerInputAction => playerInputAction;
 
     private void Awake()
@@ -19,8 +20,11 @@ public class InputManager : MonoBehaviour
 
     private void Start()
     {
-        mouseOffText.text = "Press Left Ctrl to hide the mouse cursor 😊\nGood luck!";
-        Invoke(nameof(HideMouseOffText), 3f);
+        if (!isDisplayed)
+        {
+            ShowMouseInstruction();
+            isDisplayed = true;
+        }
         playerInputAction.Player.Move.Enable();
         playerInputAction.Player.Climb.Enable();
     }
@@ -53,8 +57,14 @@ public class InputManager : MonoBehaviour
         return inputVectorClimb.normalized;
     }
 
+    private void ShowMouseInstruction()
+    {
+        mouseOffText.text = "Press Left Ctrl to hide the mouse cursor 😊\nGood luck!";
+        Invoke(nameof(HideMouseOffText), 3f);
+    }
+
     private void HideMouseOffText()
     {
-        mouseOffText.text = "";
+        mouseOffText.text = string.Empty;
     }
 }

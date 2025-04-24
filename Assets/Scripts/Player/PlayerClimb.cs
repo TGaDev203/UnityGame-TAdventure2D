@@ -4,8 +4,8 @@ public class PlayerClimb : MonoBehaviour
 {
     [SerializeField] private float climbSpeed;
     private CapsuleCollider2D playerCollider;
-    private Rigidbody2D rigidBody;
     private PlayerMovement playerMovement;
+    private Rigidbody2D rigidBody;
 
     private void Awake()
     {

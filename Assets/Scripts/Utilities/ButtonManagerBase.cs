@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public abstract class ButtonManagerBase : MonoBehaviour
 {
-    [SerializeField] protected GameObject mainMenu;
-    [SerializeField] protected GameObject pauseMenu;
-    [SerializeField] protected GameObject optionMenu;
     [SerializeField] protected List<Button> buttons;
     [SerializeField] private Slider bgmSlider;
+    [SerializeField] protected GameObject mainMenu;
+    [SerializeField] protected GameObject optionMenu;
+    [SerializeField] protected GameObject pauseMenu;
     [SerializeField] private Slider sfxSlider;
     protected int currentButtonIndex = -1;
     protected bool isButtonClicked = false;
@@ -57,7 +57,7 @@ public abstract class ButtonManagerBase : MonoBehaviour
     {
         if (isButtonClicked) return;
 
-        SoundManager.Instance.PlayMenuButtonProgressSound();
+        SoundManager.Instance.PlayButtonProgressSound();
         currentButtonIndex = index;
         UpdateButtons();
     }
@@ -89,25 +89,6 @@ public abstract class ButtonManagerBase : MonoBehaviour
         else button.OnDeselect(null);
     }
 
-    protected void Pause()
-    {
-        SoundManager.Instance.PlayMenuButtonProgressSound();
-        pauseMenu.SetActive(true);
-    }
-
-    protected void Resume()
-    {
-        SoundManager.Instance.PlayMenuButtonEndSound();
-        SetMouseOff();
-        pauseMenu.SetActive(false);
-    }
-
-    protected void ReplayGame()
-    {
-        LoadGameplayScene();
-        Time.timeScale = 1f;
-        Resume();
-    }
 
     public void SetMouseOn()
     {
@@ -150,17 +131,27 @@ public abstract class ButtonManagerBase : MonoBehaviour
         buttons[index].gameObject.SetActive(isActive);
     }
 
-    protected void SaveAndReturnToMain()
+    protected void ResetButtonClick()
     {
-        FindObjectOfType<Player>()?.SavePlayerData();
-        LoadMainScene();
+        isButtonClicked = false;
     }
 
-    protected void Continue()
+    protected void Pause()
     {
-        SaveManager.LoadPlayerData();
-        LoadGameplayScene();
-        Time.timeScale = 1f;
+        SoundManager.Instance.PlayButtonProgressSound();
+        pauseMenu.SetActive(true);
+    }
+
+    protected void Resume()
+    {
+        SoundManager.Instance.PlayButtonEndSound();
+        SetMouseOff();
+        pauseMenu.SetActive(false);
+    }
+
+    protected void SaveGame()
+    {
+        FindObjectOfType<Player>()?.SavePlayerData();
     }
 
     protected void StartNewGame()
@@ -170,17 +161,21 @@ public abstract class ButtonManagerBase : MonoBehaviour
         Time.timeScale = 1f;
     }
 
+    protected void ContinueGame()
+    {
+        SaveManager.LoadPlayerData();
+        LoadGameplayScene();
+        Time.timeScale = 1f;
+    }
+
+
     protected void BackToMainMenu()
     {
-        SoundManager.Instance.PlayMenuButtonProgressSound();
+        SoundManager.Instance.PlayButtonProgressSound();
         mainMenu.SetActive(true);
         optionMenu.SetActive(false);
     }
 
-    protected void ResetButtonClick()
-    {
-        isButtonClicked = false;
-    }
 
     protected void QuitGame()
     {

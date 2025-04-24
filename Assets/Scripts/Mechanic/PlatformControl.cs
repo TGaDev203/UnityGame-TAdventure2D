@@ -5,20 +5,20 @@ public class PlatformControl : MonoBehaviour
 
     // Moving Tile
     [SerializeField] private float tileMovingDistance;
-    public float tileMoveSpeed;
-    private Vector2 startPos;
     private Vector2 lastPos;
     private bool movingRight = true;
     private bool movingUp = true;
+    private Vector2 startPos;
+    public float tileMoveSpeed;
 
     // Falling Tile
-    [SerializeField] private float fallDelay;
     [SerializeField] private float destroyTime;
+    [SerializeField] private float fallDelay;
     private bool isFalling = false;
 
+    private bool isOnPlatform = false;
     private Rigidbody2D playerBody;
     private Rigidbody2D platformBody;
-    private bool isOnPlatform = false;
 
     private void Awake()
     {

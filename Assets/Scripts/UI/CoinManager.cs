@@ -4,6 +4,7 @@ using UnityEngine;
 public class CoinManager : MonoBehaviour
 {
     public static CoinManager Instance { get; private set; }
+    
     public TextMeshProUGUI totalCoinText;
     public TextMeshProUGUI targetCoinText;
     public int totalCoinCollected = 0;

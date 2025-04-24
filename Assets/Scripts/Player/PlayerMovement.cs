@@ -4,15 +4,15 @@ using UnityEngine.Tilemaps;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private float bounceForce;
+    [SerializeField] private float jumpForce;
     [SerializeField] LayerMask _jumpableLayers;
     [SerializeField] private float runSpeed;
-    [SerializeField] private float jumpForce;
-    [SerializeField] private float bounceForce;
     [SerializeField] private float waterDrag;
-    private Rigidbody2D playerBody;
-    private CapsuleCollider2D playerCollider;
     private BoxCollider2D feetCollider;
     public TilemapCollider2D ladderCollider;
+    private CapsuleCollider2D playerCollider;
+    private Rigidbody2D playerBody;
 
     public float GetJumpForce() => this.jumpForce;
     public void DisableInput() => this.enabled = false;

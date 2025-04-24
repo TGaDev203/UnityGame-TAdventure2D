@@ -3,11 +3,10 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     [SerializeField] private float destroyDelay;
-    public string coinID;
-    private CircleCollider2D _collider;
     private Animator _animator;
+    private CircleCollider2D _collider;
+    public string coinID;
     private bool isCollected = false;
-    private bool hasBeenPicked = false;
 
     private void Awake()
     {
@@ -42,21 +41,16 @@ public class Coin : MonoBehaviour
 
         SaveManager.MarkCoinCollected(coinID);
 
-        if (!hasBeenPicked)
-        {
-            HandleCoinPickup();
-        }
+        HandleCoinPickup();
     }
 
     private void HandleCoinPickup()
     {
-        hasBeenPicked = true;
 
         IncrementCoinCount();
         PlayCoinAnimation();
         DisableCollider();
         SoundManager.Instance.PlayCoinSound();
-
         ScheduleDestroy();
     }
 

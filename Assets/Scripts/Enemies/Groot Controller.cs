@@ -2,6 +2,11 @@ using UnityEngine;
 
 public class GrootController : EnemyBase
 {
+    [SerializeField] private GameObject killPoint;
+    [SerializeField] private Vector2 deathForce = new Vector2(0f, 0f);
+
+    private void KillEnemy() => Destroy(gameObject);
+
     protected override void Update()
     {
         Move();
@@ -12,7 +17,14 @@ public class GrootController : EnemyBase
     {
         if (collision.CompareTag("Player"))
         {
-            moveSpeed = -moveSpeed;
+            if (collision.transform.position.y > killPoint.transform.position.y)
+            {
+                Vector2 randomDeathForce = new Vector2(deathForce.x * (Random.Range(0, 2) * 2 - 1), deathForce.y);
+                enemyBody.velocity = randomDeathForce;
+                Invoke(nameof(KillEnemy), 0.5f);
+            }
+
+            else moveSpeed = -moveSpeed;
         }
     }
 }

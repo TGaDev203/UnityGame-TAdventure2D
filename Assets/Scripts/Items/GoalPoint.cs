@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class GoalPoint : MonoBehaviour
 {
-    [SerializeField] private GameObject endGamePanel;
-    [SerializeField] protected GameObject pauseMenu;
     [SerializeField] private float colorChangeSpeed;
-    [SerializeField] private TextMeshProUGUI requirementText;
     [SerializeField] private float deniedSoundCooldown;
+    [SerializeField] private GameObject endGamePanel;
     [SerializeField] private float lastDeniedSoundTime;
-    private Color targetColor;
+    [SerializeField] protected GameObject pauseMenu;
+    [SerializeField] private TextMeshProUGUI requirementText;
     private ParticleSystem endEffect;
     private Image panelImage;
+    private Color targetColor;
 
     private void Awake()
     {
@@ -92,6 +92,6 @@ public class GoalPoint : MonoBehaviour
 
     private void HideRequirementText()
     {
-        requirementText.text = "";
+        requirementText.text = string.Empty;
     }
 }

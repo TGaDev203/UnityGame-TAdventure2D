@@ -4,9 +4,8 @@ public class PauseButtonManager : ButtonManagerBase
 {
     private enum PauseButton
     {
-        SaveAndMain = 0,
-        Option = 1,
-        Replay = 2
+        Option = 0,
+        Main = 1
     }
 
     private void Start()
@@ -48,16 +47,13 @@ public class PauseButtonManager : ButtonManagerBase
     {
         switch (index)
         {
-            case (int)PauseButton.SaveAndMain:
-                SaveAndReturnToMain();
-                break;
-
             case (int)PauseButton.Option:
                 OptionMenu();
                 break;
 
-            case (int)PauseButton.Replay:
-                ReplayGame();
+            case (int)PauseButton.Main:
+                player.SavePlayerData();
+                LoadMainScene();
                 break;
 
             default:
@@ -68,7 +64,7 @@ public class PauseButtonManager : ButtonManagerBase
 
     protected override void OptionMenu()
     {
-        SoundManager.Instance.PlayMenuButtonEndSound();
+        SoundManager.Instance.PlayButtonEndSound();
         pauseMenu.SetActive(false);
         optionMenu.SetActive(true);
     }

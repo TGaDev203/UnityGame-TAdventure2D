@@ -53,12 +53,11 @@ public class MainButtonManager : ButtonManagerBase
 
     private void HandleMainMenuButton(MainMenuButtonType buttonType)
     {
-        SoundManager.Instance.PlayMenuButtonEndSound();
 
         switch (buttonType)
         {
             case MainMenuButtonType.Continue:
-                Continue();
+                ContinueGame();
                 break;
 
             case MainMenuButtonType.NewGame:
@@ -66,6 +65,7 @@ public class MainButtonManager : ButtonManagerBase
                 break;
 
             case MainMenuButtonType.Option:
+                SoundManager.Instance.PlayButtonEndSound();
                 OptionMenu();
                 break;
 
@@ -81,7 +81,7 @@ public class MainButtonManager : ButtonManagerBase
 
     protected override void OptionMenu()
     {
-        SoundManager.Instance.PlayMenuButtonEndSound();
+        SoundManager.Instance.PlayButtonEndSound();
         mainMenu.SetActive(false);
         optionMenu.SetActive(true);
     }

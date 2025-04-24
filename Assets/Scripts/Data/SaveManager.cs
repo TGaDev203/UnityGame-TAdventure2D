@@ -7,7 +7,7 @@ public static class SaveManager
     private static readonly string SavePath = Application.persistentDataPath + "/save.json";
     private static HashSet<string> collectedCoins = new HashSet<string>();
 
-    public static void SavePlayerData(float x, float y, int health, int coin)
+    public static void SavePlayerData(float x, float y, float health, int coin)
     {
         var data = new PlayerData(x, y, health, coin, new List<string>(collectedCoins).ToArray());
         string json = JsonUtility.ToJson(data);

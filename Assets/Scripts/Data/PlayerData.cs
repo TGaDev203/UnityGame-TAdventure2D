@@ -1,12 +1,12 @@
 public class PlayerData
 {
     public string[] collectedCoinIDs;
+    public float currentHealth;
+    public int coin;
     public float positionX;
     public float positionY;
-    public int currentHealth;
-    public int coin;
 
-    public PlayerData(float x, float y, int health, int coinAmount, string[] collectedCoins)
+    public PlayerData(float x, float y, float health, int coinAmount, string[] collectedCoins)
     {
         positionX = x;
         positionY = y;
