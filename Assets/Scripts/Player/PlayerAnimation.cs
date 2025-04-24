@@ -9,13 +9,16 @@ public class PlayerAnimation : MonoBehaviour
     private Rigidbody2D playerBody;
     private SpriteRenderer spriteRenderer;
 
+    public void PlayerDeathAnimation() => playerAnimation.SetTrigger("Dying");
+    public void ResetAnimation() => playerAnimation.SetTrigger("Reset");
+
     private void Awake()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        feetCollider = GetComponent<BoxCollider2D>();
         playerBody = GetComponent<Rigidbody2D>();
         playerCollider = GetComponent<CapsuleCollider2D>();
-        feetCollider = GetComponent<BoxCollider2D>();
         playerAnimation = GetComponent<Animator>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     private void Update()
@@ -62,15 +65,5 @@ public class PlayerAnimation : MonoBehaviour
         {
             playerAnimation.SetBool("isClimbing", false);
         }
-    }
-
-    public void PlayerDeathAnimation()
-    {
-        playerAnimation.SetTrigger("Dying");
-    }
-
-    public void ResetAnimation()
-    {
-        playerAnimation.SetTrigger("Reset");
     }
 }

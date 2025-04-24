@@ -12,6 +12,9 @@ public class InputManager : MonoBehaviour
     private PlayerAction playerInputAction;
     public PlayerAction PlayerInputAction => playerInputAction;
 
+    private void HideMouseOffText() => mouseOffText.text = string.Empty;
+    private void Jump(UnityEngine.InputSystem.InputAction.CallbackContext context) => OnJump?.Invoke(this, EventArgs.Empty);
+
     private void Awake()
     {
         Instance = this;
@@ -35,11 +38,6 @@ public class InputManager : MonoBehaviour
         playerInputAction.Player.Jump.performed += Jump;
     }
 
-    private void Jump(UnityEngine.InputSystem.InputAction.CallbackContext context)
-    {
-        OnJump?.Invoke(this, EventArgs.Empty);
-    }
-
     public bool IsJumping()
     {
         return playerInputAction.Player.Jump.IsPressed();
@@ -61,10 +59,5 @@ public class InputManager : MonoBehaviour
     {
         mouseOffText.text = "Press Left Ctrl to hide the mouse cursor 😊\nGood luck!";
         Invoke(nameof(HideMouseOffText), 3f);
-    }
-
-    private void HideMouseOffText()
-    {
-        mouseOffText.text = string.Empty;
     }
 }

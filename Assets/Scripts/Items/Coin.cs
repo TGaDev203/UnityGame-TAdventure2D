@@ -8,6 +8,10 @@ public class Coin : MonoBehaviour
     public string coinID;
     private bool isCollected = false;
 
+    private void DisableCollider() => _collider.enabled = false;
+    private void DestroyCoin() => Destroy(gameObject);
+    private void ScheduleDestroy() => Invoke(nameof(DestroyCoin), destroyDelay);
+
     private void Awake()
     {
         _animator = GetComponent<Animator>();
@@ -42,6 +46,17 @@ public class Coin : MonoBehaviour
         SaveManager.MarkCoinCollected(coinID);
 
         HandleCoinPickup();
+
+        Player player = FindObjectOfType<Player>();
+        if (player != null)
+        {
+            SaveManager.SavePlayerData(
+                player.transform.position.x,
+                player.transform.position.y,
+                player.GetCurrentHealth(),
+                CoinManager.Instance.GetCoin()
+            );
+        }
     }
 
     private void HandleCoinPickup()
@@ -65,20 +80,5 @@ public class Coin : MonoBehaviour
         {
             _animator?.SetBool("isCollected", true);
         }
-    }
-
-    private void DisableCollider()
-    {
-        _collider.enabled = false;
-    }
-
-    private void ScheduleDestroy()
-    {
-        Invoke(nameof(DestroyCoin), destroyDelay);
-    }
-
-    private void DestroyCoin()
-    {
-        Destroy(gameObject);
     }
 }

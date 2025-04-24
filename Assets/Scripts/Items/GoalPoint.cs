@@ -15,6 +15,8 @@ public class GoalPoint : MonoBehaviour
     private Image panelImage;
     private Color targetColor;
 
+    private void HideRequirementText() => requirementText.text = string.Empty;
+
     private void Awake()
     {
         endEffect = GetComponent<ParticleSystem>();
@@ -88,10 +90,5 @@ public class GoalPoint : MonoBehaviour
         Time.timeScale = 1f;
         endGamePanel.SetActive(false);
         pauseMenu.SetActive(true);
-    }
-
-    private void HideRequirementText()
-    {
-        requirementText.text = string.Empty;
     }
 }

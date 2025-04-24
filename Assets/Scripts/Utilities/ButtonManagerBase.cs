@@ -20,6 +20,8 @@ public abstract class ButtonManagerBase : MonoBehaviour
     protected abstract void HandlePauseInput();
     protected abstract void OnButtonClicked(int index);
     protected abstract void OptionMenu();
+    protected void QuitGame() => Application.Quit();
+    protected void ResetButtonClick() => isButtonClicked = false;
 
     protected void Awake()
     {
@@ -89,7 +91,6 @@ public abstract class ButtonManagerBase : MonoBehaviour
         else button.OnDeselect(null);
     }
 
-
     public void SetMouseOn()
     {
         Cursor.visible = true;
@@ -131,11 +132,6 @@ public abstract class ButtonManagerBase : MonoBehaviour
         buttons[index].gameObject.SetActive(isActive);
     }
 
-    protected void ResetButtonClick()
-    {
-        isButtonClicked = false;
-    }
-
     protected void Pause()
     {
         SoundManager.Instance.PlayButtonProgressSound();
@@ -149,10 +145,7 @@ public abstract class ButtonManagerBase : MonoBehaviour
         pauseMenu.SetActive(false);
     }
 
-    protected void SaveGame()
-    {
-        FindObjectOfType<Player>()?.SavePlayerData();
-    }
+    protected void SaveGame() => FindObjectOfType<Player>()?.SavePlayerData();
 
     protected void StartNewGame()
     {
@@ -168,17 +161,10 @@ public abstract class ButtonManagerBase : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-
     protected void BackToMainMenu()
     {
         SoundManager.Instance.PlayButtonProgressSound();
         mainMenu.SetActive(true);
         optionMenu.SetActive(false);
-    }
-
-
-    protected void QuitGame()
-    {
-        Application.Quit();
     }
 }

@@ -14,16 +14,17 @@ public class PlayerMovement : MonoBehaviour
     private CapsuleCollider2D playerCollider;
     private Rigidbody2D playerBody;
 
-    public float GetJumpForce() => this.jumpForce;
+    private bool CanJump() => feetCollider != null && feetCollider.IsTouchingLayers(_jumpableLayers);
     public void DisableInput() => this.enabled = false;
     public void EnableInput() => this.enabled = true;
+    public float GetJumpForce() => this.jumpForce;
 
     private void Awake()
     {
+        feetCollider = gameObject.GetComponent<BoxCollider2D>();
+        ladderCollider = GameObject.FindWithTag("Ladder").GetComponent<TilemapCollider2D>();
         playerCollider = GetComponent<CapsuleCollider2D>();
         playerBody = GetComponent<Rigidbody2D>();
-        ladderCollider = GameObject.FindWithTag("Ladder").GetComponent<TilemapCollider2D>();
-        feetCollider = gameObject.GetComponent<BoxCollider2D>();
     }
 
     private void Start()
@@ -38,8 +39,24 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
         {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Water"))
+        {
+            SetWaterState(true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Water"))
+        {
+            SetWaterState(false);
         }
     }
 
@@ -65,7 +82,6 @@ public class PlayerMovement : MonoBehaviour
         playerBody.velocity = new Vector2(playerBody.velocity.x, bounceForce);
     }
 
-    private bool CanJump() => feetCollider != null && feetCollider.IsTouchingLayers(_jumpableLayers);
 
     private void HandleLadderCollision()
     {
@@ -80,16 +96,6 @@ public class PlayerMovement : MonoBehaviour
     {
         Physics2D.IgnoreCollision(playerCollider, ladderCollider, false);
         ladderCollider.enabled = true;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Water")) SetWaterState(true);
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Water")) SetWaterState(false);
     }
 
     private void SetWaterState(bool isInWater)

@@ -98,10 +98,7 @@ public class PlatformControl : MonoBehaviour
             Invoke(nameof(StartFalling), fallDelay);
         }
 
-        else
-        {
-            isOnPlatform = true;
-        }
+        else isOnPlatform = true;
     }
 
     private void OnCollisionExit2D(Collision2D collision)

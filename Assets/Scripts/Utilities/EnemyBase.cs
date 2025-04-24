@@ -8,6 +8,8 @@ public abstract class EnemyBase : MonoBehaviour
     protected float initialSpeed;
     private SpriteRenderer spriteRenderer;
 
+    protected abstract void Update();
+
     protected virtual void Awake()
     {
         enemyBody = GetComponent<Rigidbody2D>();
@@ -63,6 +65,4 @@ public abstract class EnemyBase : MonoBehaviour
             spriteRenderer.flipX = xDistance > 0f;
         }
     }
-
-    protected abstract void Update();
 }

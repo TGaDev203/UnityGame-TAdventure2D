@@ -28,9 +28,9 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        healthBar = GetComponent<HealthBarManager>();
         playerCollider = GetComponent<CapsuleCollider2D>();
         playerBody = GetComponent<Rigidbody2D>();
-        healthBar = GetComponent<HealthBarManager>();
     }
 
     private void Start()
