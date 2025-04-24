@@ -8,6 +8,24 @@ Description: |
   This game is a personal project and is not intended for commercial purposes. It is still in development, and there are a few minor bugs to be addressed.
 ---
 
+## Screenshots:
+**Main Screen**
+![alt text](Gameplay%20Screenshots/image.png)
+
+**Pause Screen**
+![alt text](Gameplay%20Screenshots/image-1.png)
+
+**Option Screen**
+![alt text](Gameplay%20Screenshots/image-2.png)
+
+**Gameplay Screen**
+![alt text](Gameplay%20Screenshots/image-3.png)
+
+**End Screen**
+![alt text](Gameplay%20Screenshots/image-4.png)
+
+And there’s still more to discover – take a look around in-game!
+
 ## Features:
 - **Health Bar System**: Players have a single health bar that must be carefully managed as they encounter dangers.
 - **Coin Collection**: The main objective is to collect a target amount of coins in each level to progress.
@@ -31,7 +49,6 @@ Your main goal is to collect all the coins scattered throughout each level. Once
 ## Controls:
 - **Move**: Arrow keys or WASD
 - **Jump**: Spacebar
-- **Interact/Collect**: E
 - **Pause/Resume**: Esc
 - **Pause Menu UI**: Press Esc to open the pause menu, where you can adjust audio settings (background music and SFX volume).
 
