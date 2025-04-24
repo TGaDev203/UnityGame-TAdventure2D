@@ -6,33 +6,35 @@ public class SoundManager : MonoBehaviour
     public static SoundManager Instance { get; private set; }
 
     public AudioSource backgroundAudioSource;
-    public AudioSource effectAudioSource;
-    public AudioClip hitEnemySound;
+    public AudioClip buttonProgressSound;
+    public AudioClip buttonEndSound;
+    public AudioClip bouncingSound;
+    public AudioClip crocodileSound;
     public AudioClip coinCollectedSound;
+    public AudioClip deathSound;
+    public AudioClip endGameSound;
+    public AudioSource effectAudioSource;
+    public AudioClip goalDeniedSound;
+    public AudioClip gameplaySound;
+    public AudioClip hitEnemySound;
+    public AudioClip healthPickupSound;
+    public AudioClip mainMenuSound;
+    public AudioClip rockFallingSound;
     public AudioClip waterSplashSound;
     public AudioClip waterWalkingSound;
-    public AudioClip menuButtonProgressSound;
-    public AudioClip menuButtonEndSound;
-    public AudioClip bouncingSound;
-    public AudioClip mainMenuSound;
-    public AudioClip gameplaySound;
-    public AudioClip endGameSound;
-    public AudioClip rockFallingSound;
     public AudioClip zombieSound;
-    public AudioClip crocodileSound;
-    public AudioClip goalDeniedSound;
-    public AudioClip deathSound;
 
-    public void PlayerHitSound() => PlaySound(hitEnemySound);
-    public void PlayCoinSound() => PlaySound(coinCollectedSound);
-    public void PlayWaterSplashSound() => PlaySound(waterSplashSound);
-    public void PlayRockFallingSound() => PlaySound(rockFallingSound);
-    public void PlayZombieSound() => PlaySound(zombieSound);
+    public void PlayButtonProgressSound() => PlaySound(buttonProgressSound);
+    public void PlayButtonEndSound() => PlaySound(buttonEndSound);
     public void PlayCrocodileSound() => PlaySound(crocodileSound);
-    public void PlayGoalDeniedSound() => PlaySound(goalDeniedSound);
+    public void PlayCoinSound() => PlaySound(coinCollectedSound);
     public void PlayDeathSound() => PlaySound(deathSound);
-    public void PlayMenuButtonProgressSound() => PlaySound(menuButtonProgressSound);
-    public void PlayMenuButtonEndSound() => PlaySound(menuButtonEndSound);
+    public void PlayGoalDeniedSound() => PlaySound(goalDeniedSound);
+    public void PlayHealthPickupSound() => PlaySound(healthPickupSound);
+    public void PlayerHitSound() => PlaySound(hitEnemySound);
+    public void PlayRockFallingSound() => PlaySound(rockFallingSound);
+    public void PlayWaterSplashSound() => PlaySound(waterSplashSound);
+    public void PlayZombieSound() => PlaySound(zombieSound);
 
     private void Awake()
     {

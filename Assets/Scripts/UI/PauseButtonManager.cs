@@ -1,10 +1,16 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class PauseButtonManager : ButtonManagerBase
 {
+    private enum PauseButton
+    {
+        Option = 0,
+        Main = 1
+    }
+
     private void Start()
     {
+        SetMouseOn();
         InitializeGameSettings();
     }
 
@@ -39,36 +45,26 @@ public class PauseButtonManager : ButtonManagerBase
 
     protected override void OnButtonClicked(int index)
     {
-        Button clickedButton = buttons[index];
-        if (clickedButton.gameObject.name == "Replay")
+        switch (index)
         {
-            ReplayGame();
-        }
+            case (int)PauseButton.Option:
+                OptionMenu();
+                break;
 
-        else if (clickedButton.gameObject.name == "Option")
-        {
-            OptionMenu();
-        }
+            case (int)PauseButton.Main:
+                player.SavePlayerData();
+                LoadMainScene();
+                break;
 
-        else
-        {
-            Player player = FindObjectOfType<Player>();
-            player.SavePlayerData();
-            LoadMainScene();
+            default:
+                Debug.LogWarning("Unknown button index: " + index);
+                break;
         }
-    }
-
-    private void ReplayGame()
-    {
-        LoadGameplayScene();
-        Time.timeScale = 1f;
-        Resume();
     }
 
     protected override void OptionMenu()
     {
-        SoundManager.Instance.PlayMenuButtonEndSound();
-        SetMouseOn();
+        SoundManager.Instance.PlayButtonEndSound();
         pauseMenu.SetActive(false);
         optionMenu.SetActive(true);
     }

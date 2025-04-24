@@ -7,6 +7,9 @@ public class EventTriggerListener : MonoBehaviour, IPointerEnterHandler, IPointe
     public Action<PointerEventData> onEnter;
     public Action<PointerEventData> onExit;
 
+    public void OnPointerEnter(PointerEventData eventData) => onEnter?.Invoke(eventData);
+    public void OnPointerExit(PointerEventData eventData) => onExit?.Invoke(eventData);
+
     public static EventTriggerListener Get(GameObject obj)
     {
         EventTriggerListener listener = obj.GetComponent<EventTriggerListener>();
@@ -16,15 +19,5 @@ public class EventTriggerListener : MonoBehaviour, IPointerEnterHandler, IPointe
         }
 
         return listener;
-    }
-
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        onEnter?.Invoke(eventData);
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        onExit?.Invoke(eventData);
     }
 }

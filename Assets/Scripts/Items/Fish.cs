@@ -1,4 +1,4 @@
-public class FishController : EnemyBase
+public class Fish : EnemyBase
 {
     protected override void Update()
     {

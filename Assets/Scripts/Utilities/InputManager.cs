@@ -1,19 +1,21 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
-    private PlayerAction playerInputAction;
+
+    [SerializeField] private TextMeshProUGUI mouseOffText;
+    private static bool isDisplayed = false;
     public event EventHandler OnJump;
+    private PlayerAction playerInputAction;
     public PlayerAction PlayerInputAction => playerInputAction;
 
-    private void Awake()
-    {
-        InitializeComponents();
-    }
+    private void HideMouseOffText() => mouseOffText.text = string.Empty;
+    private void Jump(UnityEngine.InputSystem.InputAction.CallbackContext context) => OnJump?.Invoke(this, EventArgs.Empty);
 
-    private void InitializeComponents()
+    private void Awake()
     {
         Instance = this;
         playerInputAction = new PlayerAction();
@@ -21,6 +23,11 @@ public class InputManager : MonoBehaviour
 
     private void Start()
     {
+        if (!isDisplayed)
+        {
+            ShowMouseInstruction();
+            isDisplayed = true;
+        }
         playerInputAction.Player.Move.Enable();
         playerInputAction.Player.Climb.Enable();
     }
@@ -28,12 +35,7 @@ public class InputManager : MonoBehaviour
     private void OnEnable()
     {
         playerInputAction.Player.Jump.Enable();
-        playerInputAction.Player.Jump.performed += Jump; // Subscribe event
-    }
-
-    private void Jump(UnityEngine.InputSystem.InputAction.CallbackContext context)
-    {
-        OnJump?.Invoke(this, EventArgs.Empty);
+        playerInputAction.Player.Jump.performed += Jump;
     }
 
     public bool IsJumping()
@@ -51,5 +53,11 @@ public class InputManager : MonoBehaviour
     {
         Vector2 inputVectorClimb = playerInputAction.Player.Climb.ReadValue<Vector2>();
         return inputVectorClimb.normalized;
+    }
+
+    private void ShowMouseInstruction()
+    {
+        mouseOffText.text = "Press Left Ctrl to hide the mouse cursor 😊\nGood luck!";
+        Invoke(nameof(HideMouseOffText), 3f);
     }
 }

@@ -5,11 +5,11 @@ using UnityEngine.UI;
 
 public abstract class ButtonManagerBase : MonoBehaviour
 {
-    [SerializeField] protected GameObject mainMenu;
-    [SerializeField] protected GameObject pauseMenu;
-    [SerializeField] protected GameObject optionMenu;
     [SerializeField] protected List<Button> buttons;
     [SerializeField] private Slider bgmSlider;
+    [SerializeField] protected GameObject mainMenu;
+    [SerializeField] protected GameObject optionMenu;
+    [SerializeField] protected GameObject pauseMenu;
     [SerializeField] private Slider sfxSlider;
     protected int currentButtonIndex = -1;
     protected bool isButtonClicked = false;
@@ -20,6 +20,8 @@ public abstract class ButtonManagerBase : MonoBehaviour
     protected abstract void HandlePauseInput();
     protected abstract void OnButtonClicked(int index);
     protected abstract void OptionMenu();
+    protected void QuitGame() => Application.Quit();
+    protected void ResetButtonClick() => isButtonClicked = false;
 
     protected void Awake()
     {
@@ -57,7 +59,7 @@ public abstract class ButtonManagerBase : MonoBehaviour
     {
         if (isButtonClicked) return;
 
-        SoundManager.Instance.PlayMenuButtonProgressSound();
+        SoundManager.Instance.PlayButtonProgressSound();
         currentButtonIndex = index;
         UpdateButtons();
     }
@@ -87,20 +89,6 @@ public abstract class ButtonManagerBase : MonoBehaviour
 
         if (isSelected) button.Select();
         else button.OnDeselect(null);
-    }
-
-    protected void Pause()
-    {
-        SoundManager.Instance.PlayMenuButtonProgressSound();
-        SetMouseOn();
-        pauseMenu.SetActive(true);
-    }
-
-    protected void Resume()
-    {
-        SoundManager.Instance.PlayMenuButtonEndSound();
-        SetMouseOff();
-        pauseMenu.SetActive(false);
     }
 
     public void SetMouseOn()
@@ -142,5 +130,41 @@ public abstract class ButtonManagerBase : MonoBehaviour
         if (index < 0 || index >= buttons.Count) return;
 
         buttons[index].gameObject.SetActive(isActive);
+    }
+
+    protected void Pause()
+    {
+        SoundManager.Instance.PlayButtonProgressSound();
+        pauseMenu.SetActive(true);
+    }
+
+    protected void Resume()
+    {
+        SoundManager.Instance.PlayButtonEndSound();
+        SetMouseOff();
+        pauseMenu.SetActive(false);
+    }
+
+    protected void SaveGame() => FindObjectOfType<Player>()?.SavePlayerData();
+
+    protected void StartNewGame()
+    {
+        SaveManager.DeleteSave();
+        LoadGameplayScene();
+        Time.timeScale = 1f;
+    }
+
+    protected void ContinueGame()
+    {
+        SaveManager.LoadPlayerData();
+        LoadGameplayScene();
+        Time.timeScale = 1f;
+    }
+
+    protected void BackToMainMenu()
+    {
+        SoundManager.Instance.PlayButtonProgressSound();
+        mainMenu.SetActive(true);
+        optionMenu.SetActive(false);
     }
 }

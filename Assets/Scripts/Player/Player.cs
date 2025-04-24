@@ -2,37 +2,35 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private float currentHealth;
+    [SerializeField] private Vector2 deathForce = new Vector2(0f, 0f);
     [SerializeField] private LayerMask _damageLayers;
-    [SerializeField] private int maxHealth;
-    [SerializeField] private int currentHealth;
-    [SerializeField] private int hitDamage;
+    [SerializeField] private float fallDamageCooldown;
     [SerializeField] private int fallDamage;
     [SerializeField] private float fallThreshold;
+    [SerializeField] private float hitDamage;
     [SerializeField] private float hitDamageCooldown;
-    [SerializeField] private float fallDamageCooldown;
-    [SerializeField] private Vector2 deathForce = new Vector2(0f, 0f);
+    [SerializeField] private float maxHealth;
     [SerializeField] private GameObject pauseMenu;
+    private HealthBarManager healthBar;
+    private bool hasJustLanded = false;
+    private bool isDead = false;
+    private float lastFallDamageTime;
+    private float lastDamageTime;
+    private float lastGroundY;
     private CapsuleCollider2D playerCollider;
     private Rigidbody2D playerBody;
-    private HealthBarManager healthBar;
-    private ButtonManagerBase buttonManagerBase;
 
-    private float lastGroundY;
-    private float lastDamageTime;
-    private float lastFallDamageTime;
-    private bool isDead = false;
-    private bool hasJustLanded = false;
-
-    public int GetHealth() => currentHealth;
-
+    public float GetHealth() => currentHealth;
+    public float GetCurrentHealth() => currentHealth;
+    private bool IsTouchingEnemy() => playerCollider.IsTouchingLayers(_damageLayers);
     public bool IsDead() => isDead;
 
     private void Awake()
     {
+        healthBar = GetComponent<HealthBarManager>();
         playerCollider = GetComponent<CapsuleCollider2D>();
         playerBody = GetComponent<Rigidbody2D>();
-        healthBar = GetComponent<HealthBarManager>();
-        buttonManagerBase = FindObjectOfType<ButtonManagerBase>();
     }
 
     private void Start()
@@ -65,10 +63,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.layer != LayerMask.NameToLayer("Platform")) return;
         if (playerCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"))) return;
 
-        if (hasJustLanded)
-        {
-            hasJustLanded = false;
-        }
+        if (hasJustLanded) hasJustLanded = false;
 
         float fallDistance = lastGroundY - transform.position.y;
         bool isTooFast = fallDistance > fallThreshold;
@@ -99,7 +94,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         if (isDead) return;
 
@@ -115,17 +110,6 @@ public class Player : MonoBehaviour
         }
     }
 
-    private bool IsTouchingEnemy()
-    {
-        return playerCollider.IsTouchingLayers(_damageLayers);
-    }
-
-    public void ReplayOn()
-    {
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0f;
-    }
-
     public void Die()
     {
         SoundManager.Instance.PlayDeathSound();
@@ -133,9 +117,7 @@ public class Player : MonoBehaviour
         if (anim != null) anim.PlayerDeathAnimation();
 
         ApplyRandomDeathForce();
-
         GetComponent<PlayerMovement>().DisableInput();
-        buttonManagerBase.SetMouseOn();
     }
 
     public void ApplyRandomDeathForce()
@@ -148,5 +130,11 @@ public class Player : MonoBehaviour
     {
         int coinAmount = CoinManager.Instance.GetCoin();
         SaveManager.SavePlayerData(transform.position.x, transform.position.y, currentHealth, coinAmount);
+    }
+
+    public void ReplayOn()
+    {
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0f;
     }
 }

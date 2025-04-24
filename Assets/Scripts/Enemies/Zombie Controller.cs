@@ -3,8 +3,8 @@ using UnityEngine;
 public class ZombieController : EnemyBase
 {
     [SerializeField] private float chaseRange;
-    private Animator zombieAnimation;
     private bool canChase = false;
+    private Animator zombieAnimation;
 
     protected override void Awake()
     {

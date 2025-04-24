@@ -4,14 +4,17 @@ public class PlayerClimb : MonoBehaviour
 {
     [SerializeField] private float climbSpeed;
     private CapsuleCollider2D playerCollider;
-    private Rigidbody2D rigidBody;
     private PlayerMovement playerMovement;
+    private Rigidbody2D rigidBody;
+
+    private bool IsPlayerOnTopLadderPoint() => playerCollider.IsTouchingLayers(LayerMask.GetMask("TopLadder"));
+    private bool IsPlayerOnClimbableLayer() => playerCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"));
 
     private void Awake()
     {
         playerCollider = GetComponent<CapsuleCollider2D>();
-        rigidBody = GetComponent<Rigidbody2D>();
         playerMovement = GetComponent<PlayerMovement>();
+        rigidBody = GetComponent<Rigidbody2D>();
     }
 
     private void Update()
@@ -21,18 +24,13 @@ public class PlayerClimb : MonoBehaviour
 
     private void Climb()
     {
-        if (isPlayerOnClimbableLayer())
+        if (IsPlayerOnClimbableLayer())
         {
             ApplyClimbSpeed();
             PerformJumpFromLadder();
         }
 
         else rigidBody.gravityScale = 5f;
-    }
-
-    private bool isPlayerOnClimbableLayer()
-    {
-        return playerCollider.IsTouchingLayers(LayerMask.GetMask("Ladder"));
     }
 
     private void ApplyClimbSpeed()
@@ -50,10 +48,5 @@ public class PlayerClimb : MonoBehaviour
             rigidBody.gravityScale = 5f;
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, playerMovement.GetJumpForce());
         }
-    }
-
-    private bool IsPlayerOnTopLadderPoint()
-    {
-        return playerCollider.IsTouchingLayers(LayerMask.GetMask("TopLadder"));
     }
 }

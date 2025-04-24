@@ -2,13 +2,19 @@ using UnityEngine;
 
 public class MainButtonManager : ButtonManagerBase
 {
+    public enum MainMenuButtonType
+    {
+        Continue = 0,
+        NewGame = 1,
+        Option = 2,
+        Quit = 3
+    }
+
     private void Start()
     {
-        // ToggleButton(0);
+        SetMouseOn();
         InitializeGameSettings();
-
-        bool hasSave = SaveManager.SaveExists();
-        SetButtonActive(0, hasSave);
+        SetButtonActive(0, SaveManager.SaveExists());
     }
 
     private void Update()
@@ -23,9 +29,7 @@ public class MainButtonManager : ButtonManagerBase
 
         if (optionMenu.activeSelf)
         {
-            SoundManager.Instance.PlayMenuButtonProgressSound();
-            mainMenu.SetActive(true);
-            optionMenu.SetActive(false);
+            BackToMainMenu();
         }
     }
 
@@ -36,47 +40,49 @@ public class MainButtonManager : ButtonManagerBase
         isButtonClicked = true;
         Invoke(nameof(ResetButtonClick), 0.5f);
 
-        switch (index)
+        if (System.Enum.IsDefined(typeof(MainMenuButtonType), index))
         {
-            case 0:
-                SaveManager.LoadPlayerData();
-                LoadGameplayScene();
-                Time.timeScale = 1f;
+            MainMenuButtonType buttonType = (MainMenuButtonType)index;
+            HandleMainMenuButton(buttonType);
+        }
+        else
+        {
+            Debug.LogWarning($"Invalid button index: {index}");
+        }
+    }
+
+    private void HandleMainMenuButton(MainMenuButtonType buttonType)
+    {
+
+        switch (buttonType)
+        {
+            case MainMenuButtonType.Continue:
+                ContinueGame();
                 break;
 
-            case 1:
-                SaveManager.DeleteSave();
-                LoadGameplayScene();
-                Time.timeScale = 1f;
+            case MainMenuButtonType.NewGame:
+                StartNewGame();
                 break;
 
-            case 2:
-                SoundManager.Instance.PlayMenuButtonEndSound();
+            case MainMenuButtonType.Option:
+                SoundManager.Instance.PlayButtonEndSound();
                 OptionMenu();
                 break;
 
-            case 3:
-                SoundManager.Instance.PlayMenuButtonEndSound();
+            case MainMenuButtonType.Quit:
                 QuitGame();
+                break;
+
+            default:
+                Debug.LogWarning("Unhandled button type: " + buttonType);
                 break;
         }
     }
 
-    private void ResetButtonClick()
-    {
-        isButtonClicked = false;
-    }
-
     protected override void OptionMenu()
     {
-        SoundManager.Instance.PlayMenuButtonEndSound();
-        SetMouseOn();
+        SoundManager.Instance.PlayButtonEndSound();
         mainMenu.SetActive(false);
         optionMenu.SetActive(true);
-    }
-
-    private void QuitGame()
-    {
-        Application.Quit();
     }
 }

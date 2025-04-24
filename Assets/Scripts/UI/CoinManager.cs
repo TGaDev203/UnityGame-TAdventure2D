@@ -4,10 +4,14 @@ using UnityEngine;
 public class CoinManager : MonoBehaviour
 {
     public static CoinManager Instance { get; private set; }
+
     public TextMeshProUGUI totalCoinText;
     public TextMeshProUGUI targetCoinText;
     public int totalCoinCollected = 0;
     public int targetCoin;
+
+    public int GetCoin() => totalCoinCollected;
+    public bool HasReachedTargetCoin() => totalCoinCollected == targetCoin;
 
     private void Awake()
     {
@@ -58,11 +62,6 @@ public class CoinManager : MonoBehaviour
         }
     }
 
-    public int GetCoin()
-    {
-        return totalCoinCollected;
-    }
-
     public void SetCoin(int value)
     {
         totalCoinCollected = value;
@@ -80,10 +79,5 @@ public class CoinManager : MonoBehaviour
 
             SoundManager.Instance.PlayEndGameSound();
         }
-    }
-
-    public bool HasReachedTargetCoin()
-    {
-        return totalCoinCollected == targetCoin;
     }
 }

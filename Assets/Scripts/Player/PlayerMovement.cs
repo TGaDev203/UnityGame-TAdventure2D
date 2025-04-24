@@ -4,26 +4,27 @@ using UnityEngine.Tilemaps;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] private float bounceForce;
+    [SerializeField] private float jumpForce;
     [SerializeField] LayerMask _jumpableLayers;
     [SerializeField] private float runSpeed;
-    [SerializeField] private float jumpForce;
-    [SerializeField] private float bounceForce;
     [SerializeField] private float waterDrag;
-    private Rigidbody2D playerBody;
-    private CapsuleCollider2D playerCollider;
     private BoxCollider2D feetCollider;
     public TilemapCollider2D ladderCollider;
+    private CapsuleCollider2D playerCollider;
+    private Rigidbody2D playerBody;
 
-    public float GetJumpForce() => this.jumpForce;
+    private bool CanJump() => feetCollider != null && feetCollider.IsTouchingLayers(_jumpableLayers);
     public void DisableInput() => this.enabled = false;
     public void EnableInput() => this.enabled = true;
+    public float GetJumpForce() => this.jumpForce;
 
     private void Awake()
     {
+        feetCollider = gameObject.GetComponent<BoxCollider2D>();
+        ladderCollider = GameObject.FindWithTag("Ladder").GetComponent<TilemapCollider2D>();
         playerCollider = GetComponent<CapsuleCollider2D>();
         playerBody = GetComponent<Rigidbody2D>();
-        ladderCollider = GameObject.FindWithTag("Ladder").GetComponent<TilemapCollider2D>();
-        feetCollider = gameObject.GetComponent<BoxCollider2D>();
     }
 
     private void Start()
@@ -35,6 +36,28 @@ public class PlayerMovement : MonoBehaviour
     {
         Move();
         CheckBouncing();
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.CompareTag("Water"))
+        {
+            SetWaterState(true);
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Water"))
+        {
+            SetWaterState(false);
+        }
     }
 
     private void Move()
@@ -59,7 +82,6 @@ public class PlayerMovement : MonoBehaviour
         playerBody.velocity = new Vector2(playerBody.velocity.x, bounceForce);
     }
 
-    private bool CanJump() => feetCollider != null && feetCollider.IsTouchingLayers(_jumpableLayers);
 
     private void HandleLadderCollision()
     {
@@ -74,16 +96,6 @@ public class PlayerMovement : MonoBehaviour
     {
         Physics2D.IgnoreCollision(playerCollider, ladderCollider, false);
         ladderCollider.enabled = true;
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Water")) SetWaterState(true);
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Water")) SetWaterState(false);
     }
 
     private void SetWaterState(bool isInWater)

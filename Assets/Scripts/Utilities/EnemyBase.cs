@@ -2,11 +2,13 @@ using UnityEngine;
 
 public abstract class EnemyBase : MonoBehaviour
 {
-    [SerializeField] protected Transform player;
     [SerializeField] protected float moveSpeed;
-    private SpriteRenderer spriteRenderer;
+    [SerializeField] protected Transform player;
     protected Rigidbody2D enemyBody;
     protected float initialSpeed;
+    private SpriteRenderer spriteRenderer;
+
+    protected abstract void Update();
 
     protected virtual void Awake()
     {
@@ -63,6 +65,4 @@ public abstract class EnemyBase : MonoBehaviour
             spriteRenderer.flipX = xDistance > 0f;
         }
     }
-
-    protected abstract void Update();
 }
