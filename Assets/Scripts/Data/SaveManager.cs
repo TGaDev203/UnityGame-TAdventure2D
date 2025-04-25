@@ -49,4 +49,11 @@ public static class SaveManager
         collectedCoins.Clear();
         collectedHealthPickups.Clear();
     }
+
+    public static void ResetCollectedItems()
+    {
+        collectedCoins.Clear();
+        collectedHealthPickups.Clear();
+    }
+
 }

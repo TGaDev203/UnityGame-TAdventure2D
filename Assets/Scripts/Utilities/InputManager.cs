@@ -11,7 +11,7 @@ public class InputManager : MonoBehaviour
     private PlayerAction playerInputAction;
     public PlayerAction PlayerInputAction => playerInputAction;
 
-    private void HideMouseOffText() => mouseOffText.text = string.Empty;
+    public void HideMouseOffText() => mouseOffText.text = string.Empty;
     private void Jump(UnityEngine.InputSystem.InputAction.CallbackContext context) => OnJump?.Invoke(this, EventArgs.Empty);
 
     private void Awake()
@@ -52,7 +52,7 @@ public class InputManager : MonoBehaviour
 
     private void ShowMouseInstruction()
     {
-        mouseOffText.text = "Press Left Ctrl to hide the mouse cursor 😊\nGood luck!";
+        mouseOffText.text = "Collect the target coin to unlock the goal 😊\nPress Left Ctrl to hide the mouse cursor\nGood luck!";
         Invoke(nameof(HideMouseOffText), 3f);
     }
 }
