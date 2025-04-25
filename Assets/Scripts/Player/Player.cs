@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -106,7 +107,6 @@ public class Player : MonoBehaviour
         {
             isDead = true;
             Die();
-            Invoke(nameof(ReplayOn), 1.2f);
         }
     }
 
@@ -118,6 +118,15 @@ public class Player : MonoBehaviour
 
         ApplyRandomDeathForce();
         GetComponent<PlayerMovement>().DisableInput();
+
+        Vector2 respawnPosition = new Vector2(0f, 0f);
+
+        Invoke(nameof(RespawnAfterDelay), 2f);
+    }
+
+    private void RespawnAfterDelay()
+    {
+        SceneManager.LoadScene("Gameplay_Scene");
     }
 
     public void ApplyRandomDeathForce()
@@ -132,9 +141,36 @@ public class Player : MonoBehaviour
         SaveManager.SavePlayerData(transform.position.x, transform.position.y, currentHealth, coinAmount);
     }
 
-    public void ReplayOn()
+    public void RespawnPlayer(Vector2 respawnPosition)
     {
-        pauseMenu.SetActive(true);
-        Time.timeScale = 0f;
+        currentHealth = maxHealth;
+        transform.position = respawnPosition;
+
+        SaveManager.ResetCollectedItems();
+
+        ReloadPickups();
+
+        SavePlayerData();
+    }
+
+    private void ReloadPickups()
+    {
+        Coin[] coins = FindObjectsOfType<Coin>();
+        foreach (var coin in coins)
+        {
+            if (!SaveManager.IsCoinCollected(coin.coinID))
+            {
+                coin.gameObject.SetActive(true);
+            }
+        }
+
+        HealthPickup[] healthPickups = FindObjectsOfType<HealthPickup>();
+        foreach (var healthPickup in healthPickups)
+        {
+            if (!SaveManager.IsHealthCollected(healthPickup.healthID))
+            {
+                healthPickup.gameObject.SetActive(true);
+            }
+        }
     }
 }

@@ -21,7 +21,11 @@ public class Coin : MonoBehaviour
 
         if (SaveManager.IsCoinCollected(coinID))
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            gameObject.SetActive(true);
         }
     }
 
@@ -61,7 +65,6 @@ public class Coin : MonoBehaviour
 
     private void HandleCoinPickup()
     {
-
         IncrementCoinCount();
         PlayCoinAnimation();
         DisableCollider();

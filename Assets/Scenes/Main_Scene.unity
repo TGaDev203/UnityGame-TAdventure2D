@@ -2644,7 +2644,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Tile Vania
+  m_text: T-Adventure
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f333602c22f475047ad3d3c50623f7c6, type: 2}
   m_sharedMaterial: {fileID: -1547395738849266188, guid: f333602c22f475047ad3d3c50623f7c6, type: 2}
@@ -2671,8 +2671,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 300
-  m_fontSizeBase: 300
+  m_fontSize: 230
+  m_fontSizeBase: 230
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

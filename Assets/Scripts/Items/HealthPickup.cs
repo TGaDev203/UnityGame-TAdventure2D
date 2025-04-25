@@ -20,7 +20,11 @@ public class HealthPickup : MonoBehaviour
 
         if (SaveManager.IsHealthCollected(healthID))
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            gameObject.SetActive(true);
         }
     }
 
