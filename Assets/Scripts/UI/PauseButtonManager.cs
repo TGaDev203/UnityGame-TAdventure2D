@@ -10,7 +10,6 @@ public class PauseButtonManager : ButtonManagerBase
 
     private void Start()
     {
-        SetMouseOn();
         InitializeGameSettings();
     }
 

@@ -6,12 +6,12 @@ public class InputManager : MonoBehaviour
 {
     public static InputManager Instance { get; private set; }
 
-    [SerializeField] private TextMeshProUGUI mouseOffText;
+    [SerializeField] private TextMeshProUGUI welcomeText;
     public event EventHandler OnJump;
     private PlayerAction playerInputAction;
     public PlayerAction PlayerInputAction => playerInputAction;
 
-    public void HideMouseOffText() => mouseOffText.text = string.Empty;
+    public void HideWelcomeText() => welcomeText.text = string.Empty;
     private void Jump(UnityEngine.InputSystem.InputAction.CallbackContext context) => OnJump?.Invoke(this, EventArgs.Empty);
 
     private void Awake()
@@ -52,7 +52,7 @@ public class InputManager : MonoBehaviour
 
     private void ShowMouseInstruction()
     {
-        mouseOffText.text = "Collect the target coin to unlock the goal 😊\nPress Left Ctrl to hide the mouse cursor\nGood luck!";
-        Invoke(nameof(HideMouseOffText), 3f);
+        welcomeText.text = "Collect the target coin to unlock the goal 😊\nGood luck!";
+        Invoke(nameof(HideWelcomeText), 3f);
     }
 }
