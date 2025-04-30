@@ -134,14 +134,15 @@ public abstract class ButtonManagerBase : MonoBehaviour
 
     protected void Pause()
     {
+        SetMouseOn();
         SoundManager.Instance.PlayButtonProgressSound();
         pauseMenu.SetActive(true);
     }
 
     protected void Resume()
     {
-        SoundManager.Instance.PlayButtonEndSound();
         SetMouseOff();
+        SoundManager.Instance.PlayButtonEndSound();
         pauseMenu.SetActive(false);
     }
 
