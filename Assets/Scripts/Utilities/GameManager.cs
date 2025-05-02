@@ -23,13 +23,23 @@ public class GameManager : MonoBehaviour
     {
         int width = Screen.width, height = Screen.height;
         GUIStyle style = new GUIStyle();
+        int padding = 20;
 
-        Rect rect = new Rect(10, 10, width, height * 2 / 100);
         style.alignment = TextAnchor.UpperLeft;
         style.fontSize = height * 2 / 100;
         style.normal.textColor = Color.white;
         float fps = 1.0f / deltaTime;
         string text = string.Format("{0:0.} FPS", fps);
+
+        Vector2 textSize = style.CalcSize(new GUIContent(text));
+
+        Rect rect = new Rect(padding, padding, textSize.x + 10, textSize.y + 4);
+
+        Color previousColor = GUI.color;
+        GUI.color = new Color(0f, 0f, 0f, 0.5f); // Black, 50% transparent
+        GUI.Box(rect, GUIContent.none);
+        GUI.color = previousColor;
+
         GUI.Label(rect, text, style);
     }
 
