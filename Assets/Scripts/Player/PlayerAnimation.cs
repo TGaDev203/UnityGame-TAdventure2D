@@ -3,9 +3,9 @@ using UnityEngine;
 public class PlayerAnimation : MonoBehaviour
 {
     [SerializeField] private LayerMask _damageLayers;
+    private Animator playerAnimation;
     private BoxCollider2D feetCollider;
     private CapsuleCollider2D playerCollider;
-    private Animator playerAnimation;
     private Rigidbody2D playerBody;
     private SpriteRenderer spriteRenderer;
 

@@ -5,9 +5,8 @@ public class HealthPickup : MonoBehaviour
     [SerializeField] private float destroyDelay;
     [SerializeField] private int healthValue;
     public string healthID;
-
-    private CircleCollider2D _collider;
     private bool isCollected = false;
+    private CircleCollider2D _collider;
 
     private void DestroyHealth() => Destroy(gameObject);
     private void ScheduleDestroy() => Invoke(nameof(DestroyHealth), destroyDelay);

@@ -5,7 +5,6 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
 
-    public AudioSource backgroundAudioSource;
     public AudioClip buttonProgressSound;
     public AudioClip buttonEndSound;
     public AudioClip bouncingSound;
@@ -13,7 +12,6 @@ public class SoundManager : MonoBehaviour
     public AudioClip coinCollectedSound;
     public AudioClip deathSound;
     public AudioClip endGameSound;
-    public AudioSource effectAudioSource;
     public AudioClip goalDeniedSound;
     public AudioClip gameplaySound;
     public AudioClip hitEnemySound;
@@ -23,6 +21,8 @@ public class SoundManager : MonoBehaviour
     public AudioClip waterSplashSound;
     public AudioClip waterWalkingSound;
     public AudioClip zombieSound;
+    public AudioSource backgroundAudioSource;
+    public AudioSource effectAudioSource;
 
     public void PlayButtonProgressSound() => PlaySound(buttonProgressSound);
     public void PlayButtonEndSound() => PlaySound(buttonEndSound);

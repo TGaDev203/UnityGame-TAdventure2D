@@ -6,20 +6,20 @@ using UnityEngine.UI;
 public abstract class ButtonManagerBase : MonoBehaviour
 {
     [SerializeField] protected List<Button> buttons;
-    [SerializeField] private Slider bgmSlider;
     [SerializeField] protected GameObject mainMenu;
     [SerializeField] protected GameObject optionMenu;
     [SerializeField] protected GameObject pauseMenu;
+    [SerializeField] private Slider bgmSlider;
     [SerializeField] private Slider sfxSlider;
     protected int currentButtonIndex = -1;
     protected bool isButtonClicked = false;
     protected Player player;
 
+    protected abstract void OnButtonClicked(int index);
+    protected abstract void HandlePauseInput();
+    protected abstract void OptionMenu();
     protected void LoadGameplayScene() => SceneManager.LoadScene("Gameplay_Scene");
     protected void LoadMainScene() => SceneManager.LoadScene("Main_Scene");
-    protected abstract void HandlePauseInput();
-    protected abstract void OnButtonClicked(int index);
-    protected abstract void OptionMenu();
     protected void QuitGame() => Application.Quit();
     protected void ResetButtonClick() => isButtonClicked = false;
 

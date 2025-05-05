@@ -1,5 +1,4 @@
 using UnityEngine;
-
 public class GrootController : EnemyBase
 {
     protected override void Update()
@@ -7,7 +6,7 @@ public class GrootController : EnemyBase
         Move();
         FlipSprite();
     }
-
+    
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))

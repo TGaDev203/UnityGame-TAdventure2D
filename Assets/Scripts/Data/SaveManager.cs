@@ -5,14 +5,15 @@ using UnityEngine;
 public static class SaveManager
 {
     private static readonly string SavePath = Application.persistentDataPath + "/save.json";
+    
     private static HashSet<string> collectedCoins = new HashSet<string>();
     private static HashSet<string> collectedHealthPickups = new HashSet<string>();
 
     public static bool IsHealthCollected(string healthID) => collectedHealthPickups.Contains(healthID);
     public static bool IsCoinCollected(string coinID) => collectedCoins.Contains(coinID);
+    public static bool SaveExists() => File.Exists(SavePath);
     public static void MarkHealthCollected(string healthID) => collectedHealthPickups.Add(healthID);
     public static void MarkCoinCollected(string coinID) => collectedCoins.Add(coinID);
-    public static bool SaveExists() => File.Exists(SavePath);
 
     public static void SavePlayerData(float x, float y, float health, int coin)
     {

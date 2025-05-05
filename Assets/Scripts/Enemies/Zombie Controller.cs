@@ -3,8 +3,8 @@ using UnityEngine;
 public class ZombieController : EnemyBase
 {
     [SerializeField] private float chaseRange;
-    private bool canChase = false;
     private Animator zombieAnimation;
+    private bool canChase = false;
 
     protected override void Awake()
     {
@@ -49,7 +49,6 @@ public class ZombieController : EnemyBase
             moveSpeed = 0f;
         }
     }
-
     private new void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
