@@ -4,22 +4,22 @@ using UnityEngine.SceneManagement;
 public class Player : MonoBehaviour
 {
     [SerializeField] private float currentHealth;
-    [SerializeField] private Vector2 deathForce = new Vector2(0f, 0f);
-    [SerializeField] private LayerMask _damageLayers;
     [SerializeField] private float fallDamageCooldown;
-    [SerializeField] private int fallDamage;
     [SerializeField] private float fallThreshold;
     [SerializeField] private float hitDamage;
     [SerializeField] private float hitDamageCooldown;
     [SerializeField] private float maxHealth;
     [SerializeField] private GameObject pauseMenu;
-    private HealthBarManager healthBar;
+    [SerializeField] private int fallDamage;
+    [SerializeField] private LayerMask _damageLayers;
+    [SerializeField] private Vector2 deathForce = new Vector2(0f, 0f);
     private bool hasJustLanded = false;
     private bool isDead = false;
     private float lastFallDamageTime;
     private float lastDamageTime;
     private float lastGroundY;
     private CapsuleCollider2D playerCollider;
+    private HealthBarManager healthBar;
     private Rigidbody2D playerBody;
 
     public float GetHealth() => currentHealth;

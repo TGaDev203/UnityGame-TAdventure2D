@@ -8,8 +8,8 @@ public class InputManager : MonoBehaviour
 
     [SerializeField] private TextMeshProUGUI welcomeText;
     public event EventHandler OnJump;
-    private PlayerAction playerInputAction;
     public PlayerAction PlayerInputAction => playerInputAction;
+    private PlayerAction playerInputAction;
 
     public void HideWelcomeText() => welcomeText.text = string.Empty;
     private void Jump(UnityEngine.InputSystem.InputAction.CallbackContext context) => OnJump?.Invoke(this, EventArgs.Empty);

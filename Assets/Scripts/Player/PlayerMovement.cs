@@ -6,17 +6,17 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float bounceForce;
     [SerializeField] private float jumpForce;
-    [SerializeField] LayerMask _jumpableLayers;
     [SerializeField] private float runSpeed;
     [SerializeField] private float waterDrag;
+    [SerializeField] LayerMask _jumpableLayers;
     private BoxCollider2D feetCollider;
-    public TilemapCollider2D ladderCollider;
     private CapsuleCollider2D playerCollider;
     private Rigidbody2D playerBody;
+    public TilemapCollider2D ladderCollider;
 
-    private bool CanJump() => feetCollider != null && feetCollider.IsTouchingLayers(_jumpableLayers);
     public void DisableInput() => this.enabled = false;
     public void EnableInput() => this.enabled = true;
+    private bool CanJump() => feetCollider != null && feetCollider.IsTouchingLayers(_jumpableLayers);
     public float GetJumpForce() => this.jumpForce;
 
     private void Awake()

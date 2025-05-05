@@ -5,11 +5,11 @@ public class PlatformControl : MonoBehaviour
 
     // Moving Tile
     [SerializeField] private float tileMovingDistance;
-    private Vector2 lastPos;
+    public float tileMoveSpeed;
     private bool movingRight = true;
     private bool movingUp = true;
+    private Vector2 lastPos;
     private Vector2 startPos;
-    public float tileMoveSpeed;
 
     // Falling Tile
     [SerializeField] private float destroyTime;
@@ -17,8 +17,8 @@ public class PlatformControl : MonoBehaviour
     private bool isFalling = false;
 
     private bool isOnPlatform = false;
-    private Rigidbody2D playerBody;
     private Rigidbody2D platformBody;
+    private Rigidbody2D playerBody;
 
     private void Awake()
     {

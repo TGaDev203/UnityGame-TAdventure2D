@@ -4,9 +4,9 @@ using System.Collections.Generic;
 
 public class CameraZone : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> backgrounds;
     [SerializeField] private CinemachineVirtualCamera virtualCamera;
     [SerializeField] private List<PolygonCollider2D> zones;
+    [SerializeField] private List<GameObject> backgrounds;
 
     private CinemachineConfiner2D confiner;
 

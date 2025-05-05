@@ -4,8 +4,8 @@ public abstract class EnemyBase : MonoBehaviour
 {
     [SerializeField] protected float moveSpeed;
     [SerializeField] protected Transform player;
-    protected Rigidbody2D enemyBody;
     protected float initialSpeed;
+    protected Rigidbody2D enemyBody;
     private SpriteRenderer spriteRenderer;
 
     protected abstract void Update();

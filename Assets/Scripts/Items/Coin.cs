@@ -3,9 +3,9 @@ using UnityEngine;
 public class Coin : MonoBehaviour
 {
     [SerializeField] private float destroyDelay;
+    public string coinID;
     private Animator _animator;
     private CircleCollider2D _collider;
-    public string coinID;
     private bool isCollected = false;
 
     private void DisableCollider() => _collider.enabled = false;
@@ -28,7 +28,6 @@ public class Coin : MonoBehaviour
             gameObject.SetActive(true);
         }
     }
-
     private void GenerateCoinIDIfNeeded()
     {
         if (string.IsNullOrEmpty(coinID))
@@ -36,7 +35,6 @@ public class Coin : MonoBehaviour
             coinID = $"{transform.position.x}_{transform.position.y}";
         }
     }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (isCollected || !other.CompareTag("Player")) return;
@@ -62,7 +60,6 @@ public class Coin : MonoBehaviour
             );
         }
     }
-
     private void HandleCoinPickup()
     {
         IncrementCoinCount();
@@ -71,12 +68,10 @@ public class Coin : MonoBehaviour
         SoundManager.Instance.PlayCoinSound();
         ScheduleDestroy();
     }
-
     private void IncrementCoinCount()
     {
         CoinManager.Instance?.CountCoin(1);
     }
-
     private void PlayCoinAnimation()
     {
         if (CompareTag("Coin"))
