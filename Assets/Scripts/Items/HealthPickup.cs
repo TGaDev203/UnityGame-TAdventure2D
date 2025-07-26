@@ -7,12 +7,14 @@ public class HealthPickup : MonoBehaviour
     public string healthID;
     private bool isCollected = false;
     private CircleCollider2D _collider;
+    private PlayerController playerController;
 
     private void DestroyHealth() => Destroy(gameObject);
     private void ScheduleDestroy() => Invoke(nameof(DestroyHealth), destroyDelay);
 
     private void Awake()
     {
+        playerController = FindObjectOfType<PlayerController>();
         _collider = GetComponent<CircleCollider2D>();
 
         GenerateHealthIDIfNeeded();
@@ -47,13 +49,12 @@ public class HealthPickup : MonoBehaviour
 
         HandleHealthPickup();
 
-        Player player = FindObjectOfType<Player>();
-        if (player != null)
+        if (playerController != null)
         {
             SaveManager.SavePlayerData(
-                player.transform.position.x,
-                player.transform.position.y,
-                player.GetCurrentHealth(),
+                playerController.transform.position.x,
+                playerController.transform.position.y,
+                playerController.GetCurrentHealth(),
                 CoinManager.Instance.GetCoin()
             );
         }
@@ -68,10 +69,9 @@ public class HealthPickup : MonoBehaviour
 
     private void ApplyHealing()
     {
-        Player player = FindObjectOfType<Player>();
-        float currentHealth = player.GetCurrentHealth();
+        float currentHealth = playerController.GetCurrentHealth();
         currentHealth += healthValue;
-        player.GetComponent<HealthBarManager>().SetHealth(currentHealth);
+        playerController.GetComponent<HealthBarManager>().SetHealth(currentHealth);
         FindObjectOfType<HealthBarManager>().SetHealth(currentHealth);
     }
 }

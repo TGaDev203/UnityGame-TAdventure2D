@@ -13,7 +13,7 @@ public abstract class ButtonManagerBase : MonoBehaviour
     [SerializeField] private Slider sfxSlider;
     protected int currentButtonIndex = -1;
     protected bool isButtonClicked = false;
-    protected Player player;
+    protected PlayerController playerController;
 
     protected abstract void OnButtonClicked(int index);
     protected abstract void HandlePauseInput();
@@ -25,7 +25,7 @@ public abstract class ButtonManagerBase : MonoBehaviour
 
     protected void Awake()
     {
-        player = FindObjectOfType<Player>();
+        playerController = FindObjectOfType<PlayerController>();
 
         for (int i = 0; i < buttons.Count; i++)
         {
@@ -146,7 +146,7 @@ public abstract class ButtonManagerBase : MonoBehaviour
         pauseMenu.SetActive(false);
     }
 
-    protected void SaveGame() => FindObjectOfType<Player>()?.SavePlayerData();
+    protected void SaveGame() => playerController?.SavePlayerData();
 
     protected void StartNewGame()
     {

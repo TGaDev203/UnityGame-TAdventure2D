@@ -3,7 +3,7 @@ using UnityEngine;
 public class CrocodileController : EnemyBase
 {
     private Animator crocodileAnimation;
-    
+
     protected override void Awake()
     {
         base.Awake();
@@ -31,7 +31,6 @@ public class CrocodileController : EnemyBase
         if (collision.CompareTag("Player"))
         {
             crocodileAnimation.SetBool("isAttacking", false);
-
         }
     }
 }
