@@ -555,10 +555,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttons: []
-  bgmSlider: {fileID: 2017004355}
   mainMenu: {fileID: 0}
   optionMenu: {fileID: 180652011}
   pauseMenu: {fileID: 1516937610}
+  bgmSlider: {fileID: 2017004355}
   sfxSlider: {fileID: 744048553}
 --- !u!1001 &32652999
 PrefabInstance:
@@ -2618,10 +2618,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttons: []
-  bgmSlider: {fileID: 2017004355}
   mainMenu: {fileID: 0}
   optionMenu: {fileID: 180652011}
   pauseMenu: {fileID: 1516937610}
+  bgmSlider: {fileID: 2017004355}
   sfxSlider: {fileID: 744048553}
 --- !u!1 &194494001
 GameObject:
@@ -51906,10 +51906,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e015566afca1547468a29f18c6c32d61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalCoinText: {fileID: 1511282149824050661}
-  targetCoinText: {fileID: 73706803}
   totalCoinCollected: 0
   targetCoin: 0
+  totalCoinText: {fileID: 1511282149824050661}
+  targetCoinText: {fileID: 73706803}
 --- !u!1 &221915591
 GameObject:
   m_ObjectHideFlags: 0
@@ -52893,17 +52893,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2a1705f6c82db42a7092a9b471452f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgrounds:
-  - {fileID: 1116260266}
-  - {fileID: 491535042}
-  - {fileID: 1519343233}
-  - {fileID: 579804042}
   virtualCamera: {fileID: 884978009}
   zones:
   - {fileID: 339508159}
   - {fileID: 1582842542}
   - {fileID: 1465527479}
   - {fileID: 1343468880}
+  backgrounds:
+  - {fileID: 1116260266}
+  - {fileID: 491535042}
+  - {fileID: 1519343233}
+  - {fileID: 579804042}
 --- !u!114 &339508162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59424,9 +59424,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 866362311}
+  - {fileID: 1157893620}
   - {fileID: 555639497}
   - {fileID: 2049535858}
-  - {fileID: 866362311}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1045125573
@@ -60527,11 +60528,11 @@ Transform:
   m_GameObject: {fileID: 1157893619}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -23.07, y: 53.440002, z: -0.37313223}
+  m_LocalPosition: {x: -22.584282, y: 52.06421, z: 3.4114704}
   m_LocalScale: {x: 1.9716842, y: 3.729801, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1034051608}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1157893621
 SpriteRenderer:
@@ -60663,11 +60664,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87ff66bebbd3fd247a465c5136cb8a1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 1516937610}
   colorChangeSpeed: 10
   deniedSoundCooldown: 2
-  endGamePanel: {fileID: 377463953}
   lastDeniedSoundTime: -10
-  pauseMenu: {fileID: 1516937610}
+  endGamePanel: {fileID: 377463953}
   requirementText: {fileID: 409574735}
 --- !u!50 &1157893625
 Rigidbody2D:
@@ -66053,17 +66054,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentHealth: 20
-  deathForce: {x: 3, y: 20}
-  _damageLayers:
-    serializedVersion: 2
-    m_Bits: 49160
   fallDamageCooldown: 0.5
-  fallDamage: 1
   fallThreshold: 6
   hitDamage: 2
   hitDamageCooldown: 0.5
   maxHealth: 30
   pauseMenu: {fileID: 1516937610}
+  fallDamage: 1
+  _damageLayers:
+    serializedVersion: 2
+    m_Bits: 49160
+  deathForce: {x: 3, y: 20}
 --- !u!114 &1250106912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -66498,17 +66499,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2a1705f6c82db42a7092a9b471452f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgrounds:
-  - {fileID: 1116260266}
-  - {fileID: 491535042}
-  - {fileID: 1519343233}
-  - {fileID: 579804042}
   virtualCamera: {fileID: 884978009}
   zones:
   - {fileID: 339508159}
   - {fileID: 1582842542}
   - {fileID: 1465527479}
   - {fileID: 1343468880}
+  backgrounds:
+  - {fileID: 1116260266}
+  - {fileID: 491535042}
+  - {fileID: 1519343233}
+  - {fileID: 579804042}
 --- !u!114 &1343468882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67748,17 +67749,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2a1705f6c82db42a7092a9b471452f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgrounds:
-  - {fileID: 1116260266}
-  - {fileID: 491535042}
-  - {fileID: 1519343233}
-  - {fileID: 579804042}
   virtualCamera: {fileID: 884978009}
   zones:
   - {fileID: 339508159}
   - {fileID: 1582842542}
   - {fileID: 1465527479}
   - {fileID: 1343468880}
+  backgrounds:
+  - {fileID: 1116260266}
+  - {fileID: 491535042}
+  - {fileID: 1519343233}
+  - {fileID: 579804042}
 --- !u!114 &1465527481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -68267,8 +68268,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1628419588}
   - {fileID: 1499266538}
+  - {fileID: 1628419588}
   m_Father: {fileID: 166921299}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -68291,10 +68292,10 @@ MonoBehaviour:
   buttons:
   - {fileID: 1128307733}
   - {fileID: 694276927}
-  bgmSlider: {fileID: 2017004355}
   mainMenu: {fileID: 0}
   optionMenu: {fileID: 180652011}
   pauseMenu: {fileID: 1516937610}
+  bgmSlider: {fileID: 2017004355}
   sfxSlider: {fileID: 744048553}
 --- !u!4 &1517624222 stripped
 Transform:
@@ -68993,17 +68994,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f2a1705f6c82db42a7092a9b471452f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgrounds:
-  - {fileID: 1116260266}
-  - {fileID: 491535042}
-  - {fileID: 1519343233}
-  - {fileID: 579804042}
   virtualCamera: {fileID: 884978009}
   zones:
   - {fileID: 339508159}
   - {fileID: 1582842542}
   - {fileID: 1465527479}
   - {fileID: 1343468880}
+  backgrounds:
+  - {fileID: 1116260266}
+  - {fileID: 491535042}
+  - {fileID: 1519343233}
+  - {fileID: 579804042}
 --- !u!114 &1582842544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -69063,8 +69064,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1703630418}
   - {fileID: 1377795767}
+  - {fileID: 1703630418}
   - {fileID: 178132586}
   - {fileID: 198429515}
   m_Father: {fileID: 0}
@@ -73179,7 +73180,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f2c21f057b23054d9a6cb68c78dada9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundAudioSource: {fileID: 2049535860}
   buttonProgressSound: {fileID: 8300000, guid: 937e2b0cbb034794090a15e87480ff4d, type: 3}
   buttonEndSound: {fileID: 8300000, guid: 0d2f20c90552e5c43a8990c6c2e02af4, type: 3}
   bouncingSound: {fileID: 8300000, guid: 6d594a25fc345b2479a71014e46d63d2, type: 3}
@@ -73187,7 +73187,6 @@ MonoBehaviour:
   coinCollectedSound: {fileID: 8300000, guid: bd74ccc6eaeac9d4dad9339b866714bb, type: 3}
   deathSound: {fileID: 8300000, guid: 8f4848cda4063a7478d11e88adae98f0, type: 3}
   endGameSound: {fileID: 8300000, guid: c7831b76539f9b34eacad94aa1db7694, type: 3}
-  effectAudioSource: {fileID: 2049535861}
   goalDeniedSound: {fileID: 8300000, guid: 051f04e76a0cbd541946d8376e795b69, type: 3}
   gameplaySound: {fileID: 8300000, guid: 5004827d9a2dffc46b9734aa43634b91, type: 3}
   hitEnemySound: {fileID: 8300000, guid: 26362c5ac97803e4693a1f69962a96cb, type: 3}
@@ -73197,6 +73196,8 @@ MonoBehaviour:
   waterSplashSound: {fileID: 8300000, guid: b4b51e6fab39a244cbedc818ba61e853, type: 3}
   waterWalkingSound: {fileID: 8300000, guid: 6d5a0984ea0447d4e9eed2fcbe47a42e, type: 3}
   zombieSound: {fileID: 8300000, guid: 8fd7add8ca1503a4f98cadcf8b4b0e85, type: 3}
+  backgroundAudioSource: {fileID: 2049535860}
+  effectAudioSource: {fileID: 2049535861}
 --- !u!82 &2049535860
 AudioSource:
   m_ObjectHideFlags: 0
@@ -74916,11 +74917,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bounceForce: 21
   jumpForce: 19
+  runSpeed: 5
+  waterDrag: 100
   _jumpableLayers:
     serializedVersion: 2
     m_Bits: 2112
-  runSpeed: 5
-  waterDrag: 100
   ladderCollider: {fileID: 178132589}
 --- !u!4 &4773098626248509405 stripped
 Transform:
@@ -75456,4 +75457,3 @@ SceneRoots:
   - {fileID: 1348804236}
   - {fileID: 1034051608}
   - {fileID: 1144817625535520360}
-  - {fileID: 1157893620}

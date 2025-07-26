@@ -1212,10 +1212,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttons: []
-  bgmSlider: {fileID: 1878207918}
   mainMenu: {fileID: 3741525206444680527}
   optionMenu: {fileID: 926675882}
   pauseMenu: {fileID: 0}
+  bgmSlider: {fileID: 1878207918}
   sfxSlider: {fileID: 329505558}
 --- !u!1 &980637496
 GameObject:
@@ -1508,24 +1508,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f2c21f057b23054d9a6cb68c78dada9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  backgroundAudioSource: {fileID: 1117795058}
   buttonProgressSound: {fileID: 8300000, guid: 937e2b0cbb034794090a15e87480ff4d, type: 3}
   buttonEndSound: {fileID: 8300000, guid: 0d2f20c90552e5c43a8990c6c2e02af4, type: 3}
-  bouncingSound: {fileID: 8300000, guid: 6d594a25fc345b2479a71014e46d63d2, type: 3}
+  bouncingSound: {fileID: 0}
   crocodileSound: {fileID: 0}
   coinCollectedSound: {fileID: 0}
   deathSound: {fileID: 0}
   endGameSound: {fileID: 0}
-  effectAudioSource: {fileID: 1117795059}
   goalDeniedSound: {fileID: 0}
-  gameplaySound: {fileID: 8300000, guid: 849fc93f7285cea45ab32b8697b16edf, type: 3}
-  hitEnemySound: {fileID: 8300000, guid: 26362c5ac97803e4693a1f69962a96cb, type: 3}
+  gameplaySound: {fileID: 0}
+  hitEnemySound: {fileID: 0}
   healthPickupSound: {fileID: 0}
   mainMenuSound: {fileID: 8300000, guid: 0f2d5ad638c750e4b85f2e9b4e0bc59c, type: 3}
   rockFallingSound: {fileID: 0}
-  waterSplashSound: {fileID: 8300000, guid: b4b51e6fab39a244cbedc818ba61e853, type: 3}
-  waterWalkingSound: {fileID: 8300000, guid: 6d5a0984ea0447d4e9eed2fcbe47a42e, type: 3}
+  waterSplashSound: {fileID: 0}
+  waterWalkingSound: {fileID: 0}
   zombieSound: {fileID: 0}
+  backgroundAudioSource: {fileID: 1117795058}
+  effectAudioSource: {fileID: 1117795059}
 --- !u!82 &1117795058
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3162,10 +3162,10 @@ MonoBehaviour:
   - {fileID: 809674393}
   - {fileID: 322422075}
   - {fileID: 1354863545}
-  bgmSlider: {fileID: 1878207918}
   mainMenu: {fileID: 3741525206444680527}
   optionMenu: {fileID: 926675882}
   pauseMenu: {fileID: 0}
+  bgmSlider: {fileID: 1878207918}
   sfxSlider: {fileID: 329505558}
 --- !u!1 &7343232456276213646
 GameObject:
