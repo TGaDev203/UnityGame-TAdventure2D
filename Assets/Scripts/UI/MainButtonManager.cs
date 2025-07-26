@@ -24,7 +24,7 @@ public class MainButtonManager : ButtonManagerBase
 
     protected override void HandlePauseInput()
     {
-        if (player != null && player.IsDead()) return;
+        if (playerController != null && playerController.IsDead()) return;
         if (!Input.GetKeyDown(KeyCode.Escape)) return;
 
         if (optionMenu.activeSelf)

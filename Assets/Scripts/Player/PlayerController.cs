@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Player : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float currentHealth;
     [SerializeField] private float fallDamageCooldown;
@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
     private float lastGroundY;
     private CapsuleCollider2D playerCollider;
     private HealthBarManager healthBar;
+    private PlayerAnimation anim;
+    private PlayerMovement playerMovement;
     private Rigidbody2D playerBody;
 
     public float GetHealth() => currentHealth;
@@ -29,9 +31,11 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
+        anim = GetComponent<PlayerAnimation>();
         healthBar = GetComponent<HealthBarManager>();
         playerCollider = GetComponent<CapsuleCollider2D>();
         playerBody = GetComponent<Rigidbody2D>();
+        playerMovement = GetComponent<PlayerMovement>();
     }
 
     private void Start()
@@ -113,11 +117,10 @@ public class Player : MonoBehaviour
     public void Die()
     {
         SoundManager.Instance.PlayDeathSound();
-        PlayerAnimation anim = GetComponent<PlayerAnimation>();
         if (anim != null) anim.PlayerDeathAnimation();
 
         ApplyRandomDeathForce();
-        GetComponent<PlayerMovement>().DisableInput();
+        playerMovement.DisableInput();
 
         Vector2 respawnPosition = new Vector2(0f, 0f);
 

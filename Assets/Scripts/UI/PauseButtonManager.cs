@@ -20,7 +20,7 @@ public class PauseButtonManager : ButtonManagerBase
 
     protected override void HandlePauseInput()
     {
-        if (player != null && player.IsDead()) return;
+        if (playerController != null && playerController.IsDead()) return;
         if (!Input.GetKeyDown(KeyCode.Escape)) return;
 
         if (pauseMenu.activeSelf)
@@ -51,7 +51,7 @@ public class PauseButtonManager : ButtonManagerBase
                 break;
 
             case (int)PauseButton.Main:
-                player.SavePlayerData();
+                playerController.SavePlayerData();
                 LoadMainScene();
                 break;
 
