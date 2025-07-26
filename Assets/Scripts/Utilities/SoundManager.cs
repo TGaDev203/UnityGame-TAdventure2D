@@ -65,7 +65,7 @@ public class SoundManager : MonoBehaviour
         backgroundAudioSource.loop = true;
 
         string scene = SceneManager.GetActiveScene().name;
-        backgroundAudioSource.clip = (scene == "Main_Scene") ? mainMenuSound : gameplaySound;
+        backgroundAudioSource.clip = (scene == "MainMenu_Scene") ? mainMenuSound : gameplaySound;
 
         backgroundAudioSource.Play();
     }
