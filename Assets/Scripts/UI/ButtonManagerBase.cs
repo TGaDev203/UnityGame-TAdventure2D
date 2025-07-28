@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -11,6 +12,8 @@ public abstract class ButtonManagerBase : MonoBehaviour
     [SerializeField] protected GameObject pauseMenu;
     [SerializeField] private Slider bgmSlider;
     [SerializeField] private Slider sfxSlider;
+    private const int MAINMENU_INDEX = 0;
+    private const int GAMEPLAY_INDEX = 1;
     protected int currentButtonIndex = -1;
     protected bool isButtonClicked = false;
     protected PlayerController playerController;
@@ -18,8 +21,8 @@ public abstract class ButtonManagerBase : MonoBehaviour
     protected abstract void OnButtonClicked(int index);
     protected abstract void HandlePauseInput();
     protected abstract void OptionMenu();
-    protected void LoadGameplayScene() => SceneManager.LoadScene("Gameplay_Scene");
-    protected void LoadMainScene() => SceneManager.LoadScene("Main_Scene");
+    protected void LoadGameplayScene() => SceneManager.LoadScene(sceneBuildIndex: GAMEPLAY_INDEX);
+    protected void LoadMainScene() => SceneManager.LoadScene(sceneBuildIndex: MAINMENU_INDEX);
     protected void QuitGame() => Application.Quit();
     protected void ResetButtonClick() => isButtonClicked = false;
 
