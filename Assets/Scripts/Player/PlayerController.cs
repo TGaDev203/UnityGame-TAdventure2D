@@ -1,3 +1,4 @@
+using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -19,6 +20,7 @@ public class PlayerController : MonoBehaviour
     private float lastDamageTime;
     private float lastGroundY;
     private CapsuleCollider2D playerCollider;
+    private const int GAMEPLAY_INDEX = 1;
     private HealthBarManager healthBar;
     private PlayerAnimation anim;
     private PlayerMovement playerMovement;
@@ -129,7 +131,7 @@ public class PlayerController : MonoBehaviour
 
     private void RespawnAfterDelay()
     {
-        SceneManager.LoadScene("Gameplay_Scene");
+        SceneManager.LoadScene(sceneBuildIndex: GAMEPLAY_INDEX);
     }
 
     public void ApplyRandomDeathForce()
