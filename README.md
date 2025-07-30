@@ -1,5 +1,5 @@
 ---
-Title: T-Adventure
+Title: 🕹️ T-Adventure (PC Game)
 Description: |
   T-Adventure is a challenging 2D platformer game built using Unity, where players aim to collect coins and reach the end of each level with a limited health bar. The game features intricate levels with various obstacles, such as enemies, traps, and hazards like lava. The goal is to navigate through these dangers, collect enough coins, and reach the target while avoiding death.
 
