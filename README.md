@@ -6,7 +6,6 @@ The game offers a retro-inspired experience, emphasizing precise control and tim
 
 This game is a personal project and is not intended for commercial purposes. It is still in development, and there are a few minor bugs to be addressed.
 
-  
 ---
 
 ## Screenshots:
@@ -26,7 +25,6 @@ This game is a personal project and is not intended for commercial purposes. It 
 <p align="center">
   <em>And there’s still more to discover – take a look around in-game!</em>
 </p>
-
 
 ## Features:
 - **Health Bar System**: Players have a single health bar that must be carefully managed as they encounter dangers.
