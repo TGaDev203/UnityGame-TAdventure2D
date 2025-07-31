@@ -1,30 +1,32 @@
----
-Title: 🕹️ T-Adventure (PC Game)
-Description: |
-  T-Adventure is a challenging 2D platformer game built using Unity, where players aim to collect coins and reach the end of each level with a limited health bar. The game features intricate levels with various obstacles, such as enemies, traps, and hazards like lava. The goal is to navigate through these dangers, collect enough coins, and reach the target while avoiding death.
+# 🕹️ T-Adventure (PC Game)
 
-  The game offers a retro-inspired experience, emphasizing precise control and timing. You’ll need to be cautious of hidden traps and enemies that can quickly deplete your health, as you only have one life to make it to the end.
+**T-Adventure** is a challenging 2D platformer game built using **Unity**, where players aim to collect coins and reach the end of each level with a limited health bar. The game features intricate levels with various obstacles, such as enemies, traps, and hazards like lava. The goal is to navigate through these dangers, collect enough coins, and reach the target while avoiding death.
 
-  This game is a personal project and is not intended for commercial purposes. It is still in development, and there are a few minor bugs to be addressed.
+The game offers a retro-inspired experience, emphasizing precise control and timing. You’ll need to be cautious of hidden traps and enemies that can quickly deplete your health, as you only have one life to make it to the end.
+
+This game is a personal project and is not intended for commercial purposes. It is still in development, and there are a few minor bugs to be addressed.
+
+  
 ---
 
 ## Screenshots:
-**Main Screen**
-![alt text](Gameplay%20Screenshots/image.png)
 
-**Pause Screen**
-![alt text](Gameplay%20Screenshots/image-1.png)
+<p align="center">
+  <img src="Gameplay%20Screenshots/image.png" width="500" alt="Main Screen" />
+  <img src="Gameplay%20Screenshots/image-1.png" width="500" alt="Pause Screen" />
+</p>
+<p align="center">
+  <img src="Gameplay%20Screenshots/image-2.png" width="500" alt="Option Screen" />
+  <img src="Gameplay%20Screenshots/image-3.png" width="500" alt="Gameplay Screen" />
+</p>
+<p align="center">
+  <img src="Gameplay%20Screenshots/image-4.png" width="500" alt="End Screen" />
+</p>
 
-**Option Screen**
-![alt text](Gameplay%20Screenshots/image-2.png)
+<p align="center">
+  <em>And there’s still more to discover – take a look around in-game!</em>
+</p>
 
-**Gameplay Screen**
-![alt text](Gameplay%20Screenshots/image-3.png)
-
-**End Screen**
-![alt text](Gameplay%20Screenshots/image-4.png)
-
-And there’s still more to discover – take a look around in-game!
 
 ## Features:
 - **Health Bar System**: Players have a single health bar that must be carefully managed as they encounter dangers.
