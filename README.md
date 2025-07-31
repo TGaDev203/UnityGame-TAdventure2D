@@ -28,10 +28,7 @@ This game is a personal project and is not intended for commercial purposes. It 
     <td colspan="2" align="center"><img src="Gameplay%20Screenshots/image-4.png" width="500" alt="End Screen" /></td>
   </tr>
 </table>
-
-<p align="center">
-  <em>And there’s still more to discover – take a look around in-game!</em>
-</p>
+<p align="center"><em>And there’s still more to discover – take a look around in-game!</em></p>
 
 ## Features:
 - **Health Bar System**: Players have a single health bar that must be carefully managed as they encounter dangers.
