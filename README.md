@@ -9,7 +9,7 @@ This game is a personal project and is not intended for commercial purposes. It 
 ---
 
 🔗 Play Now on Itch.io
-<p align="center"> 👉 <a href="https://tgadev203.itch.io/tadventure2d" target="_blank"><strong>Play T-Adventure on Itch.io</strong></a> </p>
+<p align="center"> 👉 <a href="https://tgadev203.itch.io/tadventure2d" target="_blank"><strong>Play TAdventure2D on Itch.io</strong></a> </p>
 
 ---
 
