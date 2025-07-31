@@ -49,7 +49,7 @@ In **TAdventure2D**, you will journey through several challenging levels. Each l
 
 The game’s mechanics revolve around managing your health bar, which depletes when you take damage from enemies or traps. Be sure to avoid unnecessary risks, as one hit could be the difference between success and failure.
 
-Your main goal is to collect all the coins scattered throughout each level. Once you reach the required coin target, you can move to the next level. The game ends when you lose all your health or complete the final level.
+Your main goal is to collect all the coins scattered throughout each level. You win the level by collecting enough coins to meet the target.
 
 ---
 
