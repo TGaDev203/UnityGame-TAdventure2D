@@ -10,17 +10,19 @@ This game is a personal project and is not intended for commercial purposes. It 
 
 ## Screenshots:
 
-<p align="center">
-  <img src="Gameplay%20Screenshots/image.png" width="500" alt="Main Screen" />
-  <img src="Gameplay%20Screenshots/image-1.png" width="500" alt="Pause Screen" />
-</p>
-<p align="center">
-  <img src="Gameplay%20Screenshots/image-2.png" width="500" alt="Option Screen" />
-  <img src="Gameplay%20Screenshots/image-3.png" width="500" alt="Gameplay Screen" />
-</p>
-<p align="center">
-  <img src="Gameplay%20Screenshots/image-4.png" width="500" alt="End Screen" />
-</p>
+<table align="center">
+  <tr>
+    <td><img src="Gameplay%20Screenshots/image.png" width="500" alt="Main Screen" /></td>
+    <td><img src="Gameplay%20Screenshots/image-1.png" width="500" alt="Pause Screen" /></td>
+  </tr>
+  <tr>
+    <td><img src="Gameplay%20Screenshots/image-2.png" width="500" alt="Option Screen" /></td>
+    <td><img src="Gameplay%20Screenshots/image-3.png" width="500" alt="Gameplay Screen" /></td>
+  </tr>
+  <tr>
+    <td colspan="2" align="center"><img src="Gameplay%20Screenshots/image-4.png" width="500" alt="End Screen" /></td>
+  </tr>
+</table>
 
 <p align="center">
   <em>And there’s still more to discover – take a look around in-game!</em>
